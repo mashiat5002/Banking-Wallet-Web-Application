@@ -10,6 +10,7 @@
   "rules": {
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "off",
-    "eslint@typescript-eslint/no-var-requires":"off"
+    "eslint@typescript-eslint/no-var-requires":"off",
+    "@next/next/no-async-client-component":"off"
   }
 }
