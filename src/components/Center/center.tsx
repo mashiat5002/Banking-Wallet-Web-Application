@@ -4,7 +4,7 @@ import Center_left from '../Center_Left/Center_left'
 
 export default function Center() {
   return (
-    <div className='flex flex-row-reverse  mr-52 text-slate-200'>
+    <div className=' h-4/6 flex flex-row-reverse  mr-48  text-slate-200 '> 
       <Mobile_hand />
       <Center_left />
     </div>

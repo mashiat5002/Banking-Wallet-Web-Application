@@ -12,7 +12,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className=" overflow-hidden   bg-[url('/assets/images/landing-bg.jpg')] ">
+      <body className=" overflow-hidden  h-screen  bg-[url('/assets/images/landing-bg.jpg')] ">
         {children}
         
       </body>
