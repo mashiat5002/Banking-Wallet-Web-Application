@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { usePlaidLink } from 'react-plaid-link';
-
 export default function PlaidButton() {
   const [linkToken, setLinkToken] = useState(null);
 
@@ -26,10 +25,11 @@ export default function PlaidButton() {
   });
 
   return (
-    <div>
-      <button onClick={() => open()} disabled={!ready}>
+    
+      <button   onClick={() => open()} disabled={!ready}>
         Connect a bank account
       </button>
-    </div>
+   
   );
 }
+

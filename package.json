@@ -14,6 +14,7 @@
     "plaid": "^27.0.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-icons": "^5.3.0",
     "react-plaid-link": "^3.6.0"
   },
   "devDependencies": {

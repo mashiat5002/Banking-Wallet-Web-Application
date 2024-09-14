@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-
-
+import "../../styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Banking Wallet Web",
- 
 };
 
 export default function RootLayout({
@@ -16,8 +12,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className=" overflow-hidden   bg-[url('/assets/images/landing-bg.jpg')] ">
         {children}
+        
       </body>
     </html>
   );

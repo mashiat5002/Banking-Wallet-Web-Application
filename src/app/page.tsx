@@ -1,12 +1,16 @@
-import Button from "./PlaidButton/Button";
+
+import Nevbar from "@/components/Nevbar/nev";
+import Center from "@/components/Center/center";
 
 
 export default async function Home() {
 
 
   return (
-    <div>
-      <Button />
+    <div >
+      <Nevbar />
+      <Center />
+   
     </div>
   );
 }
