@@ -8,7 +8,7 @@ export default async function Home() {
 
 
   return (
-    <div className="h-full">
+    <div className="md:h-full h-fit">
       <Nevbar />
       <Center />
       <Bottom />

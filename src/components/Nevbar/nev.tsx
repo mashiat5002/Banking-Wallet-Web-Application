@@ -6,7 +6,7 @@ import Nev_buttons from '../Nev_buttons/Nev_buttons'
 
 export default function Nevbar() {
   return (
-    <div className='text-slate-50 h-1/6 flex'>
+    <div className='h-96 text-slate-50 md:h-1/6 md:flex '>
         <Nevlogo />
         <Nev_dropdowns />
         <Nev_buttons />

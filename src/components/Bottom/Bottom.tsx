@@ -7,7 +7,7 @@ import { PiHandDepositBold } from "react-icons/pi";
 
 export default function Bottom() {
   return (
-    <div className='h-1/6 flex  justify-center text-slate-200 '>
+    <div className='  md:h-1/6 flex flex-col md:flex-row justify-center text-slate-200  '>
         <Mycomponent Icon={FaCreditCard} Heading="Debit Card" Details='Transfer from one account to other'/>
         <Mycomponent Icon={TbBuildingBank} Heading="Bank Link" Details='Connect to bank accounts to deposit and withdraw funds'/>
         <Mycomponent Icon={PiHandDepositBold} Heading="Micro Deposit" Details='Deposit to bank accounts to deposit and withdraw funds'/>
