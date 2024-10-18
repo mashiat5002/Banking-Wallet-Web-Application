@@ -12,7 +12,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className=" md:overflow-hidden  md:h-screen  bg-[url('/assets/images/landing-bg.jpg')] ">
+    
+
+
+
+
+      <body >
         {children}
         
       </body>

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Configuration, PlaidApi, PlaidEnvironments, Products, CountryCode } from 'plaid';
-require('dotenv').config();
+
 
 const configuration = new Configuration({
   basePath: PlaidEnvironments.sandbox,
