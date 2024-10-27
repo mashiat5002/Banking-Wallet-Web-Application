@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Configuration, PlaidApi, PlaidEnvironments } from 'plaid';
+
 const configuration = new Configuration({
     basePath: PlaidEnvironments.sandbox,
     baseOptions: {
@@ -11,6 +12,11 @@ const configuration = new Configuration({
   });
   
   const client = new PlaidApi(configuration);
+
+
+
+
+
 export async function POST(request: NextRequest) {
     const body = await request.json();
     const { token } = body;
@@ -26,3 +32,5 @@ export async function POST(request: NextRequest) {
         access_token: accessToken
       });
 }
+
+

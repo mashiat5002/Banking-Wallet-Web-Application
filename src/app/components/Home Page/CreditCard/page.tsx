@@ -7,10 +7,10 @@ export default function CreditCards() {
   return (
     <div className='md:scale-75 lg:scale-90'>
         <Cards 
-        number={"5555 5555 5555 4444"}
+        number={"4587 9009 2179 1327"}
         expiry={"10/10/2014"}
         cvc={"1"}
-        name={"Mashiat Islam"}
+        name={"Anik Chowdhury"}
         
       />
       

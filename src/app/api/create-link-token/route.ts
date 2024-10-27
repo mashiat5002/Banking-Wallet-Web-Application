@@ -28,14 +28,14 @@ export async function POST(request: NextResponse) {
     language: 'en',
   
     redirect_uri: 'http://localhost:3000/api/create-link-token',
-    country_codes: [CountryCode.Us], // Use CountryCode enum instead of a plain string
+    country_codes: [CountryCode.Us], 
   };
 
   try {
     const createTokenResponse = await client.linkTokenCreate(plaidRequest);
 
 
-    return NextResponse.json(createTokenResponse.data); // Properly return the response
+    return NextResponse.json(createTokenResponse.data); 
   } catch (error) {
     console.error('Error creating link token:', error);
     return NextResponse.json({ error: 'Failed to create link token' }, { status: 500 });
