@@ -6,7 +6,7 @@ import Bottom from '../Bottom/Bottom'
 
 export default function Landing_pg_Container() {
   return (
-    <div className="md:h-full h-fit bg-[url('/assets/images/landing-bg.jpg')]">
+    <div className="md:h-screen h-fit bg-[url('/assets/images/landing-bg.jpg')]">
     <Nevbar />
     <Center />
     <Bottom />

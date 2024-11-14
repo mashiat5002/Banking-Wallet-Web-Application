@@ -10,7 +10,7 @@ export default function CreditCards() {
         number={"4587 9009 2179 1327"}
         expiry={"10/10/2014"}
         cvc={"1"}
-        name={"Anik Chowdhury"}
+        name={"Sumaiya Akther Mahbuba"}
         
       />
       

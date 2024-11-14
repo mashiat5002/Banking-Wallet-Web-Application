@@ -4,7 +4,7 @@ export async function POST(request: NextRequest) {
     const body= await request.json();
     const params= new URLSearchParams();
    
-    params.append("customer","cus_R6b2fTVYgQKeFN");
+    params.append("customer","cus_R6yQkBrnJl6VT3");
     console.log(body.id);
     const response= await fetch(`${process.env.Base_Url_Stripe}/v1/payment_methods/${body.id}/attach`,{
         method:"POST",

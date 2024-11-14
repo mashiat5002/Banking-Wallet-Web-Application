@@ -15,7 +15,7 @@ export default function MoneySentList() {
           
       </div>
       <div className="text-custom-white text-xs  font-semibold flex items-center md:pl-1 md:text-custom-size lg:text-xs ">
-        <p >Mashiat Islam  </p>
+        <p >Sumaiya Akther  </p>
       </div>
 
 

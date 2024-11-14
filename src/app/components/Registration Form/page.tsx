@@ -100,9 +100,9 @@ export default  function Registration_form() {
     }
   return (
     <form onSubmit={HandleSubmit}>
-    <div className='h-full w-full  flex items-center justify-center '>
-        <div className='h-650px w-900px bg-custom-light-green flex items-center justify-center '>
-            <div className='h-600px w-850px bg-black flex items-center justify-center rounded-2xl  '>
+    <div className='h-screen w-screen  flex items-center justify-center '>
+        <div className='h-650px w-900px  flex items-center justify-center '>
+            <div className='h-600px w-850px  flex items-center justify-center rounded-2xl  '>
                 <div className='h-full w-1/2 bg-slate-50 rounded-s-2xl flex items-center justify-center'>
                     <div className='h-11/12 w-5/6  text-custom-green '>
                         <div className='h-1/12 w-full '>

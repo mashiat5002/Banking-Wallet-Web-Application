@@ -10,7 +10,7 @@ export default function Avatar() {
 
 
       <div className='h-1/3 w-full flex items-center justify-center md:text-custom-size lg:text-xs'>
-      <h1>Mashiat</h1>
+      <h1>Sumaiya</h1>
       </div>
 
     </div>
