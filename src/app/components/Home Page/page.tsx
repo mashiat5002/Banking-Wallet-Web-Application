@@ -1,3 +1,4 @@
+
 import React from 'react'
 
 import HomePageNav from './HmPg Nav/page'
@@ -10,7 +11,8 @@ import RecentTrans from './HmPgRecentTransaction/page'
 import PolarChart from './HmpgPolarChart/page'
 import MoneySentCard from './HmPgMoneySentCard/page'
 
-export default function Homepage() {
+export default async function Homepage() {
+ 
   return (
     
     <div className='md:h-full w-full bg-black'>

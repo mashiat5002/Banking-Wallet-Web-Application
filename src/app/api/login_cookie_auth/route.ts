@@ -1,29 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db, } from '../db connection/route';
 import { RowDataPacket } from 'mysql2';
-import {SignJWT} from 'jose';
+import {jwtVerify, SignJWT} from 'jose';
 import { cookies } from 'next/headers';
 const key="secret";
 const secret_key= new TextEncoder().encode(key);
 
 
-const encrypt= (payload:any)=>{
+const encrypt= (payload:{Email:string,expires:Date,Password:string})=>{
     return new SignJWT(payload)
     .setProtectedHeader({alg:"HS256"})
     .setIssuedAt()
-    .setExpirationTime('10 sec from now')
+    .setExpirationTime('1h')
     .sign(secret_key);
 
 }
 
+export async function decrypt(input:string){
+    const  {payload} = await jwtVerify(input, secret_key, {
+        algorithms:['HS256']
+    })
 
+    return payload;
+}
 
 export  async function POST(request:NextRequest){
     const body= await request.json();
-
-
-
-
 
     const email= body.email;
     const password= body.password;
@@ -34,15 +36,15 @@ export  async function POST(request:NextRequest){
         if(Number(rows.length)!=0){
         const Email= rows[0].email;
         const Password= rows[0].password;
-        const expires= new Date(Date.now()+ 10*1000);
+        const expires = new Date(Date.now() + 1 * 60 * 60 * 1000);
 
         const session= await encrypt({Email,expires,Password});
-        cookies().set('sesssion',session,{expires, httpOnly:true})
+        cookies().set('session',session,{expires, httpOnly:true})
         return NextResponse.json({"status":"Login Successful"})
         }
        
         else return NextResponse.json({"status":"Email or Password did not match!!"})
     }
-   
+     
 
 }

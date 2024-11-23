@@ -1,4 +1,6 @@
 "use client"
+
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
 export default  function Registration_form() {
@@ -12,11 +14,11 @@ export default  function Registration_form() {
     const HandleSubmit= async (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         const formdata= new FormData(e.currentTarget)
-
+        
         setErrMsg("Processing Request...")
         setErrMsg_color("orange")
-
-     
+        
+        
         //api dwolla calling
         const response= await fetch("/api/create_customer_dwolla",{
             method: "POST",
@@ -42,9 +44,9 @@ export default  function Registration_form() {
             setErrMsg_color("lightgreen");
             setErrMsg("Successful");
 
-              const stripeResponse=  await fetch("/api/create_stripe_customer",{
-                    method:"POST",
-                    headers: {
+            const stripeResponse=  await fetch("/api/create_stripe_customer",{
+                method:"POST",
+                headers: {
                         "Content-Type": "application/json", 
                     },
                     body: JSON.stringify(Object.fromEntries(formdata)),
@@ -52,18 +54,18 @@ export default  function Registration_form() {
                 
 
                 await fetch("/api/db_insertion",{
-                method:"POST",
+                    method:"POST",
                 headers: {
                     "Content-Type": "application/json", 
                 },
                 body: JSON.stringify(Object.fromEntries(formdata)),
             })
 
-                
+            
 
         }
             
-         
+        
         try{
             const stat= await response.json();
          
@@ -71,8 +73,8 @@ export default  function Registration_form() {
             if(stat.status == "database not connected"){
                 setErrMsg_color("red");
                 setErrMsg("Database Error");
-              }
-           
+            }
+            
             if(stat.code== "ExpiredAccessToken" || stat.code== "InvalidAccessToken"){
                 setErrMsg_color("red");
                 setErrMsg("Session Invalid");
@@ -86,22 +88,23 @@ export default  function Registration_form() {
         }
         catch(error){
             console.log(error)
-
+            
         }
         
           
 
+        
 
 
-
-
+        
      
-
+        
     }
-  return (
-    <form onSubmit={HandleSubmit}>
-    <div className='h-screen w-screen  flex items-center justify-center '>
-        <div className='h-650px w-900px  flex items-center justify-center '>
+    const router= useRouter();
+    return (
+        <form onSubmit={HandleSubmit}>
+    <div onClick={()=>router.back()} className='h-screen w-screen  flex items-center justify-center '>
+        <div onClick={(e)=>e.stopPropagation()} className='h-650px w-900px  flex items-center justify-center '>
             <div className='h-600px w-850px  flex items-center justify-center rounded-2xl  '>
                 <div className='h-full w-1/2 bg-slate-50 rounded-s-2xl flex items-center justify-center'>
                     <div className='h-11/12 w-5/6  text-custom-green '>

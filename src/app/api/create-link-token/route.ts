@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { Configuration, PlaidApi, PlaidEnvironments, Products, CountryCode } from 'plaid';
 
 
@@ -14,7 +14,7 @@ const configuration = new Configuration({
 
 const client = new PlaidApi(configuration);
 
-export async function POST(request: NextResponse) {
+export async function POST(request: NextRequest) {
  
   const clientUserId = 'user'; //demo
 

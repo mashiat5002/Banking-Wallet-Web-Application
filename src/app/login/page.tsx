@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function page() {
   return (
-    <div className="h-screen w-screen bg-red-400 bg-[url('/assets/images/landing-bg.jpg')] "  >
+    <div className="h-screen w-screen  bg-[url('/assets/images/landing-bg.jpg')] "  >
       <Login/>
     </div>
   )
