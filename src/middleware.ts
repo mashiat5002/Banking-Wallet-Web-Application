@@ -3,11 +3,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
   const session=cookies().get("session")?.value;
-  // console.log("middleware")
+  
   const pathnext= request.nextUrl.pathname;
   if(pathnext=="/api/login_cookie_auth" )
     return NextResponse.next();
-  
+  // console.log("session:"+session)
   if(session){ 
     return NextResponse.next();
   }

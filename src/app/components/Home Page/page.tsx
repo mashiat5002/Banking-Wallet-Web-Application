@@ -26,21 +26,21 @@ export default async function Homepage() {
 
 
    {/* *******************Left Side************* */} 
-           <div className='h-650px md:h-full md:w-1/3 bg-black'>
+           <div className='h-650px md:h-full md:w-1/3 bg-black '>
           
-              <div className='h-2/5 w-full  flex items-center justify-center overflow-hidden ' >
+              <div className='h-5/12 w-full  flex items-center justify-center overflow-hidden ' >
 
-                    <div className='h-5/6 w-11/12 '>
+                    <div className='h-11/12 w-11/12 '>
                         <CardStack/>
                     </div>
 
               </div>
 
-              <div className='h-1/5 w-full  flex items-center justify-center'>
+              <div className='h-3/12 w-full  flex items-center justify-center'>
                   <QuickSend/>
               </div>
 
-              <div className='h-2/5 w-full flex items-center justify-center '>
+              <div className='h-4/12 w-full flex items-center justify-center '>
                 <Savings/>
 
               </div>
@@ -53,7 +53,7 @@ export default async function Homepage() {
 
       {/* *******************Right Side************* */}
 
-          <div className='h-custompx w-full md:h-full md:w-2/3 bg-black'>
+          <div className='h-custompx w-full md:h-full md:w-2/3 bg-black md:pt-3 md:pb-2'>
 
 
               <div className='h-1/3 md:h-1/5 w-full  md:flex md:items-center  md:space-x-5 flex-col md:flex-row items-center justify-center '>

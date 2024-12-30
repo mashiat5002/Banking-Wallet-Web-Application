@@ -6,6 +6,7 @@ import TransactionList from './transactionList/page';
 
 
 export default function RecentTrans() {
+  
   return (
     <div className='w-5/6 md:w-full h-11/12 bg-logo-surrounding rounded-2xl  lg:scale-100 '>
         <div className='h-1/5 w-full flex text-custom-white  font-semibold'>

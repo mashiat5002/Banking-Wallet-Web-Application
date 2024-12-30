@@ -85,8 +85,8 @@ console.log(data3.code);
 
   return (
     
-      <button className='bg-cyan-950 text-slate-50 rounded-xl h-fit w-fit p-5 m-10 ring-2 ring-slate-500'  onClick={() => open()} disabled={!ready}>
-        Connect a bank account
+      <button className=' ml-1 md:ml-2 text-nowrap text-slate-50  ring-slate-500'  onClick={() => open()} disabled={!ready}>
+        Connect Banks
       </button>
    
   );

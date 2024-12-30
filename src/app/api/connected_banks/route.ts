@@ -5,6 +5,8 @@ import { NextResponse } from "next/server";
 
 export async function POST(){
    
+  
+   
    const userId= await get_dwolla_user_id()
    const access_dwolla= await get_dwolla_access_token();
    
@@ -16,9 +18,8 @@ export async function POST(){
       }
    })
    const all_connected_banks= await banks_connected.json();
-
-   const banknames= all_connected_banks._embedded["funding-sources"].map((x:any)=> ({"name":x.name,"id":x.id,"bankname":x.bankName}) )
    
+   const banknames= all_connected_banks._embedded["funding-sources"].map((x:any)=> ({"name":x.name,"id":x.id,"bankname":x.bankName}) )
    return NextResponse.json({"connected_banks":banknames})
 
 

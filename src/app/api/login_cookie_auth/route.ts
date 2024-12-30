@@ -7,7 +7,7 @@ const key="secret";
 const secret_key= new TextEncoder().encode(key);
 
 
-const encrypt= (payload:{Email:string,expires:Date,Password:string})=>{
+export const encrypt= (payload:{Email:string,expires:Date,Password:string})=>{
     return new SignJWT(payload)
     .setProtectedHeader({alg:"HS256"})
     .setIssuedAt()

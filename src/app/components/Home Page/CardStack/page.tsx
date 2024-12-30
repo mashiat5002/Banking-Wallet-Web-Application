@@ -26,7 +26,7 @@ export default function CardStack() {
 
 
       <div className='h-4/5 w-full  flex items-center justify-center'>
-                   <StackedCarousel height={360} autoplay= {true} scaleFactor={0.9} >
+                   <StackedCarousel height={360} autoplay= {false} scaleFactor={0.9} >
                       <div className="sample-card bg-color-1 mt-20">
                           <CreditCards />
                       </div>

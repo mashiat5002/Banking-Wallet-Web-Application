@@ -11,8 +11,8 @@ export async function GET(){
         }
     })
     const res=await response.json();
-    
-    const cards_details= res.data.map((x:any)=> ({"type":x.card.brand,"last4":x.card.last4,"fingerprint":x.card.fingerprint}))
+        // console.log(res.data[0])
+    const cards_details= res.data.map((x:any)=> ({"payment_method_id":x.id,"type":x.card.brand,"last4":x.card.last4,"fingerprint":x.card.fingerprint,"exp_month":x.card.exp_month,"exp_year":x.card.exp_year}))
     
     
     return NextResponse.json({"stripe_method":cards_details});
