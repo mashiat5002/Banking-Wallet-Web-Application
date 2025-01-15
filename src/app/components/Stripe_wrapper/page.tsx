@@ -21,8 +21,8 @@ export default function Stripe_Wrapper() {
   );
   return (
     
-    <div  onClick={(e)=>{e.stopPropagation()}} className="h-600px w-500px bg-white rounded-xl flex flex-col items-center justify-center ">
-      <div>
+    <div  onClick={(e)=>{e.stopPropagation()}} className="h-[400px] w-[400px]  mt-5 rounded-xl flex flex-col items-center justify-center ">
+      <div className=" scale-100 ">
         <Credit_Card_Based_on_input
           number= {number}
           expiry={expiry}
@@ -31,10 +31,10 @@ export default function Stripe_Wrapper() {
         />
       </div>
 
-      <div className=" w-full flex items-center justify-center mt-5 ">
+      <div className="  w-full flex items-center justify-center scale-90 ">
         
-        <div className=" w-3/5  rounded-2xl ring-1 ring-black " style={{ backgroundColor: "#1073B5" }}>
-          <form className=" h-full  flex flex-col justify-evenly  p-5 rounded-2xl">
+        <div className=" w-5/6  rounded-2xl ring-1 ring-black " style={{ backgroundColor: "#1073B5" }}>
+          <form className=" w-full  flex flex-col justify-evenly p-2  rounded-2xl">
             <div className="w-full  flex justify-between">
               <h1 className="text-sm font-semibold text-slate-200">Enter to add to Homepage Slide:</h1>
             </div>
@@ -65,7 +65,7 @@ export default function Stripe_Wrapper() {
           </div>
         </div>
       </div>
-<div className='h-7 mt-5 flex flex-row-reverse w-500 '><Back_btn/></div>
+
     </div>
   );
 }

@@ -13,6 +13,6 @@ export async function call_get_card_balance() {
     })
     const final_res= await res.json()
     
-    return final_res.balance;
+    return final_res;
    
 }

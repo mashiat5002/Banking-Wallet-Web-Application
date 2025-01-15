@@ -13,6 +13,6 @@ export async function call_get_dwolla_transaction_details() {
     })
     const final_res= await res.json()
     
-    return final_res;
+    return final_res.res;
    
 }

@@ -21,7 +21,7 @@ export default async function Homepage() {
           <HomePageNav />
       </div>
 
-
+      
       <div className=' h-56 md:h-11/12 w-full  md:flex  '>
 
 
@@ -57,9 +57,9 @@ export default async function Homepage() {
 
 
               <div className='h-1/3 md:h-1/5 w-full  md:flex md:items-center  md:space-x-5 flex-col md:flex-row items-center justify-center '>
-                <HomePage_Balance_Card/>
-                <HomePage_Balance_Card/>
-                <HomePage_Balance_Card/>
+                <HomePage_Balance_Card card_type={"bank"}/>
+                <HomePage_Balance_Card card_type={"card"}/>
+                <HomePage_Balance_Card card_type={"savings"}/>
            
 
               </div>
@@ -76,11 +76,11 @@ export default async function Homepage() {
               </div>
 
               <div className='h-1/3 md:h-2/5 w-full  md:flex '>
-                  <div className='h-1/2 w-full md:h-full md:w-1/3 flex items-center justify-center '>
+                  <div className='h-1/2  w-full md:h-full md:w-1/2 flex items-center justify-center md:justify-start'>
                     <RecentTrans/>
 
                   </div>
-                  <div className='h-1/2 w-full md:h-full md:w-2/3  flex items-center justify-center '>
+                  <div className='h-1/2 w-full md:h-full md:w-1/2  flex items-center justify-center '>
                     <MoneySentCard/>
 
                   </div>

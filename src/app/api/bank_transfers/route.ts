@@ -6,7 +6,7 @@ export async function POST() {
     const access= await get_dwolla_access_token()
     const customer= await get_dwolla_user_id()
     
-    const res= await fetch(`https://api-sandbox.dwolla.com/customers/${customer}/transfers`,{
+    const res= await fetch(`https://api-sandbox.dwolla.com/customers/${customer}/transfers?limit=4`,{
         method:"GET",
         headers:{
             "Authorization":`Bearer ${access}`,

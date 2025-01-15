@@ -11,7 +11,7 @@ export const encrypt= (payload:{Email:string,expires:Date,Password:string})=>{
     return new SignJWT(payload)
     .setProtectedHeader({alg:"HS256"})
     .setIssuedAt()
-    .setExpirationTime('1h')
+    .setExpirationTime('5h')
     .sign(secret_key);
 
 }

@@ -1,23 +1,22 @@
 "use client"
 
 
-import { call_check_bank_acc_type } from '@/app/(utils)/call_check_bank_acc_type/route';
-import { call_create_saving_acc_in_db } from '@/app/(utils)/call_create_saving_acc_in_db/route';
-import { call_get_saving_acc_balance } from '@/app/(utils)/call_get_saving_acc_balance/route';
-import { call_update_saving_bank_balance } from '@/app/(utils)/call_update_saving_bank_balance/route copy';
 import { useRouter } from 'next/navigation';
 import React from 'react'
 import { useState } from 'react';
+import { call_bank_transfers } from '@/app/(utils)/call_bank_transfers/route';
 
 export default function Login() {
     const router = useRouter();
     const [LoginStat, setLoginStat]=useState("");
     const [LoginStatColor, setLoginStatColor]=useState("white");
 
-    const handledemo=async()=>{
-        
-        console.log(await call_create_saving_acc_in_db("1a10"))
-    }
+    const handledemo = async () => {
+       const data = await call_bank_transfers()
+       
+       
+            console.log(data)
+    };
     const handleSubmission=async (e:React.FormEvent<HTMLFormElement>)=>{
         
         setLoginStat("Processing Request...");

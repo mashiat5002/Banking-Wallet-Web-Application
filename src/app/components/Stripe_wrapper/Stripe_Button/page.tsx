@@ -3,7 +3,8 @@ import React, { useState } from "react";
 
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { call_add_card_to_slide } from "@/app/(utils)/call_add_card_to_slide/route";
-import { useRouter } from "next/navigation";
+import Dialog_UI from "../../Dialog_UI/page";
+import { call_remove_card_from_db } from "@/app/(utils)/call_remove_card_from_db/route";
 
 type propsType = {
   name: string;
@@ -13,28 +14,36 @@ type propsType = {
 };
 
 const Stripe: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
-  const router= useRouter()
-  const [status, setStatus] = useState("Connect");
+  const [status, setStatus] = useState("Processing..");
+  const [loading, setLoading] = useState(false);
 
   const stripe = useStripe();
   const elements = useElements();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true)
     if (name != "" && number != "" && cvc != "" && expiry != "") {
-      console.log("call add card")
-      const inserted= await call_add_card_to_slide(number,name,expiry,cvc)
+      
+      const inserted_res= await call_add_card_to_slide(number,name,expiry,cvc)
+     
+      const insertID= inserted_res.res.insertId;
+      const inserted= inserted_res.status;
 
-      if(inserted== "inserted"){
-        setStatus("inserted to slide")
-        setTimeout(() => {setStatus("Processing...");}, 1500);
+      if(inserted || inserted== "inserted"){
+        // setStatus("inserted to slide")
+        
         if (!stripe || !elements) {
           console.error("Stripe.js has not loaded.");
+          setStatus("Stripe.js has not loaded.")
+         
           return;
         }
         const cardElement = elements.getElement(CardElement);
         if (!cardElement) {
           console.error("CardElement is not found");
+          setStatus("CardElement is not found!")
+         
           return;
         }
         const { error: cardError, paymentMethod } =
@@ -42,27 +51,38 @@ const Stripe: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
             type: "card",
             card: cardElement,
           });
-        console.log("PaymentMethod successfully created:", paymentMethod);
+
   
         const res = await fetch("/api/connect_stripe_card", {
           method: "POST",
           body: JSON.stringify(paymentMethod),
         });
-       
+      
         if (res.status == 200) {
-          setStatus("Successful");
-          // setTimeout(() => {router.back()}, 1000);
+         
+          setStatus("Successfully connected card to stripe. (The card is added to card stack as your input for homepage stack)");
+         
+        }
+        else{
+       
+          
+          setStatus("Couldn't connect card in stripe. Make sure the provided Info is correct");
+          await call_remove_card_from_db(insertID);
+          
         }
       }
       else{
+        console.log("res not 200")
         
         setStatus("Insertion Failed");
+       
       }
       
     }
     else{
       setStatus("Field is empty!!");
-      setTimeout(() => {setStatus("Connect");}, 1500);
+      
+     
 
       }
 
@@ -83,8 +103,12 @@ const Stripe: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
             type="submit"
             className=" h-fit w-fit p-1 mt-4 rounded-xl text-sm font-semibold bg-custom-skyblue ring-black ring-2"
           >
-            {status}
+            Connect
           </button>
+
+
+            
+            {loading==true ? <Dialog_UI status={{header:"Processing Status",description:`${status}`,action:()=>{setLoading(false),setStatus("Processing....");}}} /> : null}
 
           </div>
         </div>

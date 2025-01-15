@@ -8,15 +8,16 @@ export async function POST(request: NextRequest) {
 
   try{
     const res =
-    await db.query(`INSERT INTO stripe_cards (stripe_id, card_ids, expiry_date)
-VALUES ('${stripe_id}', '${body.number}', '${body.exp}');
+    await db.query(`INSERT INTO stripe_cards (stripe_id, card_ids, expiry_date,Card_holder)
+VALUES ('${stripe_id}', '${body.number}', '${body.exp}', '${body.name}');
 `);
+
+return NextResponse.json({"status":"inserted","res":res[0]});
   }
   catch(err){
     if(err)
         console.log(err)
   }
-  return NextResponse.json({"status":"inserted"});
 
 
 }

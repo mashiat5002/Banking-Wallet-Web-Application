@@ -1,5 +1,6 @@
 "use client"
 
+import { call_create_saving_acc_in_db } from '@/app/(utils)/call_create_saving_acc_in_db/route';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
@@ -35,7 +36,7 @@ export default  function Registration_form() {
               "type": "personal"
             })
           });
-          
+         console.log(response)
           console.log(response.headers.get("Location"));
          
         
@@ -43,7 +44,7 @@ export default  function Registration_form() {
           if(response.status==201){
             setErrMsg_color("lightgreen");
             setErrMsg("Successful");
-
+            // await call_create_saving_acc_in_db(response.id) 
             const stripeResponse=  await fetch("/api/create_stripe_customer",{
                 method:"POST",
                 headers: {
@@ -51,7 +52,9 @@ export default  function Registration_form() {
                     },
                     body: JSON.stringify(Object.fromEntries(formdata)),
                 })
+                const stripe_res= await stripeResponse.json();
                 
+                await call_create_saving_acc_in_db(stripe_res.id)
 
                 await fetch("/api/db_insertion",{
                     method:"POST",
@@ -77,7 +80,7 @@ export default  function Registration_form() {
             
             if(stat.code== "ExpiredAccessToken" || stat.code== "InvalidAccessToken"){
                 setErrMsg_color("red");
-                setErrMsg("Session Invalid");
+                setErrMsg(stat.code);
             }
             if (!response.ok) {
                 setErrMsg_color("red");

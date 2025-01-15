@@ -1,44 +1,140 @@
-import React from 'react'
-import Image from 'next/image'
+"use client";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import { call_bank_transfers } from "@/app/(utils)/call_bank_transfers/route";
+import { call_find_customer_with_customer_id } from "@/app/(utils)/call_find_customer_with_customer_id/route";
+import { call_find_customer_id_with_funding_src_id } from "@/app/(utils)/call_find_customer_id_with_funding_src_id/route";
+
+interface TransactionLink {
+  href: string;
+  "resource-type"?: string;
+}
+
+interface Transaction {
+  _links: {
+    source: TransactionLink;
+    destination: TransactionLink;
+  };
+  created: string;
+  amount: { value: string };
+  status: string;
+}
 
 export default function MoneySentList() {
+  const [transList, setTransList] = useState<Transaction[]>([]);
+  const [customerNames, setCustomerNames] = useState<string[]>([]);
+  const [destNames, setDestNames] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const transactions = await call_bank_transfers();
+        setTransList(transactions);
+      } catch (error) {
+        console.error("Error fetching transactions:", error);
+      }
+    };
+
+    fetchTransactions();
+  }, []);
+
+  useEffect(() => {
+    const fetchCustomerNames = async (isSource: boolean) => {
+      return await Promise.all(
+        transList.map(async (transaction) => {
+          const link = isSource ? transaction._links.source : transaction._links.destination;
+          if (link["resource-type"] === "customer") {
+            const customerId = link.href.slice(-36);
+            return await call_find_customer_with_customer_id(customerId);
+          } else if (link["resource-type"] === "funding-source") {
+            const fundingId = link.href.slice(-36);
+            const customerId = await call_find_customer_id_with_funding_src_id(fundingId);
+            return await call_find_customer_with_customer_id(customerId);
+          } else if (link["resource-type"] === "account") {
+            return "Main Account";
+          }
+          return "Unknown";
+        })
+      );
+    };
+
+    const fetchAllNames = async () => {
+      try {
+        const [sourceNames, destinationNames] = await Promise.all([
+          fetchCustomerNames(true),
+          fetchCustomerNames(false),
+        ]);
+        setCustomerNames(sourceNames);
+        setDestNames(destinationNames);
+      } catch (error) {
+        console.error("Error fetching customer names:", error);
+      }
+    };
+
+    if (transList.length > 0) {
+      fetchAllNames();
+    }
+  }, [transList]);
+
   return (
-    <div className="h-1/6 w-full bg-logo-surrounding flex ">
+    <div className="h-4/6 w-full">
+      {transList.map((transaction, index) => (
+        <div
+          key={index}
+          className="h-1/4 w-full bg-logo-surrounding flex lg:text-custom-size2 lg:font-semibold"
+        >
+          {/* Source Customer */}
+          <div className="h-full w-2/6 flex">
+            <div className="h-full w-1/3 flex items-center justify-center">
+              <Image
+                height={25}
+                width={25}
+                src="/assets/images/profileAvatar.png"
+                alt="Source Avatar"
+              />
+            </div>
+            <div className="text-custom-white font-semibold flex items-center">
+              <p>{customerNames[index] || "Loading..."}</p>
+            </div>
+          </div>
 
+          {/* Destination Customer */}
+          <div className="h-full w-2/6 flex">
+            <div className="h-full w-1/3 flex items-center justify-center">
+              <Image
+                height={25}
+                width={25}
+                src="/assets/images/profileAvatar.png"
+                alt="Destination Avatar"
+              />
+            </div>
+            <div className="text-white font-semibold flex items-center">
+              <p>{destNames[index] || "Loading..."}</p>
+            </div>
+          </div>
 
-
-    <div className="h-full w-2/6 flex ">
-      <div className="h-full w-1/3 flex items-center justify-center ">
-         
-          <Image className=""  height={25} width={25}   src='/assets/images/profileAvatar.png' alt=''/>
-     
-          
-      </div>
-      <div className="text-custom-white text-xs  font-semibold flex items-center md:pl-1 md:text-custom-size lg:text-xs ">
-        <p >Sumaiya Akther  </p>
-      </div>
-
-
-    </div>
-
-
-
-
-    <div className="h-full w-4/6 flex text-custom-white text-xs">
-      <div className="h-full w-1/4 flex items-center justify-center md:text-custom-size lg:text-xs"><h1>10/10/2014</h1></div>
-      <div className="h-full w-1/4 flex items-center justify-center md:text-custom-size lg:text-xs"><h1>$400</h1></div>
-      
-      <div className="h-full w-1/4 flex items-center ">
-        <div className="h-2/5 w-4/5 bg-custom-green-light rounded-2xl flex items-center justify-center">
-          <h1 className="text-custom-green md:text-custom-size lg:text-xs ">Completed</h1>
+          {/* Transaction Details */}
+          <div className="h-full w-4/6 flex text-custom-white">
+            <div className="h-full w-2/5 flex items-center">
+              <h1 className="ml-4">{transaction.created.slice(0, 10)}</h1>
+            </div>
+            <div className="h-full w-1/4 flex items-center">
+              <h1>${transaction.amount.value}</h1>
+            </div>
+            <div className="h-full w-1/4 flex items-center">
+              <div
+                className={`h-2/5 w-full rounded-2xl flex items-center justify-center ${
+                  transaction.status === "processed"
+                    ? "bg-custom-green-light text-custom-green"
+                    : "bg-amber-600 text-neutral-950"
+                }`}
+              >
+                <h1>{transaction.status}</h1>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="h-full w-1/4 flex items-center md:text-custom-size lg:text-xs">
-        <h1>Employee</h1>
-      </div>
-
+      ))}
     </div>
-
-  </div>
-  )
+  );
 }

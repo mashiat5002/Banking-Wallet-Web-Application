@@ -1,11 +1,12 @@
 import { get_stripe_user_id } from "@/app/(utils)/(get_logged_in_stripe_customer_id)/route";
+import { separating_weekly_monthly_daily_payment } from "@/app/(utils)/separating_weekly_monthly_daily_payment/route";
 import { NextResponse } from "next/server";
 
 export async function POST() {
     
     const id = await get_stripe_user_id();
 
-    let arr: any[] = []; 
+    let transaction_list: any[] = []; 
     let has_more = true;
     let starting_after = null;
 
@@ -29,7 +30,7 @@ export async function POST() {
       
 
         const result = await response.json();
-        arr = [...arr, ...result.data]; 
+        transaction_list = [...transaction_list, ...result.data]; 
 
         has_more = result.has_more; 
         if (has_more) {
@@ -37,19 +38,14 @@ export async function POST() {
         }
     }
     
-    const weeks_list: any[] = []; 
+   
+    
+     const res=separating_weekly_monthly_daily_payment(transaction_list)
+          
+            
 
-
-    for(let i=1;i<8;i++){
-        const rr= arr.filter((x=> ((x.created>(Date.now()- (604800000* i))/1000)    && (x.created<(Date.now()- (604800000* (i-1)))/1000))))
-        let sum=0;
-        rr.map(x=>{
-            sum= sum+x.amount
-        })
-        weeks_list[i]=sum/100;
-        
-    }
+       
     
 
-    return NextResponse.json(weeks_list);
+    return NextResponse.json({res});
 }

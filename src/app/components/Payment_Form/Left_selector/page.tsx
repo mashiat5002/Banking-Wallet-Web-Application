@@ -1,17 +1,20 @@
+"use client"
 import { useSearchParams } from "next/navigation";
 import React from "react";
 type SelectorProps = {
   onSelectionChange: (value: string) => void;
+  system_id: string;
+  system_type:string
 };
 
 
 
-const Selector = ({ onSelectionChange }: SelectorProps) => {
+const Selector : React.FC<SelectorProps>= ({onSelectionChange,system_id,system_type} ) => {
 
 
   const searchParams = useSearchParams();
 
-  return searchParams.get("card_index") ? 
+  return system_type=="card" ? 
   (
     <div className=" w-full mx-auto flex justify-between ">
       <label className="block text-xs text-nowrap md:text-sm font-medium text-custom-blue2 mb-2 w-1/2">

@@ -19,7 +19,8 @@ export async function POST(){
    })
    const all_connected_banks= await banks_connected.json();
    
-   const banknames= all_connected_banks._embedded["funding-sources"].map((x:any)=> ({"name":x.name,"id":x.id,"bankname":x.bankName}) )
+   const banknames= all_connected_banks._embedded["funding-sources"].map((x:any)=> ({"name":x.name,"id":x.id,"bankname":x.bankName,"type":x.bankAccountType}) )
+   
    return NextResponse.json({"connected_banks":banknames})
 
 

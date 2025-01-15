@@ -5,6 +5,6 @@ export async function call_add_card_to_slide(number:string,name:string,exp:strin
         
     })
     const final_res= await res.json()
-    console.log(final_res)
-   return final_res.status
+ 
+   return final_res
 }

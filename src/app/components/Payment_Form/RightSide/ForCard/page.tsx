@@ -1,3 +1,4 @@
+"use client"
 import { getSelectedCardInfo } from "@/app/(utils)/(call_api_function_selected_connected_card)/route";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -9,8 +10,10 @@ type StatusData = {
 
 type PropsType = {
   status_data: StatusData;
+  system_id: string;
+  system_type:string
 };
-const  ForCard:React.FC<PropsType>= ({status_data})=> {
+const  ForCard:React.FC<PropsType>= ({system_id,system_type,status_data})=> {
   const [card_details, set_card_details] = useState({
     last4: "Processing...",
     type: "Processing...",
@@ -22,7 +25,7 @@ const  ForCard:React.FC<PropsType>= ({status_data})=> {
   useEffect(() => {
     const callfun = async () => {
       const data = await getSelectedCardInfo(
-        Number(searchParams.get("card_index"))
+        Number(system_id)
       );
       console.log(data);
       set_card_details(data);

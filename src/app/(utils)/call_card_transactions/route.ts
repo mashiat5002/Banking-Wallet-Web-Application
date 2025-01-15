@@ -9,6 +9,6 @@
             
         })
         const final_res= await res.json()
-        return final_res;
+        return final_res.final_res.data;
        
     }

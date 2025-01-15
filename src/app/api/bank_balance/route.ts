@@ -15,6 +15,7 @@ export async function POST(request:NextRequest) {
     })
    
     const final_res= await res.json()
-    return NextResponse.json(final_res.balance)
+    
+    return NextResponse.json({"balance":final_res.balance.value,"last_update":final_res.lastUpdated})
     
 }

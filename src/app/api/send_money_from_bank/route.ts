@@ -7,7 +7,7 @@ export async function POST(request:NextRequest) {
     const body= await request.json();
     
     const sender= body.selected=="bank" ? body.sender:"1a180d82-44d5-41b7-80f3-43407947c4cb"
-
+    console.log("sender",sender)
     const response= await fetch("https://api-sandbox.dwolla.com/transfers",{
         method:"POST",
         headers:{

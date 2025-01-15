@@ -17,6 +17,6 @@ export async function POST(request:NextRequest) {
    
     const final_res= await res.json()
    
-    return NextResponse.json({"bank_type":final_res.bankAccountType})
+    return NextResponse.json({"bank_type":final_res.name=="Balance"?final_res.type:final_res.bankAccountType})
     
 }
