@@ -39,6 +39,11 @@ import { call_check_bank_acc_type } from "@/app/(utils)/call_check_bank_acc_type
 import { call_find_customer_id_with_funding_src_id } from "@/app/(utils)/call_find_customer_id_with_funding_src_id/route";
 import { get_dwolla_user_id } from "@/app/(utils)/(get_logged_in_dwolla_customer_id)/route";
 import { call_check_if_own_savings_acc } from "@/app/(utils)/call_check_if_own_savings_acc/route";
+
+
+
+
+
 export default function Savings_form() {
   const [sectors, setSectors] = React.useState({department_1:"",department_2:""});
   const [source, setSource] = React.useState("");
@@ -46,7 +51,12 @@ export default function Savings_form() {
   const [amount, setAmount] = React.useState("");
   const [savingsSector, setSavingsSector] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
   const [status, setStatus] = React.useState("Processing...");
+
+
+
+
   const handleSubmit =  async () => {
     setStatus("Processing...");
     setLoading(true);
@@ -62,6 +72,8 @@ export default function Savings_form() {
       return;
 
     }
+
+
     else if(isSavingsDestination.bank_type=="savings"){
       const cid= await call_find_customer_id_with_funding_src_id(destination);
       const origin= await call_check_if_own_savings_acc(cid);
@@ -71,7 +83,10 @@ export default function Savings_form() {
       }
       
     }
+
     const res= await call_Sender_bank(amount,source,destination,"bank");
+
+
     if(res.status==201){
       setStatus("Successful");
       console.log(await call_update_saving_bank_balance(savingsSector,amount,"add"));
@@ -92,7 +107,7 @@ export default function Savings_form() {
     fetchData();
   }, []);
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={()=>{setIsOpen(!isOpen), setSource(""),setdestination(""),setSavingsSector("")}}>
       <DialogTrigger asChild>
         <p className="text-sm font-light pl-1 cursor-pointer text-nowrap">
           Add Savings
@@ -115,11 +130,11 @@ export default function Savings_form() {
               <div className="grid w-full items-center gap-4">
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="name">Source Funding Source</Label>
-                  <Input onChange={(e:any)=>{setSource(e.currentTarget.value)}} id="name" placeholder="Funding Source ID" />
+                  <Input required onChange={(e:any)=>{setSource(e.currentTarget.value)}} id="name" placeholder="Funding Source ID" />
                 </div>
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="name">Destination Funding Source</Label>
-                  <Input  onChange={(e:any)=>{setdestination(e.currentTarget.value)}} id="name" placeholder="Savings Account ID" />
+                  <Input required  onChange={(e:any)=>{setdestination(e.currentTarget.value)}} id="name" placeholder="Savings Account ID" />
                 </div>
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="framework">Savings Type</Label>
@@ -141,16 +156,17 @@ export default function Savings_form() {
                 </div>
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="name">Amount</Label>
-                  <Input onChange={(e:any)=>{setAmount(e.currentTarget.value)}} id="name" placeholder="Amount" />
+                  <Input required onChange={(e:any)=>{setAmount(e.currentTarget.value)}} id="name" placeholder="Amount" />
                 </div>
               </div>
             </form>
           </CardContent>
           <CardFooter className="flex justify-between">
-            <Button variant="outline">Cancel</Button>
+            <Button onClick={()=>setIsOpen(!isOpen)} variant="outline">Cancel</Button>
+           
             {
             
-            savingsSector==""?<Confirm_Action status={{header: `Incomplete Input `, description:`Select Destination Savings Sector`, action: () => {}}} /> 
+            (savingsSector=="" || source=="" || destination=="" || amount=="")?<Confirm_Action status={{header: `Incomplete Input `, description:`Ensure All Fields Are Filled`, action: () => {}}} /> 
             : <Confirm_Action status={{header: `Confirm Transfer `, description:`Sending to: ${savingsSector=="balance_1"?sectors.department_1:sectors.department_2} Amount: ${amount} from: ${source} to: ${destination}`, action: ()=>{return handleSubmit()}}} />}
             
             {loading==true? <Dialog_UI status={{header:"Processing Status",description:`${status}`,action:()=>{setLoading(false)}}} /> : null}

@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Bar, BarChart, ResponsiveContainer } from "recharts"
 export default function Recharts_Chart() {
@@ -43,6 +44,7 @@ export default function Recharts_Chart() {
         },
       ]
   return (
+    
     <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data}>
                 <Bar

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
         const body = await request.json();
- 
+        
         const customer= await get_stripe_user_id();
          
         const formBody = new URLSearchParams();
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
         formBody.append("customer", customer);
         formBody.append("payment_method", body.sender.payment_method_id);
         formBody.append("description", body.receiver);
-
+        formBody.append("metadata[recipient]", body.recipient || "No additional note");
      
         const response = await fetch(`${process.env.Base_Url_Stripe}/v1/payment_intents`, {
             method: "POST",

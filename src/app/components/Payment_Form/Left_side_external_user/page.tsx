@@ -11,10 +11,10 @@ export default function Left_side_external_user() {
     <div className=' h-5/12 w-full '>
     <div className='h-1/6 w-full text-xs md:text-base text-custom-blue3 flex items-center '>
         <div className='h-full w-9/12 flex items-center '>
-            <h1 className=''>Reciepent Name:</h1>
+            <h1 className=''>Recipient Name:</h1>
         </div>
         <div className='h-full w-3/12 flex items-center font-bold flex-col-reverse text-custom-blue3'>
-        <input required name='receipent' className='w-11/12 ml-1 bg-slate-50'/>
+        <input required name='recipient' className='w-11/12 ml-1 bg-slate-50'/>
         </div>
     </div>
     <div className='h-1/6 w-full text-xs md:text-base text-custom-blue3 flex items-center '>

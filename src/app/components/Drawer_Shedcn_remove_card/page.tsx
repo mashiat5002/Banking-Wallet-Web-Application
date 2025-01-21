@@ -35,6 +35,7 @@ type propsCard= {
     expiry: string;
     cvc: string;
     key_id: string;
+    
 }
 const Drawer_Shedcn_remove_card: React.FC<props>=({cardData,action ,setStatus,setdrawerVisibility,stts,heading, description,btnVisibility,drawerVisibility})=> {
   

@@ -4,23 +4,26 @@
 import { useRouter } from 'next/navigation';
 import React from 'react'
 import { useState } from 'react';
-import { call_bank_transfers } from '@/app/(utils)/call_bank_transfers/route';
+import myfun from '@/app/(utils)/bank_transfers_proper_all/route';
+import { call_card_transfer_all } from '@/app/(utils)/call_card_transfer_all/route';
+import Dialog_UI_login from '../Dialog_UI_login/page';
 
 export default function Login() {
     const router = useRouter();
     const [LoginStat, setLoginStat]=useState("");
-    const [LoginStatColor, setLoginStatColor]=useState("white");
+    const [loading, setloading]=useState(false);
 
     const handledemo = async () => {
-       const data = await call_bank_transfers()
-       
-       
-            console.log(data)
+        const transections = await call_card_transfer_all()
+              console.log(transections)
+        //       console.log(transections.res[0])
+        //     //   const data= transections.res.map((x)=> {"Sender":x.})
+        await myfun()
     };
     const handleSubmission=async (e:React.FormEvent<HTMLFormElement>)=>{
-        
+        setloading(true)
         setLoginStat("Processing Request...");
-        setLoginStatColor("orange");
+       
         e.preventDefault();
         const formdata= new FormData(e.currentTarget);
 
@@ -37,19 +40,16 @@ export default function Login() {
         if(data.status=="Login Successful"){
 
             setLoginStat(data.status);
-            setLoginStatColor("lightgreen");
+           
             
-            setTimeout(() =>{
-                router.back()
-                setTimeout(() =>router.push('homepage'),10);
-            },395);
+            router.push('/homepage')
           
 
             
         }
         else{
             setLoginStat(data.status);
-            setLoginStatColor("red");
+           
 
         }
 
@@ -58,7 +58,6 @@ export default function Login() {
 
   return (
     <form onSubmit={handleSubmission} >
-    <div onClick={()=>router.back()} className='h-screen w-screen absolute flex items-center justify-center backdrop-blur  font-bold text-custom-white '>
         <div onClick={(e)=>e.stopPropagation()} className='h-500px w-96 bg-custom-green space-y-3 rounded-2xl'>
             <div className='h-1/5 w-full  flex items-center justify-center'>
                 <h1 onClick={handledemo} className='text-3xl  opacity-100'>Login Here</h1>
@@ -93,7 +92,7 @@ export default function Login() {
                 <div className='h-full w-4/5   flex items-center justify-center '>
                 <div className='h-4/5 w-full  '>
 
-                    <h1 className='text-sm font-normal ' style={{color:LoginStatColor}}>{LoginStat}</h1>
+                    <h1 className='text-sm font-normal ' ></h1>
                     <button className='h-2/5 w-full bg-white text-black mt-5'>Login</button>
                 </div>
 
@@ -102,8 +101,7 @@ export default function Login() {
             </div>
 
         </div>
-      
-    </div>
+      {loading?<Dialog_UI_login  status={{"header":"Logging In","description":LoginStat,"action":()=>handleSubmission}}/>:null}
     </form>
   )
 }

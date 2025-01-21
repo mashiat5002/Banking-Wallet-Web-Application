@@ -3,7 +3,7 @@ export async function call_api_Connected_banks(){
     method:"POST"
   })
   const account=await res.json();
-
+    console.log(account)
      return account.connected_banks
     
   

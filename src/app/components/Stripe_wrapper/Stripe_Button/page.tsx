@@ -5,6 +5,7 @@ import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { call_add_card_to_slide } from "@/app/(utils)/call_add_card_to_slide/route";
 import Dialog_UI from "../../Dialog_UI/page";
 import { call_remove_card_from_db } from "@/app/(utils)/call_remove_card_from_db/route";
+import { call_insert_method_id_stripe_in_db } from "@/app/(utils)/call_insert_method_id_stripe_in_db/route";
 
 type propsType = {
   name: string;
@@ -57,11 +58,13 @@ const Stripe: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
           method: "POST",
           body: JSON.stringify(paymentMethod),
         });
-      
+        const res_data=await res.json() 
+        console.log(res_data)
         if (res.status == 200) {
          
           setStatus("Successfully connected card to stripe. (The card is added to card stack as your input for homepage stack)");
          
+          await call_insert_method_id_stripe_in_db(insertID,res_data.data.id)
         }
         else{
        

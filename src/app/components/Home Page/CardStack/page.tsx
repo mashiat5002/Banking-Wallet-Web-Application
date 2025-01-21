@@ -11,6 +11,7 @@ import { call_remove_card_from_db } from '@/app/(utils)/call_remove_card_from_db
 export default function CardStack() {
   const [stts, setStatus] = React.useState("Remove")
    const [drawerVisibility, setdrawerVisibility] = React.useState(false)
+   const [reload, setreload] = React.useState(false)
    const [cardData, setcardData] = React.useState({name_:"", number:"", expiry:"",cvc:"",key_id:""})
    const [cardAllData, setAllcardData] = React.useState([{Card_holder:"",expiry_date:"",key_id:"",card_ids:""}])
    const [Component, setComponent] = React. useState<JSX.Element | null>(<div>Initial JSX Element</div>);
@@ -21,7 +22,7 @@ export default function CardStack() {
 
     }
     myfun()
-  },[])
+  },[reload])
 
   
     
@@ -32,6 +33,7 @@ export default function CardStack() {
             console.log(res);
             if(res==1){
            setStatus("Removed Successfully")
+           setreload(!reload)
          }
          else
          setStatus("Something went wrong!!")
@@ -59,7 +61,7 @@ export default function CardStack() {
 
         <div className='h-full w-1/6  flex items-center justify-center'>
         <BsThreeDotsVertical size={"25px"}/>
-                  <Drawer_Shedcn_remove_card  cardData={cardData}  drawerVisibility={drawerVisibility} setdrawerVisibility={setdrawerVisibility} btnVisibility={false}  setStatus={setStatus} stts={stts}  action={handleSubmission} heading='Remove Card'  description='This action will only remove from the homepage view' />
+                  <Drawer_Shedcn_remove_card   cardData={cardData}  drawerVisibility={drawerVisibility} setdrawerVisibility={setdrawerVisibility} btnVisibility={false}  setStatus={setStatus} stts={stts}  action={handleSubmission} heading='Remove Card'  description='This action will only remove from the homepage view' />
         </div>
       </div>
 

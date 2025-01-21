@@ -10,6 +10,10 @@ import Graph from './HmpgGraphChart/page'
 import RecentTrans from './HmPgRecentTransaction/page'
 import PolarChart from './HmpgPolarChart/page'
 import MoneySentCard from './HmPgMoneySentCard/page'
+import Spline_bg from '../Spline/page'
+import Bank_banance from './Balance_bank/page'
+import Balance_credit_card from './Balance_credit_card/page'
+import Balance_savings from './Balance_savings/page'
 
 export default async function Homepage() {
  
@@ -57,9 +61,9 @@ export default async function Homepage() {
 
 
               <div className='h-1/3 md:h-1/5 w-full  md:flex md:items-center  md:space-x-5 flex-col md:flex-row items-center justify-center '>
-                <HomePage_Balance_Card card_type={"bank"}/>
-                <HomePage_Balance_Card card_type={"card"}/>
-                <HomePage_Balance_Card card_type={"savings"}/>
+                <Balance_credit_card card_type={"card"}/>
+                <Balance_savings card_type={"savings"}/>
+                <Bank_banance card_type={"bank"}/>
            
 
               </div>

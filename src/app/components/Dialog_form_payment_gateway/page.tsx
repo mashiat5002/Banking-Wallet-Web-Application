@@ -67,7 +67,7 @@ const  Dialog_form_payment_gateway:React.FC<props>=({system_id,system_type})=> {
      
       </DialogTrigger>
       <DialogContent className="md:h-[700px] md:w-[1000px] h-[500px] w-[550px] flex items-center justify-center">
-          <Payment_Form system_type={system_type} system_id={system_id}/>
+          <Payment_Form recipient="" from="" amount={0} system_type={system_type} system_id={system_id}/>
       </DialogContent>
     </Dialog>
    

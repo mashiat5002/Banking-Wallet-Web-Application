@@ -41,7 +41,7 @@ const Dialog_UI:React.FC<props>=({status})=> {
       </AlertDialogHeader>
       <AlertDialogFooter>
         
-        <AlertDialogAction disabled={status.description=="Processing...."} onClick={() => {status.action()}}>Continue</AlertDialogAction>
+        <AlertDialogAction disabled={status.description=="Processing..."} onClick={() => {status.action()}}>Continue</AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

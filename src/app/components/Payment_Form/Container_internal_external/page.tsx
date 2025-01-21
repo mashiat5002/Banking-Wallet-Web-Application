@@ -4,11 +4,14 @@ import Left_side_external_user from '../Left_side_external_user/page'
 
 type propsType={
     selected:string
+    recipient:string
+    from: string
+    amount:Number
 }
 
-const Internal_External = ({selected}:propsType) => {
+const Internal_External = ({recipient,from,amount,selected}:propsType) => {
   return (
-    selected=="1"?<Left_side_internal_user/>:<Left_side_external_user/>
+    selected=="1"?<Left_side_internal_user recipient={recipient} from={from} amount={amount}/>:<Left_side_external_user/>
   )
 }
 

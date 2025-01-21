@@ -16,9 +16,12 @@ import { call_update_saving_bank_balance } from '@/app/(utils)/call_update_savin
 type props={
   system_id: string;
   system_type:string
+  recipient:string
+  from: string
+  amount:Number
 }
 
-const  Payment_Form:React.FC<props>=({system_id,system_type})=> {
+const  Payment_Form:React.FC<props>=({recipient,from,amount,system_id,system_type})=> {
  
   const router= useRouter()
     const [status,setStatus]= useState("Confirm")
@@ -40,10 +43,10 @@ const  Payment_Form:React.FC<props>=({system_id,system_type})=> {
         setStatus("Processing...")
         set_statusClr("orange")
         const formdata=  new FormData(e.currentTarget);
-        
+          console.log(formdata.get("recipient"))
         const routingId = formdata.get("routing_id") as string;
         const accountId = formdata.get("account_id") as string;
-        const recipient = formdata.get("receipent") as string;
+        const recipient_name = formdata.get("recipient") as string;
         const recipientID = formdata.get("receipent_id") as string;
         const amount = formdata.get("amount") as string;
 
@@ -103,8 +106,8 @@ const  Payment_Form:React.FC<props>=({system_id,system_type})=> {
         
         // await  Call_remover_funding_src("")
 
-        selected=="2"?summary_response= await check_funding_source_origin(routingId,accountId,recipient,amount,sender):
-        summary_response=await call_Sender_card(amount,sender,recipientID,selected)
+        selected=="2"?summary_response= await check_funding_source_origin(routingId,accountId,recipient_name,amount,sender,recipient_name):
+        summary_response=await call_Sender_card(amount,sender,recipientID,selected,recipient_name)
         console.log(summary_response)
         if(summary_response=="succeeded" || summary_response=="201"){
           
@@ -195,7 +198,7 @@ const  Payment_Form:React.FC<props>=({system_id,system_type})=> {
                 </div>
               </div>
 
-              <Internal_External selected={selected}/>
+              <Internal_External recipient={recipient} from={from} amount={amount} selected={selected}/>
 
               <div className=" mt-5 w-full flex items-center ">
                 <input type="radio"></input> 
