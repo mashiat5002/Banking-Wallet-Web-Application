@@ -1,18 +1,13 @@
+"use client";
 
+import Spline from '@splinetool/react-spline';
 
-import React from 'react';
-import dynamic from 'next/dynamic';
-
-// Dynamically import the Spline component with no SSR
-const Spline = dynamic(() => import('@splinetool/react-spline/next'), {
-  ssr: false, // Disable SSR for this component
-});
-
-export default function Spline_bg() {
+const SplineComponent = () => {
   return (
-    <main className="h-full w-full">
-   
+    <div style={{ width: '100%', height: '100vh' }}>
       <Spline scene="https://prod.spline.design/1rqlqEdM-FyIEuI7/scene.splinecode" />
-    </main>
+      </div>
   );
-}
+};
+
+export default SplineComponent;

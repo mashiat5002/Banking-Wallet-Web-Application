@@ -16,13 +16,36 @@ const isConnected=async ()=>{
 export async function POST(request:NextRequest){
     
     
-
-   
+    
+    
     if(await isConnected()){
         const Body = await request.json();
+        const hasUppercase = /[A-Z]/.test(Body.pass); // Checks for at least one uppercase letter
+        const hasSpecialChar = /[!@#$%^&*(),.?`":{}|<>]/.test(Body.pass); // Checks for at least one
+        if (Body.pass.length < 9) {
+           
+            return NextResponse.json({
+                status: 500,
+                msg: "Password Can't be less than 8 characters!",
+            });
+        } else if (!hasSpecialChar){
+            return NextResponse.json({
+                status: 500,
+              msg: "Password Can't be less than 1 special characters!",
+            });
+            
+        }
+        else if (! hasUppercase){
+            return NextResponse.json({
+                status: 500,
+                msg: "Password Can't be less than 1 Upper Case characters!",
+            });
+            
+        }
         
-       
-        const access_token=await get_dwolla_access_token();
+        
+        
+        const access_token = await get_dwolla_access_token();
    
         
         
@@ -36,9 +59,8 @@ export async function POST(request:NextRequest){
                 
             },
             method:"POST"
-    
         });
-       
+        console.log(response)
         if (!response.ok) {
             
             return response;

@@ -12,7 +12,7 @@ export async function call_check_bank_acc_type(id: string) {
         
     })
     const final_res= await res.json()
-    
+    console.log(final_res)
     return final_res;
    
 }

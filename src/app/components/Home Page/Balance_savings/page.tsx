@@ -5,21 +5,30 @@ import { call_get_card_balance } from '@/app/(utils)/call_get_card_balance/route
 import { call_get_saving_acc_balance } from '@/app/(utils)/call_get_saving_acc_balance/route';
 import { format_date } from '@/app/(utils)/format_date_function/route';
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import Loading_shed_cn_card from '../../loading_shedcn_card/page';
 import { MdBarChart } from 'react-icons/md';
 import { BsThreeDotsVertical } from 'react-icons/bs';
+import MyContext from '../../MyContext/route';
+import { call_get_last_update_time_savings_balance } from '@/app/(utils)/call_get_last_update_time_savings_balance/route';
+
 type propsType={
     card_type:string
 }
 const Balance_savings = ({card_type}:propsType) => {
+    const {saving_balance_loading}= useContext(MyContext)
+    const {card_bank_reload,setcard_bank_reload}= useContext(MyContext)
+
+
     const [value,setValue]= useState(0)
     const [loading,setloading]= useState(true)
     const [lastUpdate,setlastUpdate]= useState("fetching...")
     const [type,setType]= useState("")
     useEffect( ()=>{
         const getdata=async ()=>{
+            const getTime= await call_get_last_update_time_savings_balance()
+            setlastUpdate(getTime)
            
           
                 setType("Savings")
@@ -35,20 +44,20 @@ const Balance_savings = ({card_type}:propsType) => {
         
        getdata()
 
-    },[])
+    },[saving_balance_loading,card_bank_reload])
     
   return (
   <div className='h-1/3 w-full md:h-full  md:w-full  pl-3 md:pl-0'>
       <div className='w-11/12 h-5/6 bg-logo-surrounding text-custom-white rounded-2xl '>
         <div className='h-1/3 w-full  flex '>
             <div className='w-2/12 h-full  flex items-center justify-center'>
-                <div className='md:w-3/5 w-2/6 aspect-square bg-custom-black  rounded-full text-custom-purple flex items-center justify-center'>
-                    <MdBarChart size={"20px"} fill='#8759EC'/>
+                <div className='md:w-2/5 w-1/6 aspect-square bg-custom-black  rounded-full text-custom-purple flex items-center justify-center'>
+                    <MdBarChart size={"15px"} fill='#8759EC'/>
                 </div>
 
             </div>
             <div className='w-8/12 h-full  flex items-center text-sm font-medium md:text-custom-size lg:text-xs'>
-                <h1 className='pl-3'>{type}</h1>
+                <h1 className='pl-3'>Savings Balance</h1>
             </div>
             <div className='w-2/12 h-full  flex items-center justify-center'>
                 <BsThreeDotsVertical size={"30px"} fill='white'/>

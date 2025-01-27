@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { call_add_card_to_slide } from "@/app/(utils)/call_add_card_to_slide/route";
 import Dialog_UI from "../../Dialog_UI/page";
 import { call_remove_card_from_db } from "@/app/(utils)/call_remove_card_from_db/route";
 import { call_insert_method_id_stripe_in_db } from "@/app/(utils)/call_insert_method_id_stripe_in_db/route";
+import MyContext from "../../MyContext/route";
 
 type propsType = {
   name: string;
@@ -15,6 +16,7 @@ type propsType = {
 };
 
 const Stripe: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
+  const {card_loading,setCard_loading}= useContext(MyContext)
   const [status, setStatus] = useState("Processing..");
   const [loading, setLoading] = useState(false);
 
@@ -32,6 +34,7 @@ const Stripe: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
       const inserted= inserted_res.status;
 
       if(inserted || inserted== "inserted"){
+        setCard_loading(!card_loading)
         // setStatus("inserted to slide")
         
         if (!stripe || !elements) {

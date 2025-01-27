@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -39,6 +39,8 @@ import { call_check_bank_acc_type } from "@/app/(utils)/call_check_bank_acc_type
 import { call_find_customer_id_with_funding_src_id } from "@/app/(utils)/call_find_customer_id_with_funding_src_id/route";
 import { get_dwolla_user_id } from "@/app/(utils)/(get_logged_in_dwolla_customer_id)/route";
 import { call_check_if_own_savings_acc } from "@/app/(utils)/call_check_if_own_savings_acc/route";
+import MyContext from "../MyContext/route";
+import { call_update_savings_time } from "@/app/(utils)/call_update_savings_time/route";
 
 
 
@@ -54,6 +56,7 @@ export default function Savings_form() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [status, setStatus] = React.useState("Processing...");
 
+  const {saving_balance_loading,setsaving_balance_loading}= useContext(MyContext)
 
 
 
@@ -62,10 +65,16 @@ export default function Savings_form() {
     setLoading(true);
     const isSavingsSource= await call_check_bank_acc_type(source);
     const isSavingsDestination= await call_check_bank_acc_type(destination);
-    
+    const cid= await call_find_customer_id_with_funding_src_id(source);
+    const origin= await call_check_if_own_savings_acc(cid);
+      if(origin==false){
+        setStatus("Cannot Perform Transaction from Accounts except Own Savings Account");
+        return;
+      }
     if(isSavingsSource.bank_type=="savings"){
       setStatus("Cannot Perform Transaction from Savings Account");
       return;
+
     }
     else if(isSavingsDestination.bank_type!="savings"){
       setStatus("Cannot Perform Transaction to Accounts except Savings Account");
@@ -78,7 +87,7 @@ export default function Savings_form() {
       const cid= await call_find_customer_id_with_funding_src_id(destination);
       const origin= await call_check_if_own_savings_acc(cid);
       if(origin==false){
-        setStatus("Cannot Perform Transaction to Accounts except Savings Account");
+        setStatus("Cannot Perform Transaction to Accounts except Own Savings Account");
         return;
       }
       
@@ -89,7 +98,9 @@ export default function Savings_form() {
 
     if(res.status==201){
       setStatus("Successful");
+      await call_update_savings_time()
       console.log(await call_update_saving_bank_balance(savingsSector,amount,"add"));
+      setsaving_balance_loading(!saving_balance_loading)
      
     }
     else{

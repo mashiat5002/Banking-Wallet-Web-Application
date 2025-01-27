@@ -9,7 +9,7 @@ export async function POST() {
     const id= await get_dwolla_user_id();
     const access= await get_dwolla_access_token();
     let transfers = [] as any;
-let url = `https://api-sandbox.dwolla.com/customers/${id}/transfers?limit=50`; // Set limit to maximum allowed (50
+let url = `https://api-sandbox.dwolla.com/customers/${id}/transfers?limit=200`; // Set limit to maximum allowed (50
     while (url) {
         const response = await fetch(url, {
             method: "GET",

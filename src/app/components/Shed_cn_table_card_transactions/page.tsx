@@ -37,6 +37,7 @@ import {
 } from "@/components/ui/table"
 import call_bank_transfers_proper_all from "@/app/(utils)/bank_transfers_proper_all/route"
 import { call_card_transfer_all } from "@/app/(utils)/call_card_transfer_all/route";
+import { format_date } from "@/app/(utils)/format_date_function/route";
 
 
 
@@ -176,8 +177,11 @@ export type Payment = {
   
   
 }
-export function Shed_cn_table_card_transactions() {
-  const [loading,setLoading]=React.useState(true)
+type props={
+  loading:boolean,
+  data: Payment[]
+}
+const Shed_cn_table_card_transactions:React.FC<props>=({loading,data})=> {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -185,24 +189,7 @@ export function Shed_cn_table_card_transactions() {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
-  const [data, setInfo] = React.useState<Payment[]>([]); // Correct type initialization
-  
-  React.useEffect(()=>{
-    const callFun=async()=>{
-      const data= await call_card_transfer_all()
-      setLoading(false)
-      
-      const transformedData = data.map((x:any, index) => ({
-        receiver: x.description,
-        status: x.status,
-        amount: x.amount,
-        time: x.created,
-        pid: x.payment_method,
-      }));
-      setInfo(transformedData)
-    }
-    callFun()
-  },[])
+ 
 
   const table = useReactTable({
     data,
@@ -350,3 +337,4 @@ export function Shed_cn_table_card_transactions() {
     </div>
   )
 }
+export default Shed_cn_table_card_transactions

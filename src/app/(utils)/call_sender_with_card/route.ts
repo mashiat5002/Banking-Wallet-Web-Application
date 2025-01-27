@@ -6,6 +6,7 @@ export async function call_Sender_card(amount:string,sender:string,receiver:stri
     console.log("recipient==="+recipient_name)
     if(selected=="1"){
         const res_bank= await call_Sender_bank(amount, sender, receiver,selected);
+        console.log(res_bank)
         if(res_bank.status==201){
             // await call_Sender_card(amount,sender,receiver,selected)
             const res= await fetch("http://localhost:3000/api/send_money_with_card",{
@@ -19,7 +20,7 @@ export async function call_Sender_card(amount:string,sender:string,receiver:stri
                     
                 })
             })
-          
+            
             const data= await res.json()
            
             if(data.response.status=="succeeded"){
@@ -42,7 +43,6 @@ export async function call_Sender_card(amount:string,sender:string,receiver:stri
         })
       
         const data= await res.json()
-  
         if(data.response.status=="succeeded")
         {
             await call_spend_card_balance(amount);

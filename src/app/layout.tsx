@@ -15,7 +15,7 @@ return (
   <body >
   <div className="relative">
     {children}
-    { <div className="absolute top-0 left-0 ">{modal}</div>}
+    {/* { <div className="absolute top-0 left-0 ">{modal}</div>} */}
   </div>
   </body>
   </html>

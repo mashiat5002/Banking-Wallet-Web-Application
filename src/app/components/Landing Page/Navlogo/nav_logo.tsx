@@ -7,7 +7,7 @@ export default function Navlogo() {
       <FaPiggyBank style={{fontSize:'30px', fill:'white'}}/>
 
       </div>
-      <h1 className=' ml-1 md:ml-4 md:text-2xl lg:text-3xl'>Banking Wallet</h1>
+      <h1 className=' ml-1 md:ml-4 md:text-sm lg:text-3xl'>Banking Wallet</h1>
     </div>
   )
 }

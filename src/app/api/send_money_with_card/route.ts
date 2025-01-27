@@ -17,6 +17,8 @@ export async function POST(request: NextRequest) {
         formBody.append("payment_method", body.sender.payment_method_id);
         formBody.append("description", body.receiver);
         formBody.append("metadata[recipient]", body.recipient || "No additional note");
+        formBody.append("metadata[recipientID]", body.receiver || "No additional note");
+        formBody.append("metadata[amount]", (Number(body.amount) ).toString());
      
         const response = await fetch(`${process.env.Base_Url_Stripe}/v1/payment_intents`, {
             method: "POST",

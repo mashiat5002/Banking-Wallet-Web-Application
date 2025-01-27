@@ -10,6 +10,8 @@ import {
 } from 'chart.js';
 import { call_get_stripe_transaction_details } from '@/app/(utils)/call_get_stripe_transaction_details/route';
 import Drawer_Shedcn_settings_cards_transactions from '../../Drawer_Shedcn_settings_cards_transactions/page';
+import Loading_shed_cn_card from '../../loading_shedcn_card/page';
+import No_data_skeleton from '../../No_data_skeleton/page';
 
 const options = {
   aspectRatio: 2,
@@ -34,7 +36,8 @@ ChartJS.register(
 
 
 export default function PolarChart() {
-  const [heading,setheading]= useState("");
+  const [loading,setloading]= useState(true);
+  const [isnodata,setisnodata]= useState([] as any);
   const [description,setdescription]= useState("");
   const [stts,setstts]= useState("");
   const [dimension,setDimension]= useState("This Week (Last 7 days)");
@@ -50,7 +53,7 @@ export default function PolarChart() {
     ],
     datasets: [{
       label: 'My First Dataset',
-      data: [10, 10, 10, 10, 10,10,10],
+      data: [],
       backgroundColor: [
         'rgb(255, 99, 132)',
         'rgb(75, 192, 192)',
@@ -84,11 +87,13 @@ export default function PolarChart() {
   useEffect(()=>{
     const myfun= async()=>{
       const data= await call_get_stripe_transaction_details();
-
-
-     console.log(data)
+      const data_arr= data.monthly.filter((x:any)=> x.sum!=0)
+      setisnodata(data_arr)
+      
+      setloading(false)
+      console.log(data_.datasets[0].data.length)
      
-     setDays_sum(data.daily.map((x:any)=>x.sum));
+     if(data.monthly){setDays_sum(data.daily.map((x:any)=>x.sum));
      setDays_name(data.daily.map((x:any)=>x.name));
      setWeeks_sum(data.weekly.map((x:any)=>x.sum));
      setWeeks_name(data.weekly.map((x:any)=>x.j.toString()));
@@ -100,12 +105,12 @@ export default function PolarChart() {
      setactiveWeeks_sum((data.weekly.filter((x:any)=>x.sum)).map((x:any)=>x.sum));
      setactiveWeeks_name((data.weekly.filter((x:any)=>x.sum.toString())).map((x:any)=>x.j.toString()));
      setactiveMonths_sum((data.monthly.filter((x:any)=>x.sum)).map((x:any)=>x.sum));
-     setactiveMonths_name((data.monthly.filter((x:any)=>x.sum)).map((x:any)=>x.name));
+     setactiveMonths_name((data.monthly.filter((x:any)=>x.sum)).map((x:any)=>x.name));}
        
 
 
 
-        setData({
+      if(data.daily){  setData({
           labels: data.daily.map((x:any)=>x.name).slice(0,7),
           datasets: [{
             label: 'Card Total Transactions',
@@ -124,7 +129,7 @@ export default function PolarChart() {
             
           }],
         })
-        setDimension("Last 7 Days")
+        setDimension("Last 7 Days")}
      
     }
     myfun();
@@ -213,9 +218,11 @@ export default function PolarChart() {
       />
       </div>
       </div>
-      <div className="h-5/6 w-full flex items-center justify-center ">
+      {loading?<div className="h-5/6 w-full flex items-center justify-center "><Loading_shed_cn_card/></div>:(isnodata.length==0)? 
+      <div className='w-full h-8/12 bg-custom-grey-white'><No_data_skeleton/></div> 
+      :<div className="h-5/6 w-full flex items-center justify-center ">
         <PolarArea data={data_} options={options} />
-      </div>
+      </div>}
     </div>
   );
 }

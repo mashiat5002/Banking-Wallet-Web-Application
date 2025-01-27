@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Avatar, { genConfig } from 'react-nice-avatar'
 import { call_find_customer_with_customer_id } from '@/app/(utils)/call_find_customer_with_customer_id/route';
 import { call_find_customer_id_with_funding_src_id } from '@/app/(utils)/call_find_customer_id_with_funding_src_id/route';
@@ -11,6 +11,9 @@ import { call_get_stripe_transaction_details } from '@/app/(utils)/call_get_stri
 import { call_card_transfer_all } from '@/app/(utils)/call_card_transfer_all/route';
 import { call_api_Connected_cards } from '@/app/(utils)/(call_api_function_stripe_connected_payment_methods)/route';
 import Dialog_form_payment_gateway_quick_trans from '../../Dialog_form_payment_gateway_quick_trans/page';
+import MyContext from '../../MyContext/route';
+import Loading_shed_cn_card from '../../loading_shedcn_card/page';
+import No_data_skeleton from '../../No_data_skeleton/page';
 export default function QuickSend() {
    const [system_id, setsystem_id] = useState("");
    const [isOpen, setisOpen] = useState(false);
@@ -25,35 +28,43 @@ export default function QuickSend() {
    const [unique_two_card_desc, setunique_two_card_desc] =useState([] as any);
    const [connectedCards, setconnectedCards] =useState([] as any);
    const [amounts, setamounts] =useState([] as any);
+   const [card_meta, setcardmeta] =useState([] as any);
    const [tobeSent, settobeSent]= useState(0);
    const [toSent, settoSent]= useState("");
    const [toFid, settofid]= useState("");
+     const [loading,setloading]= useState(true);
+     const {card_bank_reload,setcard_bank_reload}= useContext(MyContext)
+   
+      // const [recent_card_transaction_details,setrecent_card_transaction_detials]=useState("")
+      const {setIsQuickTrans}= useContext(MyContext)
 
     const handleClick=(index:any)=>{
       if(index<3){
-
-        // console.log(sourceFids[index])
-        console.log(destFids[index])
-        console.log(destNames[index])
+   
+        
         settoSent(destNames[index])
 
         const target= connected_banks.findIndex((item:any)=>item==sourceFids[index])
-        console.log(target)
+      
         settofid(destFids[index])
-        console.log(amounts[index])
+      
         settobeSent(amounts[index])
         setsystem_id(target)
         setisOpen(true)
       }
       else{
-        // console.log(connectedCards)
-        // console.log(unique_two_card_pid[index-3])
-        // console.log(unique_two_card_desc[index-3])
+        setIsQuickTrans(true)
+    
         const targetId= unique_two_card_pid[index-3];
         const target= connectedCards.findIndex((item: any) => item.payment_method_id === targetId);
         setsystem_id(target)
+  
+        settobeSent(card_meta[index-3].amount)
+        settoSent(card_meta[index-3].recipient)
+        settofid(card_meta[index-3].recipientID)
         setisOpen_card(true)
-       console.log(target)
+
+      
       }
       
 
@@ -65,7 +76,7 @@ export default function QuickSend() {
        setconnectedCards(allCards)
       }
       myfun()
-    },[])
+    },[card_bank_reload])
 
     useEffect(() => {
      
@@ -148,6 +159,7 @@ export default function QuickSend() {
               unique_five_source.push(source)
               unique_five_destination.push(destination )
               money.push(transactions[i].amount.value)
+             
             }
           }
           
@@ -161,9 +173,7 @@ export default function QuickSend() {
         await myfun();
         setTransList(unique_five);
         setamounts(money)
-        console.log(money)
-        console.log(unique_five_source)
-        console.log(unique_five_destination)
+
           
         
           //fetching customer names of destinations
@@ -181,6 +191,7 @@ export default function QuickSend() {
               );
           
               setDestNames(names)
+              setloading(false)
             } catch (error) {
               console.error("Error fetching names:", error);
             }
@@ -188,7 +199,7 @@ export default function QuickSend() {
           
           fetchNames();
           
-
+          
           
           //fetching fids of destinations
           const fetch_dest_fid = async () => {
@@ -237,7 +248,7 @@ export default function QuickSend() {
             }
           };
           
-
+          
 
           
           fetch_source_fid();
@@ -248,12 +259,14 @@ export default function QuickSend() {
       };
      
       fetchTransactions();
-    }, []);
+     
+    }, [card_bank_reload]);
     
     
     const unique_cards=[] as any;
     const unique_cards_pid=[] as any;
     const unique_cards_description=[] as any;
+    const card_metaData= [] as any;
     useEffect(()=>{
       const fetch_card_trans=async()=>{
         const card_trans_list= await call_card_transfer_all()
@@ -268,16 +281,20 @@ export default function QuickSend() {
             unique_cards.push(card_info)
             unique_cards_pid.push(card_trans_list[i].payment_method)
             unique_cards_description.push(card_trans_list[i].description)
-
+            card_metaData.push(card_trans_list[i].metadata)
+  
+            
           }
         }
         setunique_two_card(unique_cards)
         setunique_two_card_pid(unique_cards_pid)
         setunique_two_card_desc(unique_cards_description)
-        console.log(unique_cards)
+        setcardmeta(card_metaData)
+      
       }
       fetch_card_trans()
-    },[])
+     
+    },[card_bank_reload])
   
     
     return (
@@ -288,7 +305,7 @@ export default function QuickSend() {
         <div className='h-2/3 w-full flex items-center justify-center md:space-x-1 lg:space-x-3 '>
          
 
-         {transList.map((transaction, index:any) => {
+         {loading? <div className='w-full h-full'><Loading_shed_cn_card/></div>: (destNames.length==0)? <div className='w-full h-full bg-custom-grey-white'><No_data_skeleton/></div> : transList.map((transaction, index:any) => {
            return (
          
              <div key={index} className='w-1/6 h-full    text-custom-white '>
@@ -301,7 +318,7 @@ export default function QuickSend() {
          
          
                <div  onClick={()=>handleClick(index)} className=' h-1/3 w-full cursor-pointer font-semibold flex items-center justify-center md:text-custom-size lg:text-xs'>
-               <h1>{destNames[index]?.replace(/".*?"/g, '')}</h1>
+               {index<3?<h1>{destNames[index]?.replace(/".*?"/g, '')}</h1>:<h1>{card_meta[index-3].recipient}</h1>}
                </div>
          
              </div>

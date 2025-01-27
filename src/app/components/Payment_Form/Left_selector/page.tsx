@@ -1,6 +1,6 @@
 "use client"
-import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import MyContext from "../../MyContext/route";
 type SelectorProps = {
   onSelectionChange: (value: string) => void;
   system_id: string;
@@ -11,10 +11,12 @@ type SelectorProps = {
 
 const Selector : React.FC<SelectorProps>= ({onSelectionChange,system_id,system_type} ) => {
 
+  const {isQuickTrans,setIsQuickTrans}= useContext(MyContext)
+  useEffect(()=>{
 
-  const searchParams = useSearchParams();
+  },[isQuickTrans])
 
-  return system_type=="card" ? 
+  return (system_type=="card" && !isQuickTrans)? 
   (
     <div className=" w-full mx-auto flex justify-between ">
       <label className="block text-xs text-nowrap md:text-sm font-medium text-custom-blue2 mb-2 w-1/2">

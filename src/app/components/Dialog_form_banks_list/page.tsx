@@ -92,7 +92,7 @@ export default function Dialog_form_banks_list() {
                     </SelectTrigger>  
                     <SelectContent position="popper" >
                      
-                      {bankList.map((x:any,index)=><SelectItem   value={`${index}`}>{x.name}</SelectItem>)}
+                      {bankList.map((x:any,index)=><SelectItem key={index}  value={`${index}`}>{x.name}</SelectItem>)}
                     </SelectContent>
                   </Select>
                 </div>

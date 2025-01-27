@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -11,6 +11,9 @@ import {
 } from "chart.js";
 import Drawer_Shedcn_settings_banks_transactions from "../../Drawer_Shedcn_settings_banks_transactions/page";
 import { call_get_dwolla_transaction_details } from "@/app/(utils)/call_get_dwolla_transaction_details/route";
+import MyContext from "../../MyContext/route";
+import Loading_shed_cn_card from "../../loading_shedcn_card/page";
+import No_data_skeleton from "../../No_data_skeleton/page";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
@@ -19,7 +22,7 @@ const data = {
   datasets: [
     {
       label: "Total Bank Transaction",
-      data: [65, 59, 80, 81, 56, 55, 40],
+      data: [],
       backgroundColor: [
         "rgba(255, 99, 132, 0.2)",
         "rgba(255, 159, 64, 0.2)",
@@ -62,8 +65,11 @@ const options = {
   },
 };
 export default function Graph() {
-  const [heading,setheading]= useState("");
-    const [description,setdescription]= useState("");
+  const {saving_balance_loading}= useContext(MyContext)
+  const [loading,setloading]= useState(true);
+    const [isnodata,setisnodata]= useState([] as any);
+  const {card_bank_reload,setcard_bank_reload}= useContext(MyContext)
+
     const [stts,setstts]= useState("");
     const [dimension,setDimension]= useState("This Week (Last 7 days)");
     const [data_,setData]=useState(data)
@@ -83,9 +89,10 @@ export default function Graph() {
       useEffect(()=>{
         const myfun= async()=>{
           const data= await call_get_dwolla_transaction_details();
-    
-
-         setDays_sum(data.daily.map((x:any)=>x.sum));
+          const data_arr= data.monthly.filter((x:any)=> x.sum!=0)
+          setisnodata(data_arr)
+          setloading(false)
+         if(data.monthly){setDays_sum(data.daily.map((x:any)=>x.sum));
          setDays_name(data.daily.map((x:any)=>x.name));
          setWeeks_sum(data.weekly.map((x:any)=>x.sum));
          setWeeks_name(data.weekly.map((x:any)=>x.j.toString()));
@@ -97,10 +104,10 @@ export default function Graph() {
          setactiveWeeks_sum((data.weekly.filter((x:any)=>x.sum)).map((x:any)=>x.sum));
          setactiveWeeks_name((data.weekly.filter((x:any)=>x.sum.toString())).map((x:any)=>x.j.toString()));
          setactiveMonths_sum((data.monthly.filter((x:any)=>x.sum)).map((x:any)=>x.sum));
-         setactiveMonths_name((data.monthly.filter((x:any)=>x.sum)).map((x:any)=>x.name));
+         setactiveMonths_name((data.monthly.filter((x:any)=>x.sum)).map((x:any)=>x.name));}
            
     
-         setData({
+        if(data.monthly){ setData({
           labels: data.daily.map((x:any)=>x.name).slice(0,7),
           datasets: [
             {
@@ -130,14 +137,14 @@ export default function Graph() {
           ],
         })
     
-        setDimension("Last 7 Days")
+        setDimension("Last 7 Days")}
           
          
         }
         myfun();
     
         
-      },[])
+      },[saving_balance_loading,card_bank_reload])
 
       const handleClick=(dimension_type:string)=>{
    
@@ -233,9 +240,11 @@ export default function Graph() {
         </div>
       </div>
       <div className="h-5/6 w-full flex items-center justify-center ">
+        {loading?<div className="bg-logo-surrounding h-full w-10/12 flex items-center justify-center "><Loading_shed_cn_card/></div>:
+        (isnodata.length==0)? <div className='w-full h-full bg-custom-grey-white'><No_data_skeleton/></div> :
         <div className="bg-logo-surrounding h-full w-10/12 flex items-center justify-center ">
           <Bar  data={data_} options={options} />
-        </div>
+        </div>}
       </div>
     </div>
   );

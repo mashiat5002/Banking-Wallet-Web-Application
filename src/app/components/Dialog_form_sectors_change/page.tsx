@@ -29,15 +29,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { GiPiggyBank } from 'react-icons/gi';
 import Confirm_Action from '../Confirm_Action/page';
 import Dialog_UI from '../Dialog_UI/page';
 import { get_both_savings_sector } from "@/app/(utils)/call_get_savings_sectors/route";
 import { MdDriveFileRenameOutline } from "react-icons/md";
-import { call_update_saving_bank_balance } from "@/app/(utils)/call_update_saving_bank_balance/route";
 import { call_change_savings_sector_name } from "@/app/(utils)/call_change_savings_sector_name/route";
-
-export default function Dialog_form_sectors_change() {
+type props={
+  reload:boolean,
+  reloading: React.Dispatch<React.SetStateAction<boolean>>
+}
+const Dialog_form_sectors_change:React.FC<props>=({reloading, reload})=> {
       const [sectors, setSectors] = React.useState({department_1:"",department_2:""});
       const [source, setSource] = React.useState("");
       const [destination, setdestination] = React.useState("");
@@ -65,7 +66,8 @@ export default function Dialog_form_sectors_change() {
                 const updated_data= await get_both_savings_sector()
                 
                 setSectors({department_1:updated_data.department_1,department_2:updated_data.department_2})
-            }
+                reloading(!reload)
+              }
             else{
                 setStatus("failed")
             }
@@ -92,7 +94,7 @@ export default function Dialog_form_sectors_change() {
           <CardHeader>
             <CardTitle className="text-center">Change Savings Sectors Name</CardTitle>
             <CardDescription className="text-center">
-              Choose a new name for your savings
+              To view progress choose a new name for your savings
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -140,3 +142,4 @@ export default function Dialog_form_sectors_change() {
    
   )
 }
+export default Dialog_form_sectors_change

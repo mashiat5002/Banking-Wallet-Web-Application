@@ -1,5 +1,6 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import MyContext from '../../MyContext/route'
 
 
 type propsType={
@@ -9,11 +10,14 @@ type propsType={
     amount:Number
 }
 const  Left_side_internal_user:React.FC<propsType>=({recipient,from,amount})=> {
+    
     const [total_amount,set_total_amount]= useState(amount)
     const handleAmount =(e: React.ChangeEvent<HTMLInputElement>)=>{
             set_total_amount(Number(e.target.value));
+           
 
     }
+  
   return (
     <div className=' h-5/12 w-full '>
                     <div className='h-1/6 w-full text-xs md:text-base text-custom-blue3 flex items-center '>
@@ -21,7 +25,7 @@ const  Left_side_internal_user:React.FC<propsType>=({recipient,from,amount})=> {
                             <h1 className=''>Reciepent Name:</h1>
                         </div>
                         <div className='h-full w-3/12 flex items-center font-bold flex-col-reverse text-custom-blue3'>
-                        <input required defaultValue={recipient} name='receipent' className='w-11/12 ml-1 bg-slate-50'/>
+                        <input required defaultValue={recipient} name='recipient_type1' className='w-11/12 ml-1 bg-slate-50'/>
                         </div>
                     </div>
                     <div className='h-1/6 w-full text-xs md:text-base text-custom-blue3 flex items-center '>
@@ -29,7 +33,7 @@ const  Left_side_internal_user:React.FC<propsType>=({recipient,from,amount})=> {
                             <h1 className=''>Reciepent Card ID:</h1>
                         </div>
                         <div className='h-full w-3/12 flex items-center font-bold '>
-                        <input required defaultValue={from} name='receipent_id' className='w-11/12 ml-1 bg-slate-50 border-y-2'/>
+                        <input required  defaultValue={from} name='receipent_id' className='w-11/12 ml-1 bg-slate-50 border-y-2'/>
                         </div>
                     </div>
                     <div className='h-1/6 w-full text-xs md:text-base text-custom-blue3 flex items-center '>
@@ -38,7 +42,7 @@ const  Left_side_internal_user:React.FC<propsType>=({recipient,from,amount})=> {
                         </div>
                         <div className='h-full w-3/12 flex items-center font-bold'>
                         <h1>$ </h1>
-                        <input defaultValue={amount.toString()} onChange={handleAmount} required name='amount' className='w-11/12 ml-1 bg-slate-50 border-b-2'/>
+                        <input  defaultValue={amount.toString()} onChange={handleAmount} required name='amount' className='w-11/12 ml-1 bg-slate-50 border-b-2'/>
                         </div>
                     </div>
                     <div className='h-1/6 w-full text-xs md:text-base text-custom-blue3 flex items-center  '>
@@ -46,7 +50,7 @@ const  Left_side_internal_user:React.FC<propsType>=({recipient,from,amount})=> {
                             <h1 className=''>Charge:</h1>
                         </div>
                         <div className='h-full w-3/12 flex items-center font-bold'>
-                        <h1>${Number(total_amount)* 0.03}</h1>
+                        <h1>${(Number(total_amount)* 0.00).toPrecision(2)}</h1>
                         </div>
                     </div>
                     <div className='h-2/6 w-full text-xs md:text-base text-custom-blue3 flex items-center  '>
@@ -54,7 +58,7 @@ const  Left_side_internal_user:React.FC<propsType>=({recipient,from,amount})=> {
                             <h1 className=''>Amount to pay:</h1>
                         </div>
                         <div className='h-full w-3/12 flex items-center font-bold  border-t-2 border-t-custom-grey3 text-custom-blue4 '>
-                        <h1 className='text-base md:text-2xl'>${Number(total_amount) + (Number(total_amount)* 0.03)}</h1>
+                        <h1 className='text-base md:text-2xl'>${Number(total_amount) + (Number(total_amount)* 0.00)}</h1>
                         </div>
                     </div>
                     

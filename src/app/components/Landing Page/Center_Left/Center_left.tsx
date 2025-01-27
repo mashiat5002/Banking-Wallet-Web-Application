@@ -1,7 +1,14 @@
 import React from 'react'
 import { GiTakeMyMoney } from "react-icons/gi";
-
-export default function Center_left() {
+import Dialog_form_registration from '../../Dialog_form_registration/page';
+type props ={
+  setemailInput: React.Dispatch<React.SetStateAction<string>>
+  emailInput: string
+}
+const Center_left:React.FC<props>=({setemailInput,emailInput})=> {
+  const handleChange=(e:any)=>{
+    setemailInput(e.currentTarget.value)
+  }
   return (
     <div className='h-full w-screen md:h-5/6 lg:w-1/2 flex flex-col mt-8   md:pl-0  justify-center '>
       <div className=' '>
@@ -14,11 +21,13 @@ export default function Center_left() {
       <div className= ' w-screen lg:w-full flex  md:flex items-center md:ml-20 h-1/6 mt-10'>
 
       <div className='   w-1/2 h-12 md:w-1/3   md:rounded-2xl md:ring-2  ring-custom-green'>
-      <input className=' bg-custom-light-green h-full w-full md:rounded-2xl text-xl pl-5' placeholder='enter email'/>
+      <input onChange={handleChange} className=' bg-custom-light-green h-full w-full md:rounded-2xl text-base pl-5' placeholder='enter email'/>
       </div>
 
-      <button className='md:ml-6 text-nowrap  w-1/2 h-12 md:p-3 md:w-fit  bg-custom-green rounded-xl '>Create Free</button>
+      <Dialog_form_registration emailInput={emailInput} setemailInput={setemailInput} title={"Create Free"}/>
+      
       </div>
     </div>
   )
 }
+export default Center_left

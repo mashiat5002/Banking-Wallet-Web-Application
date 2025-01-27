@@ -41,7 +41,7 @@ const  Dialog_form_payment_gateway_quick_trans:React.FC<props>=({recipient,from,
      
      
       </DialogTrigger>
-      <DialogContent className="md:h-[700px] md:w-[1000px] h-[500px] w-[550px] flex items-center justify-center">
+      <DialogContent className="md:h-[700px] md:w-[1000px] h-[500px] w-[550px] flex items-center justify-center bg-transparent text-custom-white">
           <Payment_Form recipient={recipient} from={from} amount={amount}  system_type={system_type} system_id={system_id}/>
       </DialogContent>
     </Dialog>

@@ -8,7 +8,6 @@ import React, { useEffect, useState } from "react";
 
 type StatusData = {
   status: string;
-  stts_color: string;
 };
 
 type PropsType = {
@@ -16,15 +15,15 @@ type PropsType = {
   setSavingsSector: (value: string) => void
   system_id: string;
   system_type:string
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 type props={
   system_id: string;
   system_type:string
 }
-const ForBank: React.FC<PropsType>=({system_id,system_type,status_data,setSavingsSector}) =>{
+const ForBank: React.FC<PropsType>=({setLoading,system_id,system_type,status_data,setSavingsSector}) =>{
 
-  const searchParams = useSearchParams();
 
 
   const [bank_details, set_bank_details] = useState({
@@ -54,7 +53,7 @@ const ForBank: React.FC<PropsType>=({system_id,system_type,status_data,setSaving
         Number(system_id)
       );
       set_bank_details(data);
-      console.log(data);
+     
     };
     callfun();
   }, []);
@@ -115,7 +114,7 @@ const ForBank: React.FC<PropsType>=({system_id,system_type,status_data,setSaving
           <Label htmlFor="framework"  className="text-custom-size2 mr-1 md:text-sm ">Savings Type</Label>
                     <select className="text-base font-semibold" onChange={(e:any)=>{setSavingsSector(e.target.value)}}>
                        
-                        <option disabled  value="0" >select</option>
+                        <option   value="0" >select</option>
                         <option   value="balance_1">{sectors.department_1}</option>
                         <option  value="balance_2">{sectors.department_2}</option>
                     
@@ -124,8 +123,8 @@ const ForBank: React.FC<PropsType>=({system_id,system_type,status_data,setSaving
         }
       </div>
       <div className="h-1/12 w-full ">
-      <button type="submit" className="h-full w-full rounded-l-full rounded-r-full cursor-pointer bg-custom-blue4 flex items-center justify-center" style={{backgroundColor:status_data.stts_color}}><div >
-            <h1  className="font-bold text-slate-200" >{status_data.status}</h1>
+      <button type="button" onClick={()=>setLoading(true)}  className="h-full w-full rounded-l-full rounded-r-full cursor-pointer bg-custom-blue4 flex items-center justify-center" ><div >
+            <h1  className="font-bold text-slate-200" >Confirm</h1>
           </div></button>
       
       </div>

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "../db connection/route";
 export async function POST(Request: NextRequest) {
-    
     const formdata = await Request.json();
+
 
     try{
         db.getConnection()

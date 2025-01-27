@@ -25,7 +25,7 @@ import {
 
 const Dialog_UI_login:React.FC<props>=({status})=> {
  
-
+  
 
   return (
     <AlertDialog open={true} >
@@ -41,7 +41,7 @@ const Dialog_UI_login:React.FC<props>=({status})=> {
       </AlertDialogHeader>
       <AlertDialogFooter>
         
-        <AlertDialogAction disabled onClick={() => {status.action()}}>Continue</AlertDialogAction>
+        <AlertDialogAction disabled={status.description=="Processing Request..."}  onClick={() => {status.action()}}>Continue</AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

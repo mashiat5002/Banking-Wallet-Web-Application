@@ -7,11 +7,15 @@ type propsType={
     recipient:string
     from: string
     amount:Number
+    
+    
 }
 
 const Internal_External = ({recipient,from,amount,selected}:propsType) => {
+  if(from.includes("Routing") )
+    selected="2"
   return (
-    selected=="1"?<Left_side_internal_user recipient={recipient} from={from} amount={amount}/>:<Left_side_external_user/>
+    selected=="1"?<Left_side_internal_user recipient={recipient} from={from} amount={amount}/>:<Left_side_external_user recipient={recipient} from={from} amount={amount}/>
   )
 }
 

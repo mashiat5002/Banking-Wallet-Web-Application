@@ -12,8 +12,9 @@ type PropsType = {
   status_data: StatusData;
   system_id: string;
   system_type:string
+  setLoading_2: React.Dispatch<React.SetStateAction<boolean>>
 };
-const  ForCard:React.FC<PropsType>= ({system_id,system_type,status_data})=> {
+const  ForCard:React.FC<PropsType>= ({setLoading_2,system_id,system_type,status_data})=> {
   const [card_details, set_card_details] = useState({
     last4: "Processing...",
     type: "Processing...",
@@ -21,7 +22,6 @@ const  ForCard:React.FC<PropsType>= ({system_id,system_type,status_data})=> {
     exp_month: "...",
     exp_year: "...",
   });
-  const searchParams = useSearchParams();
   useEffect(() => {
     const callfun = async () => {
       const data = await getSelectedCardInfo(
@@ -98,15 +98,9 @@ const  ForCard:React.FC<PropsType>= ({system_id,system_type,status_data})=> {
           </div>
         </div>
         <div className="h-2/12 w-full flex items-center justify-center text-xs md:text-base">
-          <button
-            type="submit"
-            className="h-10/12 w-full rounded-l-full rounded-r-full cursor-pointer bg-custom-blue4 flex items-center justify-center"
-            style={{backgroundColor:status_data.stts_color}}
-          >
-            <div>
-              <h1 className="font-bold text-slate-200">{status_data.status}</h1>
-            </div>
-          </button>
+        <button type="button" onClick={()=>setLoading_2(true)}  className="h-full w-full rounded-l-full rounded-r-full cursor-pointer bg-custom-blue4 flex items-center justify-center" style={{backgroundColor:status_data.stts_color}}><div >
+            <h1  className="font-bold text-slate-200" >Confirm</h1>
+          </div></button>
         </div>
       </div>
     </div>

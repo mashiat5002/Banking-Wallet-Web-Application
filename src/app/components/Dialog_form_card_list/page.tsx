@@ -1,6 +1,6 @@
 
 "use client"
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -29,32 +29,25 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RiBankCard2Fill   } from "react-icons/ri";
 import Confirm_Action from '../Confirm_Action/page';
-import Dialog_form_payment_options from "../Dialog_form_payment_options/page";
 import { call_api_Connected_cards } from "@/app/(utils)/(call_api_function_stripe_connected_payment_methods)/route";
 import Dialog_form_payment_gateway from "../Dialog_form_payment_gateway/page";
+import MyContext from "../MyContext/route";
 
 export default function Dialog_form_card_list() {
       const [selectedMethod, setSelectedMethod] = React.useState("");
       const [cardList, setcardList] = React.useState([]);
       const [isOpen, setisOpen] = React.useState(false);
-      
+      const {setIsQuickTrans}= useContext(MyContext)
+
       useEffect(() => {
+        setIsQuickTrans(false)
          const fetchData = async () => {
            const data = await call_api_Connected_cards();
            setcardList(data);
          };
          fetchData();
        }, []);
-       const  handleSubmit= ()=>{
-        
-        const myfun=async()=>{
-       
-
-        }
-        myfun()
       
-        
-       }
   return (
     
       <Dialog open={isOpen} onOpenChange={()=>{setSelectedMethod(""),setisOpen(!isOpen)}} >

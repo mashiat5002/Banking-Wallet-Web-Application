@@ -1,24 +1,30 @@
-
-import React from 'react'
-
+"use client"
+import React, { createContext, useState, useContext } from 'react';
 import HomePageNav from './HmPg Nav/page'
 import CardStack from './CardStack/page'
 import QuickSend from './QuickSend/page'
 import Savings from './HmPgSavings/page'
-import HomePage_Balance_Card from './HmPgBalanceCard/page'
 import Graph from './HmpgGraphChart/page'
 import RecentTrans from './HmPgRecentTransaction/page'
 import PolarChart from './HmpgPolarChart/page'
 import MoneySentCard from './HmPgMoneySentCard/page'
-import Spline_bg from '../Spline/page'
 import Bank_banance from './Balance_bank/page'
 import Balance_credit_card from './Balance_credit_card/page'
 import Balance_savings from './Balance_savings/page'
+import MyContext from '../MyContext/route';
+import Dialog_UI_logout from '../Dialog_UI_logout/page';
 
-export default async function Homepage() {
- 
-  return (
+
+export default  function Homepage() {
+    const [card_loading,setCard_loading]=useState(true)
+    const [saving_balance_loading,setsaving_balance_loading]=useState(true)
+    const [card_bank_reload,setcard_bank_reload]=useState(true)
+    const [isQuickTrans,setIsQuickTrans]=useState(false)
     
+  return (
+    <MyContext.Provider value={{card_loading,setCard_loading,saving_balance_loading,setsaving_balance_loading,isQuickTrans,setIsQuickTrans,card_bank_reload,setcard_bank_reload}}>
+
+      
     <div className='md:h-full w-full bg-black'>
        {/* *******************Navbar************* */}
       <div className='  md:h-1/12 w-full  '>
@@ -97,6 +103,8 @@ export default async function Homepage() {
           </div>
 
       </div>
+
     </div>
+    </MyContext.Provider>
   )
 }

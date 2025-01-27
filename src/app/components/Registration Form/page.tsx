@@ -1,17 +1,57 @@
 "use client"
 
 import { call_create_saving_acc_in_db } from '@/app/(utils)/call_create_saving_acc_in_db/route';
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
-
-export default  function Registration_form() {
+import Dialog_UI_login from '../Dialog_UI_login/page';
+type props ={
+  setemailInput: React.Dispatch<React.SetStateAction<string>>
+  emailInput: string
+}
+const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
     
     
+    const [loading, setloading]=useState(false);
     const [error_msg, setErrMsg]=useState("");
     const [error_msg_color, setErrMsg_color]=useState("grey");
+    const [error_passMsg, seterror_passMsg]=useState("grey");
+    const [error_passClr_8char, seterror_passClr_8char]=useState("grey");
+    const [error_passClr_onespchar, seterror_passClr_onespchar]=useState("grey");
+    const [error_passClr_oneupchar, seterror_passClr_oneupchar]=useState("grey");
 
 
-    
+    const handlePass=(e:any)=>{
+       
+        if(e.currentTarget.value.length<9 && e.currentTarget.value.length>0){
+            seterror_passClr_8char("red")
+        }
+        else if(e.currentTarget.value.length>=8){
+            seterror_passClr_8char("green")
+        }
+        else seterror_passClr_8char("grey")
+
+
+
+        const hasUppercase = /[A-Z]/.test(e.currentTarget.value);
+        if(!hasUppercase && e.currentTarget.value.length>0){
+            seterror_passClr_oneupchar("red")
+        }
+        else if(hasUppercase){
+            seterror_passClr_oneupchar("green")
+        }
+        else seterror_passClr_oneupchar("grey")
+
+        const hasSpecialChar = /[!@#$%^&*(),.?`":{}|<>]/.test(e.currentTarget.value);
+       
+        if(!hasSpecialChar && e.currentTarget.value.length>0){
+            seterror_passClr_onespchar("red")
+        }
+        else if(hasSpecialChar){
+            seterror_passClr_onespchar("green")
+        }
+        else seterror_passClr_onespchar("grey")
+            
+
+    }
     const HandleSubmit= async (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         const formdata= new FormData(e.currentTarget)
@@ -33,11 +73,40 @@ export default  function Registration_form() {
               "postalCode":formdata.get("postal"),
               "dateOfBirth":formdata.get("dob"),
               "ssn": "1234",
-              "type": "personal"
+              "type": "personal",
+              "pass":formdata.get("password")
             })
           });
-         console.log(response)
-          console.log(response.headers.get("Location"));
+     
+         try{
+            const stat= await response.json();
+         
+         
+            if(stat.status == "database not connected"){
+                setErrMsg_color("red");
+                setErrMsg("Database Error");
+            }
+            
+            if(stat.code== "ExpiredAccessToken" || stat.code== "InvalidAccessToken"){
+                setErrMsg_color("red");
+                setErrMsg(stat.code);
+            }
+            if (!response.ok) {
+                setErrMsg_color("red");
+              setErrMsg(stat._embedded.errors[0].message);
+              stat._embedded.errors[0].message=="DateOfBirth value not allowed." && setErrMsg("You are under Age")
+            }
+
+            if(stat.status==500){
+                setErrMsg_color("red");
+                setErrMsg(stat.msg);
+            }
+
+        }
+        catch(error){
+            console.log(error)
+            
+        }
          
         
           
@@ -69,30 +138,7 @@ export default  function Registration_form() {
         }
             
         
-        try{
-            const stat= await response.json();
-         
-
-            if(stat.status == "database not connected"){
-                setErrMsg_color("red");
-                setErrMsg("Database Error");
-            }
-            
-            if(stat.code== "ExpiredAccessToken" || stat.code== "InvalidAccessToken"){
-                setErrMsg_color("red");
-                setErrMsg(stat.code);
-            }
-            if (!response.ok) {
-                setErrMsg_color("red");
-              setErrMsg(stat._embedded.errors[0].message);
-              stat._embedded.errors[0].message=="DateOfBirth value not allowed." && setErrMsg("You are under Age")
-            }
-
-        }
-        catch(error){
-            console.log(error)
-            
-        }
+     
         
           
 
@@ -103,11 +149,12 @@ export default  function Registration_form() {
      
         
     }
-    const router= useRouter();
+    
     return (
+        <div>
         <form onSubmit={HandleSubmit}>
-    <div onClick={()=>router.back()} className='h-screen w-screen  flex items-center justify-center '>
-        <div onClick={(e)=>e.stopPropagation()} className='h-650px w-900px  flex items-center justify-center '>
+  
+        <div   className='scale-[0.63] md:scale-100 h-full w-full  flex items-center justify-center '>
             <div className='h-600px w-850px  flex items-center justify-center rounded-2xl  '>
                 <div className='h-full w-1/2 bg-slate-50 rounded-s-2xl flex items-center justify-center'>
                     <div className='h-11/12 w-5/6  text-custom-green '>
@@ -116,7 +163,7 @@ export default  function Registration_form() {
 
                         </div>
                         <div className='h-1/12 w-full '>
-                            <input required  name='email' className='h-full w-full border-b-2 outline-none pl-3' placeholder='Email'/>
+                            <input required defaultValue={emailInput} name='email' className='h-full w-full border-b-2 outline-none pl-3' placeholder='Email'/>
 
                         </div>
                         <div className='h-1/12 w-full flex justify-between'>
@@ -161,13 +208,13 @@ export default  function Registration_form() {
 
                         </div>
                         <div className='h-1/12 w-full '>
-                            <input required   name='password' type='password' className=' h-full w-full border-b-2 outline-none pl-3 bg-custom-green' placeholder='Password'/>
+                            <input required onChange={handlePass}  name='password' type='password' className=' h-full w-full border-b-2 outline-none pl-3 bg-custom-green' placeholder='Password'/>
 
                         </div>
                         <div className='h-3/12 w-full text-gray-500 '>
-                            <h1 className='mt-3'> must contain 8 characters</h1>
-                            <h1 > must contain one Uppercase character</h1>
-                            <h1 > must contain one special character</h1>
+                            <h1 style={{color:error_passClr_8char}} className='mt-3'> must contain 8 characters</h1>
+                            <h1 style={{color:error_passClr_oneupchar}} > must contain one Uppercase character</h1>
+                            <h1 style={{color:error_passClr_onespchar}} > must contain one special character</h1>
                             <h1 className='pt-3 '  style={{color:error_msg_color}}>
                                 {error_msg}
                             </h1>
@@ -176,7 +223,7 @@ export default  function Registration_form() {
                         <div className='h-3/12 w-full '>
                                 
                         
-                                <button  className='h-12 w-full bg-slate-50 flex rounded-3xl items-center justify-center cursor-pointer hover:text-slate-50 hover:bg-black text-custom-green-light'>
+                                <button onClick={()=>{setloading(true)}}  className='h-12 w-full bg-slate-50 flex rounded-3xl items-center justify-center cursor-pointer hover:text-slate-50 hover:bg-black text-custom-green-light'>
                                     <h1 className=' font-semibold '>Register</h1>
                                 </button>
 
@@ -194,7 +241,11 @@ export default  function Registration_form() {
 
         </div>
       
-    </div>
+    
     </form>
+    {loading?<Dialog_UI_login  status={{"header":"Processing Registration Request","description":error_msg,"action":()=>{setloading(false)}}}/>:null}
+
+    </div>
   )
 }
+export default  Registration_form;

@@ -7,6 +7,14 @@ import { useState } from 'react';
 import myfun from '@/app/(utils)/bank_transfers_proper_all/route';
 import { call_card_transfer_all } from '@/app/(utils)/call_card_transfer_all/route';
 import Dialog_UI_login from '../Dialog_UI_login/page';
+import { call_update_savings_time } from '@/app/(utils)/call_update_savings_time/route';
+import { call_get_last_update_time_savings_balance } from '@/app/(utils)/call_get_last_update_time_savings_balance/route';
+import { call_get_bank_balance } from '@/app/(utils)/call_get_bank_balance/route';
+import { call_update_bank_balance_time } from '@/app/(utils)/call_update_bank_balance_time/route';
+import { call_get_last_update_time_bank_balance } from '@/app/(utils)/call_get_last_update_time_bank_balance/route';
+import { call_logout_eliminate_session } from '@/app/(utils)/call_logout_eliminate_session/route';
+import { call_find_customer_id_with_funding_src_id } from '@/app/(utils)/call_find_customer_id_with_funding_src_id/route';
+import { call_check_if_own_savings_acc } from '@/app/(utils)/call_check_if_own_savings_acc/route';
 
 export default function Login() {
     const router = useRouter();
@@ -14,11 +22,16 @@ export default function Login() {
     const [loading, setloading]=useState(false);
 
     const handledemo = async () => {
-        const transections = await call_card_transfer_all()
-              console.log(transections)
-        //       console.log(transections.res[0])
-        //     //   const data= transections.res.map((x)=> {"Sender":x.})
-        await myfun()
+        const cid= await call_find_customer_id_with_funding_src_id("1a1017f9-214f-4c13-9acb-3d76549dee70");
+              const origin= await call_check_if_own_savings_acc(cid);
+              console.log(origin)
+              if(origin==false){
+                console.log("false")
+                return;
+              }
+              else{
+                console.log("true")
+              }
     };
     const handleSubmission=async (e:React.FormEvent<HTMLFormElement>)=>{
         setloading(true)

@@ -72,6 +72,7 @@ export const columns: ColumnDef<Payment>[] = [
       <div className="capitalize">{row.getValue("status")}</div>
     ),
   },
+
   {
     accessorKey: "sender",
     header: ({ column }) => {
@@ -221,8 +222,12 @@ export type Payment = {
   
   
 }
-export function Shed_cn_table_bank_transactions() {
-  const [loading,setLoading]=React.useState(true)
+type props={
+  data: Payment[],
+  loading: boolean
+}
+
+const Shed_cn_table_bank_transactions:React.FC<props>=({data, loading})=> {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -230,27 +235,8 @@ export function Shed_cn_table_bank_transactions() {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
-  const [data, setInfo] = React.useState<Payment[]>([]); // Correct type initialization
   
-  React.useEffect(()=>{
-    const callFun=async()=>{
-      const data= await call_bank_transfers_proper_all()
-      setLoading(false)
-      console.log(data.sender)
-      const transformedData = data.sender.map((_, index) => ({
-        sender: data.sender[index],
-        receiver: data.receiver[index],
-        source_fid: data.source_fid[index],
-        dest_fid: data.dest_fid[index],
-        status: data.status[index],
-        amount: data.amounts[index],
-        time: data.time[index],
-        pid: data.pid[index],
-      }));
-      setInfo(transformedData)
-    }
-    callFun()
-  },[])
+ 
 
   const table = useReactTable({
     data,
@@ -356,9 +342,10 @@ export function Shed_cn_table_bank_transactions() {
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-24 "
                 >
-                  {loading?"fetching data..":"No Result"}
+                  
+                  <h1 className="pl-96 ml-96">{loading?"fetching data...":"No Result"}</h1>
                 </TableCell>
               </TableRow>
             )}
@@ -398,3 +385,4 @@ export function Shed_cn_table_bank_transactions() {
     </div>
   )
 }
+export default Shed_cn_table_bank_transactions

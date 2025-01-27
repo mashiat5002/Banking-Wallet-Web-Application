@@ -13,6 +13,6 @@ export async function call_check_if_own_savings_acc(id: string) {
     })
     const final_res= await res.json()
     
-    return final_res;
+    return final_res.isOwn;
    
 }

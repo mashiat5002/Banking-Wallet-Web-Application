@@ -5,7 +5,7 @@ export async function POST(request:NextRequest) {
     const dwolla_access= await get_dwolla_access_token();
    
     const body= await request.json();
-    
+    // console.log("body.selected,---"+ body.receiver)
     const sender= body.selected=="bank" ? body.sender:"1a180d82-44d5-41b7-80f3-43407947c4cb"
     console.log("sender",sender)
     const response= await fetch("https://api-sandbox.dwolla.com/transfers",{
@@ -30,8 +30,7 @@ export async function POST(request:NextRequest) {
             }
          })
         })
-        
-        
+       
         return NextResponse.json({"status":response.status})
        
 }

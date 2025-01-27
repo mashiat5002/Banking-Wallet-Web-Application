@@ -19,7 +19,7 @@ const call_bank_transfers_proper_all= async()=>{
   
 
                   for(let i=0;i<transactions.length;i++){
-          console.log("transactions")
+     
         if(("funded-transfer" in transactions[i]._links) || ("funding-transfer" in transactions[i]._links) ){
           if(!(("source-funding-source" in transactions[i]._links) && ("destination-funding-source" in transactions[i]._links)))
             i++
@@ -101,7 +101,11 @@ const call_bank_transfers_proper_all= async()=>{
                             const cid = await call_find_customer_id_with_funding_src_id(x.id);
                             return await call_find_customer_with_customer_id(cid);
                           }
+                          else{
+                            return "Card"
+                          }
                         })
+                        
                       );
                   
                    

@@ -5,9 +5,8 @@ export function middleware(request: NextRequest) {
   const session=cookies().get("session")?.value;
   
   const pathnext= request.nextUrl.pathname;
-  if(pathnext=="/api/login_cookie_auth" )
+  if(pathnext=="/api/login_cookie_auth" || pathnext=="/api/create_stripe_customer" || pathnext=="/api/create_customer_dwolla")
     return NextResponse.next();
-  // console.log("session:"+session)
   if(session){ 
     return NextResponse.next();
   }
