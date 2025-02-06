@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "../db connection/route";
-import { call_create_saving_acc_in_db } from "@/app/(utils)/call_create_saving_acc_in_db/route";
 
 export async function POST(request:NextRequest) {
     

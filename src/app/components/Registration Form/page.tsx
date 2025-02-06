@@ -3,6 +3,10 @@
 import { call_create_saving_acc_in_db } from '@/app/(utils)/call_create_saving_acc_in_db/route';
 import React, { useState } from 'react'
 import Dialog_UI_login from '../Dialog_UI_login/page';
+import { Button } from '@/components/ui/button';
+import Opt_input_field from '../Opt_input_field/page';
+import { call_update_varification_key_db } from '@/app/(utils)/call_update_varification_key_db/route';
+import { call_activate_user_db } from '@/app/(utils)/call_activate_user_db/route';
 type props ={
   setemailInput: React.Dispatch<React.SetStateAction<string>>
   emailInput: string
@@ -10,6 +14,11 @@ type props ={
 const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
     
     
+    const [isdisabled, setisdisabled]=useState(false);
+    const [isreadonly, setisreadonly]=useState(false);
+    const [otp_btn_txt, setotp_btn_txt]=useState("Send OTP");
+    const [email_input, setemail_input]=useState("");
+    const [Otp, setOtp]=useState("");
     const [loading, setloading]=useState(false);
     const [error_msg, setErrMsg]=useState("");
     const [error_msg_color, setErrMsg_color]=useState("grey");
@@ -52,6 +61,38 @@ const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
             
 
     }
+
+    
+    const handleOTP=async ()=>{
+      console.log(Otp)
+      console.log(email_input)
+      setisreadonly(true)
+      if(otp_btn_txt=="Send OTP"){
+          setotp_btn_txt("OTP Sent")
+          setTimeout(() => {setotp_btn_txt("Enter OTP")}, 2000);
+ 
+        await call_update_varification_key_db(email_input)
+      }
+      else{
+       const response= await call_activate_user_db(email_input,Otp)
+       console.log(response.res)
+       if(response.res=="activated"){
+        setotp_btn_txt("varified")
+        setisdisabled(true)
+       }else{
+       
+        setTimeout(() => {setotp_btn_txt("Enter OTP")}, 2000);
+        setTimeout(() => {setotp_btn_txt("New OTP Sent")}, 1000);
+        setotp_btn_txt(response.res)
+        setisdisabled(false)
+       }
+      }
+
+
+    }
+
+
+
     const HandleSubmit= async (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         const formdata= new FormData(e.currentTarget)
@@ -141,7 +182,7 @@ const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
      
         
           
-
+      
         
 
 
@@ -163,8 +204,18 @@ const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
 
                         </div>
                         <div className='h-1/12 w-full '>
-                            <input required defaultValue={emailInput} name='email' className='h-full w-full border-b-2 outline-none pl-3' placeholder='Email'/>
+                            <input readOnly={isreadonly} onChange={(e)=>setemail_input(e.currentTarget.value)} required defaultValue={emailInput} name='email' className='h-full w-full border-b-2 outline-none pl-3' placeholder='Email'/>
 
+                        </div>
+                        <div className='h-1/12 w-full flex justify-between'>
+                       
+
+                           <Opt_input_field Otp={Otp} setOtp={setOtp} isreadonly={isreadonly}/>
+                           <div className='h-full flex items-center justify-center ml-1'>
+
+                           <Button disabled={isdisabled} onClick={handleOTP} type='button' className=' bg-white =ring-1  text-black hover:bg-custom-green hover:text-custom-white' >{otp_btn_txt}</Button>
+                           </div>
+                       
                         </div>
                         <div className='h-1/12 w-full flex justify-between'>
                             <div  className='h-full w-2/5'> <input required name='first_name' className='h-full w-full border-b-2 outline-none pl-3' placeholder='First Name'/></div>

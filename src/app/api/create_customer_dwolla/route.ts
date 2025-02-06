@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "../db connection/route";
 import { get_dwolla_access_token } from "@/app/(utils)/(get_dwolla_access_token)/route";
+import { call_check_user_active_status } from "@/app/(utils)/call_check_user_active_status/route";
 
 const isConnected=async ()=>{
     try{
@@ -20,8 +21,8 @@ export async function POST(request:NextRequest){
     
     if(await isConnected()){
         const Body = await request.json();
-        const hasUppercase = /[A-Z]/.test(Body.pass); // Checks for at least one uppercase letter
-        const hasSpecialChar = /[!@#$%^&*(),.?`":{}|<>]/.test(Body.pass); // Checks for at least one
+        const hasUppercase = /[A-Z]/.test(Body.pass); 
+        const hasSpecialChar = /[!@#$%^&*(),.?`":{}|<>]/.test(Body.pass); 
         if (Body.pass.length < 9) {
            
             return NextResponse.json({
@@ -43,7 +44,15 @@ export async function POST(request:NextRequest){
             
         }
         
-        
+        const isActive= await call_check_user_active_status(Body.email)
+        console.log("isActive",isActive)
+        if(isActive!="active"){
+            return NextResponse.json({
+                status: 500,
+                msg: "Email is not varified",
+            });
+            
+       }
         
         const access_token = await get_dwolla_access_token();
    
@@ -68,9 +77,7 @@ export async function POST(request:NextRequest){
         }
         // console.log(response.headers.get("Location"))
     
-        db.query(`INSERT INTO users (email, dwolla_customer_id) 
-        VALUES ('${Body.email}', '${response.headers.get("Location")}');
-`)
+        db.query(`update  users set dwolla_customer_id ='${response.headers.get("Location")}' where  email='${Body.email}'`)
 
         return response;
         

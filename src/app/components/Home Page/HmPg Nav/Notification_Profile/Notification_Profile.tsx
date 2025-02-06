@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useContext, useEffect, useState } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import Avatar, { genConfig } from 'react-nice-avatar'

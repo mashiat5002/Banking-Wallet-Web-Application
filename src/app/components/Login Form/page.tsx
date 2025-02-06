@@ -4,34 +4,22 @@
 import { useRouter } from 'next/navigation';
 import React from 'react'
 import { useState } from 'react';
-import myfun from '@/app/(utils)/bank_transfers_proper_all/route';
-import { call_card_transfer_all } from '@/app/(utils)/call_card_transfer_all/route';
+
 import Dialog_UI_login from '../Dialog_UI_login/page';
-import { call_update_savings_time } from '@/app/(utils)/call_update_savings_time/route';
-import { call_get_last_update_time_savings_balance } from '@/app/(utils)/call_get_last_update_time_savings_balance/route';
-import { call_get_bank_balance } from '@/app/(utils)/call_get_bank_balance/route';
-import { call_update_bank_balance_time } from '@/app/(utils)/call_update_bank_balance_time/route';
-import { call_get_last_update_time_bank_balance } from '@/app/(utils)/call_get_last_update_time_bank_balance/route';
-import { call_logout_eliminate_session } from '@/app/(utils)/call_logout_eliminate_session/route';
-import { call_find_customer_id_with_funding_src_id } from '@/app/(utils)/call_find_customer_id_with_funding_src_id/route';
-import { call_check_if_own_savings_acc } from '@/app/(utils)/call_check_if_own_savings_acc/route';
+
+import { call_nodemailer } from '@/app/(utils)/call_nodemailer/route';
+import { call_update_varification_key_db } from '@/app/(utils)/call_update_varification_key_db/route';
+import { call_check_user_active_status } from '@/app/(utils)/call_check_user_active_status/route';
 
 export default function Login() {
     const router = useRouter();
     const [LoginStat, setLoginStat]=useState("");
+    const [emailInput, setemailInput]=useState("");
     const [loading, setloading]=useState(false);
 
     const handledemo = async () => {
-        const cid= await call_find_customer_id_with_funding_src_id("1a1017f9-214f-4c13-9acb-3d76549dee70");
-              const origin= await call_check_if_own_savings_acc(cid);
-              console.log(origin)
-              if(origin==false){
-                console.log("false")
-                return;
-              }
-              else{
-                console.log("true")
-              }
+        const cid=await call_check_user_active_status("mashiat342@gmail.com")
+        console.log(cid)
     };
     const handleSubmission=async (e:React.FormEvent<HTMLFormElement>)=>{
         setloading(true)
@@ -82,7 +70,7 @@ export default function Login() {
                     <h1>Enter Email</h1>
                     </div>
                     <div className='h-2/3 w-full '>
-                        <input required name='email' className='h-full w-full font-normal pl-3 text-black' type='email'   placeholder='Email'/>
+                        <input onChange={(e)=>{setemailInput(e.currentTarget.value)}} required name='email' className='h-full w-full font-normal pl-3 text-black' type='email'   placeholder='Email'/>
                     </div>
 
                 </div>
@@ -114,7 +102,7 @@ export default function Login() {
             </div>
 
         </div>
-      {loading?<Dialog_UI_login  status={{"header":"Logging In","description":LoginStat,"action":()=>handleSubmission}}/>:null}
+      {loading?<Dialog_UI_login  status={{"emailInput":emailInput,"setLoading":setloading,"header":"Logging In","description":LoginStat,"action":()=>handleSubmission}}/>:null}
     </form>
   )
 }
