@@ -7,7 +7,7 @@ type propsType={
    
     recipient:string
     from: string
-    amount:Number
+    amount:number
 }
 const  Left_side_internal_user:React.FC<propsType>=({recipient,from,amount})=> {
     
@@ -42,7 +42,7 @@ const  Left_side_internal_user:React.FC<propsType>=({recipient,from,amount})=> {
                         </div>
                         <div className='h-full w-3/12 flex items-center font-bold'>
                         <h1>$ </h1>
-                        <input  defaultValue={amount.toString()} onChange={handleAmount} required name='amount' className='w-11/12 ml-1 bg-slate-50 border-b-2'/>
+                        <input  defaultValue={amount?.toString()} onChange={handleAmount} required name='amount' className='w-11/12 ml-1 bg-slate-50 border-b-2'/>
                         </div>
                     </div>
                     <div className='h-1/6 w-full text-xs md:text-base text-custom-blue3 flex items-center  '>

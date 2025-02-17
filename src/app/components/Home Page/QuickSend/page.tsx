@@ -7,7 +7,6 @@ import { call_bank_transfers_all } from '@/app/(utils)/call_bank_transfers_all/r
 import { call_find_balance_acc_id_with_customer_id } from '@/app/(utils)/call_find_balance_acc_id_with_customer_id/route';
 import { call_api_Connected_banks } from '@/app/(utils)/(call_api_function_connected_banks)/route';
 import { call_dwolla_id_for_frontEnd } from '@/app/(utils)/call_dwolla_id_for_frontEnd/route';
-import { call_get_stripe_transaction_details } from '@/app/(utils)/call_get_stripe_transaction_details/route';
 import { call_card_transfer_all } from '@/app/(utils)/call_card_transfer_all/route';
 import { call_api_Connected_cards } from '@/app/(utils)/(call_api_function_stripe_connected_payment_methods)/route';
 import Dialog_form_payment_gateway_quick_trans from '../../Dialog_form_payment_gateway_quick_trans/page';
@@ -33,13 +32,12 @@ export default function QuickSend() {
    const [toSent, settoSent]= useState("");
    const [toFid, settofid]= useState("");
      const [loading,setloading]= useState(true);
-     const {card_bank_reload,setcard_bank_reload}= useContext(MyContext)
+     const {card_bank_reload}= useContext(MyContext)
    
-      // const [recent_card_transaction_details,setrecent_card_transaction_detials]=useState("")
       const {setIsQuickTrans}= useContext(MyContext)
 
     const handleClick=(index:any)=>{
-      if(index<3){
+      if(index<destNames.length){
    
         
         settoSent(destNames[index])
@@ -55,13 +53,13 @@ export default function QuickSend() {
       else{
         setIsQuickTrans(true)
     
-        const targetId= unique_two_card_pid[index-3];
+        const targetId= unique_two_card_pid[index-destNames.length];
         const target= connectedCards.findIndex((item: any) => item.payment_method_id === targetId);
         setsystem_id(target)
   
-        settobeSent(card_meta[index-3].amount)
-        settoSent(card_meta[index-3].recipient)
-        settofid(card_meta[index-3].recipientID)
+        settobeSent(card_meta[index-destNames.length].amount)
+        settoSent(card_meta[index-destNames.length].recipient)
+        settofid(card_meta[index-destNames.length].recipientID)
         setisOpen_card(true)
 
       
@@ -105,7 +103,6 @@ export default function QuickSend() {
             const connected_banks_list= data.map((x:any)=>x.id)
             const dwolla_id=await call_dwolla_id_for_frontEnd()
             connected_banks_list.push(dwolla_id)
-            console.log(connected_banks_list)
             setconnected_banks(connected_banks_list);
             for(let i=0;i<transactions.length;i++){
               if(("funded-transfer" in transactions[i]._links) || ("funding-transfer" in transactions[i]._links) ){
@@ -191,6 +188,7 @@ export default function QuickSend() {
               );
           
               setDestNames(names)
+             
               setloading(false)
             } catch (error) {
               console.error("Error fetching names:", error);
@@ -270,7 +268,6 @@ export default function QuickSend() {
     useEffect(()=>{
       const fetch_card_trans=async()=>{
         const card_trans_list= await call_card_transfer_all()
-        console.log(card_trans_list)
         
         for(let i=0;i<card_trans_list.length;i++){
           if(unique_cards.length==2){
@@ -297,6 +294,8 @@ export default function QuickSend() {
     },[card_bank_reload])
   
     
+    const total_transaction= new Array(Math.min(5,(unique_two_card.length+destNames.length))).fill(0)
+    
     return (
     <div  className='h-full w-11/12 bg-logo-surrounding rounded-2xl'>
         <div className='h-1/3 w-full  flex items-center pl-5 text-custom-white text-xl md:text-custom-size lg:text-xs'>
@@ -305,20 +304,20 @@ export default function QuickSend() {
         <div className='h-2/3 w-full flex items-center justify-center md:space-x-1 lg:space-x-3 '>
          
 
-         {loading? <div className='w-full h-full'><Loading_shed_cn_card/></div>: (destNames.length==0)? <div className='w-full h-full bg-custom-grey-white'><No_data_skeleton/></div> : transList.map((transaction, index:any) => {
+         {loading? <div className='w-full h-full'><Loading_shed_cn_card/></div>: (destNames.length==0)? <div className='w-full h-full bg-custom-grey-white'><No_data_skeleton/></div> : total_transaction.map((_, index:any) => {
            return (
          
              <div key={index} className='w-1/6 h-full    text-custom-white '>
              <div className='w-full h-full '>
                <div className='h-3/6 w-full flex items-center justify-center cursor-pointer'>
                <div className='h-full aspect-square ' onClick={()=>handleClick(index)}>
-                <Avatar  className="w-full h-full"  {...genConfig(index<3?destNames[index]:"Card Transfer")} />
+                <Avatar  className="w-full h-full"  {...genConfig(index<destNames.length?destNames[index]:"Card Transfer")} />
                </div>
                </div>
          
          
                <div  onClick={()=>handleClick(index)} className=' h-1/3 w-full cursor-pointer font-semibold flex items-center justify-center md:text-custom-size lg:text-xs'>
-               {index<3?<h1>{destNames[index]?.replace(/".*?"/g, '')}</h1>:<h1>{card_meta[index-3].recipient}</h1>}
+               {index<destNames.length?<h1>{destNames[index]?.replace(/".*?"/g, '')}</h1>:<h1>{card_meta[index-(destNames.length)]?.recipient}</h1>}
                </div>
          
              </div>

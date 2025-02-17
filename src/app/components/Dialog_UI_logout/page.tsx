@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useState } from 'react'
 import {
     AlertDialog,
@@ -43,22 +42,22 @@ const Dialog_UI_logout:React.FC<props>=({status})=> {
     router.push('/')
   }
   return (
-    <AlertDialog open={status.loading} >
+    <AlertDialog open={status?.loading} >
     <AlertDialogTrigger asChild>
       
     </AlertDialogTrigger>
     <AlertDialogContent className='bg-custom-grey-white text-white'>
       <AlertDialogHeader>
-        <AlertDialogTitle>{status.header}</AlertDialogTitle>
+        <AlertDialogTitle>{status?.header}</AlertDialogTitle>
         <AlertDialogDescription>
-          {/* {status.description} */}
+          {/* {status?.description} */}
           <div className='h-40 w-full '>
             <div className='h-4/6 w-full flex items-center  justify-center text-center'>
-             <Avatar   className=" h-5/6 aspect-square "     {...genConfig(status.name_)} />
+             <Avatar   className=" h-5/6 aspect-square "     {...genConfig(status?.name_)} />
             
             </div>
          
-            <h1 className='text-center  font-semibold mt-0 text-white'>{status.name_}</h1>
+            <h1 className='text-center  font-semibold mt-0 text-white'>{status?.name_}</h1>
          
 
           </div>
@@ -66,7 +65,7 @@ const Dialog_UI_logout:React.FC<props>=({status})=> {
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
-        <Button className='bg-black ' onClick={()=>{status.setLoading(!status.loading)}}>Close</Button>
+        <Button className='bg-black ' onClick={()=>{status?.setLoading(!status?.loading)}}>Close</Button>
         <Button className='bg-slate-500 hover:bg-white hover:text-black' onClick={()=>{logout()}}>Logout</Button>
       </AlertDialogFooter>
     </AlertDialogContent>

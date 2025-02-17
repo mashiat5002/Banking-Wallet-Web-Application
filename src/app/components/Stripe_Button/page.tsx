@@ -1,12 +1,17 @@
-"use client";
+"use client"
+export const dynamic = "force-dynamic";
+
+
+
+
 import React, { useContext, useState } from "react";
 
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { call_add_card_to_slide } from "@/app/(utils)/call_add_card_to_slide/route";
-import Dialog_UI from "../../Dialog_UI/page";
+import Dialog_UI from "../Dialog_UI/page";
 import { call_remove_card_from_db } from "@/app/(utils)/call_remove_card_from_db/route";
 import { call_insert_method_id_stripe_in_db } from "@/app/(utils)/call_insert_method_id_stripe_in_db/route";
-import MyContext from "../../MyContext/route";
+import MyContext from "../MyContext/route";
 
 type propsType = {
   name: string;
@@ -15,7 +20,7 @@ type propsType = {
   expiry: string;
 };
 
-const Stripe: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
+const Stripe_: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
   const {card_loading,setCard_loading}= useContext(MyContext)
   const [status, setStatus] = useState("Processing..");
   const [loading, setLoading] = useState(false);
@@ -96,7 +101,7 @@ const Stripe: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
      
   };
   return (
-    <div className="h-full w-full ">
+    <div className="h-full w-full">
       <form
         onSubmit={handleSubmit}
         className="bg-sky-500 rounded-lg h-full w-full  p-2 ring-2 ring-black "
@@ -123,4 +128,4 @@ const Stripe: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
   );
 };
 
-export default Stripe;
+export default Stripe_;

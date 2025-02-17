@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "../db connection/route";
-import crypto from "crypto";
 import { QueryResult, RowDataPacket } from "mysql2";
 import { call_nodemailer } from "@/app/(utils)/call_nodemailer/route";
 

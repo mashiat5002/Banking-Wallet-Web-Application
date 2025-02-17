@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import {
     Drawer,
@@ -58,10 +60,10 @@ const Drawer_Shedcn_remove_card: React.FC<props>=({cardData,action ,setStatus,se
           </div>
           <div className=" h-[200px]">
           <Cards 
-        number={cardData.number}
-        expiry={cardData.expiry}
-        cvc={cardData.cvc}
-        name={cardData.name_}
+        number={cardData?.number}
+        expiry={cardData?.expiry}
+        cvc={cardData?.cvc}
+        name={cardData?.name_}
         
       />
           </div>

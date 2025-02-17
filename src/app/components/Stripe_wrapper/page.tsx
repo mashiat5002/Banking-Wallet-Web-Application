@@ -1,12 +1,14 @@
 "use client";
 
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import React, {  useState } from "react";
-import Stripe from "./Stripe_Button/page";
-import Credit_Card_Based_on_input from "../Credit_Card_based_on_input/page";
-import Back_btn from "../Back Button/page";
 
+
+import React, {  useState } from "react";
+
+import Credit_Card_Based_on_input from "../Credit_Card_based_on_input/page";
+
+import dynamic from 'next/dynamic';
+
+const Stripe_Elements_Wrapper = dynamic(() => import('../Stripe_Elements_Wrapper/page'), { ssr: false });
 export default function Stripe_Wrapper() {
   const [number,setNumber]= useState("")
   const [expiry,setExpiry]= useState("")
@@ -14,11 +16,8 @@ export default function Stripe_Wrapper() {
   const [name,setName]= useState("")
 
   
-  
+   
 
-  const stripePromise = loadStripe(
-    `${process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY}`
-  );
   return (
     
     <div  onClick={(e)=>{e.stopPropagation()}} className="h-[400px] w-[400px]  mt-5 rounded-xl flex flex-col items-center justify-center ">
@@ -56,11 +55,9 @@ export default function Stripe_Wrapper() {
             </div>
           </form>
           <h1 className="text-sm font-semibold ml-5 text-slate-200">Re-enter Card Number: </h1>
-          <div className="h-28 w-full flex  items-center justify-center mt-1">
+          <div className="h-28 w-full flex  items-center justify-center mt-1 ">
             <div className="h-24 w-4/5  flex  items-center justify-center bg-black flex-col-reverse">
-              <Elements stripe={stripePromise}>
-                <Stripe name={name} expiry={expiry} cvc={cvc} number={number} />
-              </Elements>
+              <Stripe_Elements_Wrapper name={name} expiry={expiry} cvc={cvc} number={number}/>
             </div>
           </div>
         </div>

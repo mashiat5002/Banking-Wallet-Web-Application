@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import {
     AlertDialog,
@@ -34,14 +36,14 @@ const Dialog_UI:React.FC<props>=({status})=> {
     </AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogHeader>
-        <AlertDialogTitle>{status.header}</AlertDialogTitle>
+        <AlertDialogTitle>{status?.header}</AlertDialogTitle>
         <AlertDialogDescription>
-          {status.description}
+          {status?.description}
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
         
-        <AlertDialogAction disabled={status.description=="Processing..."} onClick={() => {status.action()}}>Continue</AlertDialogAction>
+        <AlertDialogAction disabled={status?.description=="Processing..."} onClick={() => {status?.action()}}>Continue</AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

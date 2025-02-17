@@ -22,7 +22,7 @@ type props={
   system_type:string
   recipient:string
   from: string
-  amount:Number
+  amount:number
 }
 
 const  Payment_Form:React.FC<props>=({recipient,from,amount,system_id,system_type})=> {

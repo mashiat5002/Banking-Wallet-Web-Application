@@ -30,14 +30,14 @@ const Confirm_Action:React.FC<props>=({status})=> {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>{status.header}</AlertDialogTitle>
+          <AlertDialogTitle>{status?.header}</AlertDialogTitle>
           <AlertDialogDescription>
-            {status.description}
+            {status?.description}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => status.action()}>Continue</AlertDialogAction>
+          <AlertDialogAction onClick={() => status?.action()}>Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

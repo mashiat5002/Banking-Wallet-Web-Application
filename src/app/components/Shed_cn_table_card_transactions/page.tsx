@@ -50,10 +50,10 @@ export const columns: ColumnDef<Payment>[] = [
     header: ({ table }) => (
       <Checkbox
         checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
+          table?.getIsAllPageRowsSelected() ||
+          (table?.getIsSomePageRowsSelected() && "indeterminate")
         }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        onCheckedChange={(value) => table?.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
       />
     ),
@@ -192,7 +192,7 @@ const Shed_cn_table_card_transactions:React.FC<props>=({loading,data})=> {
  
 
   const table = useReactTable({
-    data,
+    data: data ?? [],
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -221,9 +221,9 @@ const Shed_cn_table_card_transactions:React.FC<props>=({loading,data})=> {
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter receivers..."
-          value={(table.getColumn("receiver")?.getFilterValue() as string) ?? ""}
+          value={(table?.getColumn("receiver")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("receiver")?.setFilterValue(event.target.value)
+            table?.getColumn("receiver")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -235,7 +235,7 @@ const Shed_cn_table_card_transactions:React.FC<props>=({loading,data})=> {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             {table
-              .getAllColumns()
+              ?.getAllColumns()
               .filter((column) => column.getCanHide())
               .map((column) => {
                 return (
@@ -257,7 +257,7 @@ const Shed_cn_table_card_transactions:React.FC<props>=({loading,data})=> {
       <div className="rounded-md border">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
+            {table?.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
@@ -275,8 +275,8 @@ const Shed_cn_table_card_transactions:React.FC<props>=({loading,data})=> {
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+            {table?.getRowModel().rows?.length ? (
+              table?.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
@@ -294,7 +294,7 @@ const Shed_cn_table_card_transactions:React.FC<props>=({loading,data})=> {
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={columns.length}
+                  colSpan={columns?.length}
                   className="h-24 text-center"
                 >
                   {loading?"fetching data..":"No Result"}
@@ -306,8 +306,8 @@ const Shed_cn_table_card_transactions:React.FC<props>=({loading,data})=> {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4" style={{color:"black", textShadow: "2px 2px 2px black" }}>
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected
+          {table?.getFilteredSelectedRowModel().rows?.length} of{" "}
+          {table?.getFilteredRowModel().rows?.length} row(s) selected
           <div className="flex text-custom-white font-semibold">
           <h1>CARD TRANSACTION DETAILS</h1>
         <IoCard className="ml-2" size={"30px"} fill="white"/>
@@ -319,16 +319,16 @@ const Shed_cn_table_card_transactions:React.FC<props>=({loading,data})=> {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
+            onClick={() => table?.previousPage()}
+            disabled={!table?.getCanPreviousPage()}
           >
             Previous
           </Button>
           <Button
             variant="outline"
             size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
+            onClick={() => table?.nextPage()}
+            disabled={!table?.getCanNextPage()}
           >
             Next
           </Button>

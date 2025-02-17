@@ -36,7 +36,7 @@ const getFundingSourceBalance = async (fundingSourceId: string, accessToken: str
   if (!response.ok) {
     throw new Error('Failed to fetch funding source balance');
   }
-
+  else
   return response.json();
 };
 
@@ -44,14 +44,16 @@ const getFundingSourceBalance = async (fundingSourceId: string, accessToken: str
 export async function GET(req: NextRequest) {
   try {
   
-
+   
     const accessToken = await getDwollaAccessToken();
     console.log(accessToken);
     const balance = await getFundingSourceBalance('1a180d82-44d5-41b7-80f3-43407947c4cb', accessToken);
 
-    return NextResponse.json(balance);
+    return NextResponse.json(balance?balance:null);
+ 
   } catch (error) {
-    console.error('Error fetching funding source balance:', error);
+    // console.error('Error fetching funding source balance:', error);
+    return NextResponse.json({"res":"Error fetching funding source balance"});
    
   }
 }

@@ -34,21 +34,21 @@ const Dialog_UI_confirm_payment:React.FC<props>=({status})=> {
   const [loading,set_loading]=useState(false)
 
   return (
-    <AlertDialog open={status.loading} >
+    <AlertDialog open={status?.loading} >
     <AlertDialogTrigger asChild>
       
     </AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogHeader>
-        <AlertDialogTitle>{status.header}</AlertDialogTitle>
+        <AlertDialogTitle>{status?.header}</AlertDialogTitle>
         <AlertDialogDescription>
-          {status.description}
+          {status?.description}
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
-        <Button onClick={()=>{status.setLoading(!status.loading)}}>Close</Button>
-        <AlertDialogAction  onClick={() => {status.action(),set_loading(!loading)}}>Confirm</AlertDialogAction>
-        {loading? <Dialog_UI status={{header:"Processing Status",description:`${status.stat}`,action:()=>{set_loading(!loading) }}} /> : null}
+        <Button onClick={()=>{status?.setLoading(!status?.loading)}}>Close</Button>
+        <AlertDialogAction  onClick={() => {status?.action(),set_loading(!loading)}}>Confirm</AlertDialogAction>
+        {loading? <Dialog_UI status={{header:"Processing Status",description:`${status?.stat}`,action:()=>{set_loading(!loading) }}} /> : null}
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

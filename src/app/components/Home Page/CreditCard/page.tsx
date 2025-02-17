@@ -15,13 +15,13 @@ const CreditCards:  React.FC<props>= ({action,name,number,expiry,key_id}) =>{
  
   return (
     <div className='md:scale-75 lg:scale-90 '  onClick={()=>action( name, number, expiry,"123",key_id )}>
-        <Cards 
+       {name && number && expiry && key_id? <Cards 
         number={number}
         expiry={expiry}
         cvc={123}
         name={name}
         
-      />
+      />:null}
       
     </div>
   )

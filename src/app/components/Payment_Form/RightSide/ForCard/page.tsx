@@ -98,7 +98,7 @@ const  ForCard:React.FC<PropsType>= ({setLoading_2,system_id,system_type,status_
           </div>
         </div>
         <div className="h-2/12 w-full flex items-center justify-center text-xs md:text-base">
-        <button type="button" onClick={()=>setLoading_2(true)}  className="h-full w-full rounded-l-full rounded-r-full cursor-pointer bg-custom-blue4 flex items-center justify-center" style={{backgroundColor:status_data.stts_color}}><div >
+        <button type="button" onClick={()=>setLoading_2(true)}  className="h-full w-full rounded-l-full rounded-r-full cursor-pointer bg-custom-blue4 flex items-center justify-center" style={{backgroundColor:status_data?.stts_color}}><div >
             <h1  className="font-bold text-slate-200" >Confirm</h1>
           </div></button>
         </div>
