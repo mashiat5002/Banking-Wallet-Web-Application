@@ -12,17 +12,17 @@ import Bank_banance from './Balance_bank/page'
 import Balance_credit_card from './Balance_credit_card/page'
 import Balance_savings from './Balance_savings/page'
 import MyContext from '../MyContext/route';
-import Dialog_UI_logout from '../Dialog_UI_logout/page';
 
 
 export default  function Homepage() {
     const [card_loading,setCard_loading]=useState(true)
     const [saving_balance_loading,setsaving_balance_loading]=useState(true)
+    const [reload_savings_card,setreload_savings_card]=useState(false)
     const [card_bank_reload,setcard_bank_reload]=useState(true)
     const [isQuickTrans,setIsQuickTrans]=useState(false)
     
   return (
-    <MyContext.Provider value={{card_loading,setCard_loading,saving_balance_loading,setsaving_balance_loading,isQuickTrans,setIsQuickTrans,card_bank_reload,setcard_bank_reload}}>
+    <MyContext.Provider value={{reload_savings_card,setreload_savings_card,card_loading,setCard_loading,saving_balance_loading,setsaving_balance_loading,isQuickTrans,setIsQuickTrans,card_bank_reload,setcard_bank_reload}}>
 
       
     <div className='md:h-full w-full bg-black'>

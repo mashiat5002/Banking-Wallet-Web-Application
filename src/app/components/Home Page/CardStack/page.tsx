@@ -16,14 +16,14 @@ export default function CardStack() {
   const [stts, setStatus] = React.useState("Remove")
    const [drawerVisibility, setdrawerVisibility] = React.useState(false)
    const [cardData, setcardData] = React.useState({name_:"", number:"", expiry:"",cvc:"",key_id:""})
-   const [cardAllData, setAllcardData] = React.useState([{Card_holder:"",expiry_date:"",key_id:"",card_ids:""}])
-   const [Component, setComponent] = React. useState<JSX.Element | null>(<div>Initial JSX Element</div>);
+   const [cardAllData, setAllcardData] = React.useState([{Card_holder:"",expiry_date:"",_id:"",card_ids:""}])
    const [loading,setloading]= useState(true);
    const [cardPlay,setcardPlay]= useState(false);
 
    useEffect(()=>{
     const myfun= async()=>{
       const cardData= await call_card_list_from_db();
+      
       setAllcardData(cardData)
       setloading(false)
       setcardPlay(true)
@@ -85,7 +85,7 @@ export default function CardStack() {
 
 
                     {cardAllData.map((x,index)=><div key={index} className="cursor-pointer sample-card bg-color-1 mt-20 " >
-                          <CreditCards name={x.Card_holder} number={x.card_ids} expiry={x.expiry_date} key_id={x.key_id}    action={handleClick}/>
+                          <CreditCards name={x.Card_holder} number={x.card_ids} expiry={x.expiry_date} key_id={x._id}    action={handleClick}/>
                       </div>)}
 
                   </StackedCarousel>

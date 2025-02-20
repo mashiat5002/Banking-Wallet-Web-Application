@@ -1,13 +1,15 @@
 import { NextRequest, NextResponse } from "next/server"
-import { db } from "../db connection/route"
-import { RowDataPacket } from "mysql2"
+import User from "@/app/models/user"
+import { connectToDatabase } from "@/app/(utils)/connect_mongodb/route"
 
 
 
 export async function POST(request: NextRequest) {
    const body= await request.json()
    try{
-     const [rows]=await db.query<RowDataPacket[]>(`Select active_status from users where email="${body.email}"`)
+      await connectToDatabase()
+     const rows=await User.find({email:body.email}).select("active_status")
+    
     if(rows[0].active_status){
 
        return NextResponse.json({"res":rows[0].active_status})

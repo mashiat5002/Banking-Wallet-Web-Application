@@ -13,6 +13,6 @@ export async function call_remove_card_from_db(key_id:string) {
     })
     const final_res= await res.json()
     
-    return final_res.res.affectedRows;
+    return final_res.res.deletedCount;
    
 }

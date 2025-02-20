@@ -7,9 +7,6 @@ import { useState } from 'react';
 
 import Dialog_UI_login from '../Dialog_UI_login/page';
 
-import { call_nodemailer } from '@/app/(utils)/call_nodemailer/route';
-import { call_update_varification_key_db } from '@/app/(utils)/call_update_varification_key_db/route';
-import { call_check_user_active_status } from '@/app/(utils)/call_check_user_active_status/route';
 
 export default function Login() {
     const router = useRouter();
@@ -17,10 +14,7 @@ export default function Login() {
     const [emailInput, setemailInput]=useState("");
     const [loading, setloading]=useState(false);
 
-    const handledemo = async () => {
-        const cid=await call_check_user_active_status("mashiat342@gmail.com")
-        console.log(cid)
-    };
+    
     const handleSubmission=async (e:React.FormEvent<HTMLFormElement>)=>{
         setloading(true)
         setLoginStat("Processing Request...");
@@ -61,7 +55,7 @@ export default function Login() {
     <form onSubmit={handleSubmission} >
         <div onClick={(e)=>e.stopPropagation()} className='h-500px w-96 bg-custom-green space-y-3 rounded-2xl'>
             <div className='h-1/5 w-full  flex items-center justify-center'>
-                <h1 onClick={handledemo} className='text-3xl  opacity-100'>Login Here</h1>
+                <h1  className='text-3xl  opacity-100'>Login Here</h1>
             </div>
 
             <div className='h-1/5 w-full  flex items-center justify-center '>

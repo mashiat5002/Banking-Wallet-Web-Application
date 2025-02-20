@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "../db connection/route";
 import { get_dwolla_access_token } from "@/app/(utils)/(get_dwolla_access_token)/route";
 import { call_check_user_active_status } from "@/app/(utils)/call_check_user_active_status/route";
+import { connectToDatabase } from "@/app/(utils)/connect_mongodb/route";
+import User from "@/app/models/user";
 
 const isConnected=async ()=>{
     try{
@@ -75,10 +77,10 @@ export async function POST(request:NextRequest){
             return response;
             
         }
-        // console.log(response.headers.get("Location"))
-    
-        db.query(`update  users set dwolla_customer_id ='${response.headers.get("Location")}' where  email='${Body.email}'`)
-
+      
+        await connectToDatabase()
+        const result_=await User.updateOne({email:Body.email},{$set:{dwolla_customer_id:response.headers.get("Location")}})
+        console.log(result_)
         return response;
         
     }

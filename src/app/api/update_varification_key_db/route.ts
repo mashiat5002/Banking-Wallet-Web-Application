@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "../db connection/route";
-import { QueryResult, RowDataPacket } from "mysql2";
 import { call_nodemailer } from "@/app/(utils)/call_nodemailer/route";
+import { connectToDatabase } from "@/app/(utils)/connect_mongodb/route";
+import User from "@/app/models/user";
 
 const generateOTP  = () => {
   return Math.floor(1000 + Math.random() * 9000).toString();};
@@ -14,25 +14,24 @@ export async function POST(request: NextRequest) {
   const varify_key = generateOTP ();
   const timeout = Math.floor(Date.now() / 1000) + 5 * 60
   try {
-    const [rows] = await db.query<RowDataPacket[]>(
-      `SELECT email from users where email ="${body.email}"`
-    );
-    const final_res = [rows][0];
+    await connectToDatabase()
+    const final_res = await User.find({email:body.email}).select("email")
     
     console.log(final_res.length)
 
     if (final_res.length == 1) {
-      const query_res =
-        await db.query(`update users set varification_key= "${varify_key}",
-                varify_timeout= "${timeout}" where email="${body.email}"`);
-          
+      const query_res = await User.updateOne({email:body.email},{$set:{varification_key:varify_key,varify_timeout:timeout}})
+        
+          console.log(query_res)
           call_nodemailer(body.email, varify_key)
-          return NextResponse.json({ res: query_res[0] });
+          return NextResponse.json({ res: query_res });
         } else {
-          const query_res =
-          await db.query(`INSERT INTO users (email, varification_key,varify_timeout)
-            VALUES ("${body.email}", "${varify_key}", "${timeout}");
-            `);
+          await connectToDatabase()
+          
+          const query_res =new User({email:body.email,varification_key:varify_key,varify_timeout:timeout,active_status:"Inactive"})
+          query_res.save()
+
+         
             
             call_nodemailer(body.email, varify_key)
       return NextResponse.json({ res: query_res[0] });

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
-import { db } from "../db connection/route"
-import { RowDataPacket } from "mysql2"
 import { call_update_varification_key_db } from "@/app/(utils)/call_update_varification_key_db/route"
+import { connectToDatabase } from "@/app/(utils)/connect_mongodb/route"
+import User from "@/app/models/user"
 
 
 
@@ -26,13 +26,15 @@ export async function POST(request: NextRequest) {
 
    const current_time= Date.now()/1000
    try{
-      
-      const [rows]= await db.query<RowDataPacket[]>(`Select varify_timeout from users
-         where varification_key= "${body.key}"` 
-      )
+      await connectToDatabase()
+
+      const rows= await User.findOne({varification_key:body.key}).select("varify_timeout")
       try{
-         
-         var varify_timeout=rows[0].varify_timeout
+         if(!rows){
+
+            return NextResponse.json({"res":"varification key not found"})
+         }
+         var varify_timeout=rows.varify_timeout
         }catch(err){
        call_update_varification_key_db(body.email)
             
@@ -41,9 +43,10 @@ export async function POST(request: NextRequest) {
         }
 
        if(current_time<=varify_timeout){
-         const query_res =
-         await db.query(`update users set password= "${body.pass}"
-                  where varification_key="${body.key}" and  email="${body.email}"`);
+          
+          await connectToDatabase()
+          const query_res =
+         await User.updateOne({varification_key:body.key,email:body.email},{password:body.pass})
             console.log(query_res)
                   return NextResponse.json({"res":"Password Updated"})
                }

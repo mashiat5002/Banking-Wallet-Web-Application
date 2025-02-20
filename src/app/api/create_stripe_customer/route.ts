@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "../db connection/route";
+import { connectToDatabase } from "@/app/(utils)/connect_mongodb/route";
+import User from "@/app/models/user";
 
 export async function POST(request:NextRequest) {
     
@@ -18,10 +19,8 @@ export async function POST(request:NextRequest) {
     
     
 
-
-
-    await db.query(`update users set stripe_customer_id=? where email=?`,
-        [data.id,body.email]
-    )
+    await connectToDatabase()
+    const result_=await User.updateOne({email:body.email},{$set:{stripe_customer_id:data.id}})
+ 
     return NextResponse.json(data)
 }

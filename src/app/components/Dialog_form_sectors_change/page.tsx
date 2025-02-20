@@ -1,6 +1,6 @@
 
 "use client"
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -34,18 +34,18 @@ import Dialog_UI from '../Dialog_UI/page';
 import { get_both_savings_sector } from "@/app/(utils)/call_get_savings_sectors/route";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import { call_change_savings_sector_name } from "@/app/(utils)/call_change_savings_sector_name/route";
+import MyContext from "../MyContext/route";
 type props={
   reload:boolean,
   reloading: React.Dispatch<React.SetStateAction<boolean>>
 }
 const Dialog_form_sectors_change:React.FC<props>=({reloading, reload})=> {
       const [sectors, setSectors] = React.useState({department_1:"",department_2:""});
-      const [source, setSource] = React.useState("");
       const [destination, setdestination] = React.useState("");
-      const [amount, setAmount] = React.useState("");
       const [savingsSector, setSavingsSector] = React.useState("");
       const [loading, setLoading] = React.useState(false);
       const [status, setStatus] = React.useState("Processing...");
+      const {reload_savings_card,setreload_savings_card}= useContext(MyContext) 
       useEffect(() => {
          const fetchData = async () => {
            const data = await get_both_savings_sector();
@@ -67,6 +67,7 @@ const Dialog_form_sectors_change:React.FC<props>=({reloading, reload})=> {
                 
                 setSectors({department_1:updated_data.department_1,department_2:updated_data.department_2})
                 reloading(!reload)
+                setreload_savings_card(!reload_savings_card)
               }
             else{
                 setStatus("failed")

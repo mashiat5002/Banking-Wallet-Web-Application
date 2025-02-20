@@ -1,13 +1,8 @@
 import React from 'react'
-import { NavLogo } from '../NavLogoLeft/NavLogo'
 import { LuWallet } from "react-icons/lu";
-import { MdOutlinePayments } from "react-icons/md";
 import { TiHomeOutline } from "react-icons/ti";
 import { FaFileInvoiceDollar } from "react-icons/fa6";
-import { IoSettingsOutline } from "react-icons/io5";
-import { GrTransaction } from "react-icons/gr";
 import PlaidButton from '@/app/components/PlaidButton/Button';
-import Dialog_box from '@/app/components/Savings_form/page';
 import Savings_form from '@/app/components/Savings_form/page';
 import Dialog_form_stripe_wrapper from '@/app/components/Dialog_form_stripe_wrapper/page';
 import Dialog_form_payment_options from '@/app/components/Dialog_form_payment_options/page';

@@ -1,17 +1,20 @@
+import { connectToDatabase } from "@/app/(utils)/connect_mongodb/route";
+import User from "@/app/models/user";
+// import bcrypt from "bcrypt";
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "../db connection/route";
 export async function POST(Request: NextRequest) {
     const formdata = await Request.json();
-
+    // formdata.password= await bcrypt.hash(formdata.password, saltRounds)
 
     try{
-        db.getConnection()
-        db.query(`Update users set ${Object.keys(formdata).join("=?, ")}=? where email="${formdata.email}"`,Object.values(formdata) )
-       
+        
+       await connectToDatabase()
+       const res=await User.updateOne({email:formdata.email},formdata)
+      
     }
     catch(error){
         console.log(error)
     }
   
-    return NextResponse.json({"a":"b"});
+    return NextResponse.json({});
 }

@@ -22,7 +22,6 @@ const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
     const [loading, setloading]=useState(false);
     const [error_msg, setErrMsg]=useState("");
     const [error_msg_color, setErrMsg_color]=useState("grey");
-    const [error_passMsg, seterror_passMsg]=useState("grey");
     const [error_passClr_8char, seterror_passClr_8char]=useState("grey");
     const [error_passClr_onespchar, seterror_passClr_onespchar]=useState("grey");
     const [error_passClr_oneupchar, seterror_passClr_oneupchar]=useState("grey");
@@ -294,7 +293,7 @@ const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
       
     
     </form>
-    {loading?<Dialog_UI_login  status={{"header":"Processing Registration Request","description":error_msg,"action":()=>{setloading(false)}}}/>:null}
+    {loading?<Dialog_UI_login  status={{setLoading:()=>{},emailInput:"","header":"Processing Registration Request","description":error_msg,"action":()=>{setloading(false)}}}/>:null}
 
     </div>
   )

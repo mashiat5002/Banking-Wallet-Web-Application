@@ -14,6 +14,6 @@ export async function call_change_savings_sector_name(department:string,updated_
     })
     const final_res= await res.json()
     
-    return final_res.res.affectedRows;
+    return final_res.res;
    
 }

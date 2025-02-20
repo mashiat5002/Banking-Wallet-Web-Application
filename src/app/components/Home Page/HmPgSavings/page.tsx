@@ -14,6 +14,7 @@ export default function Savings() {
   const [percentage, setPercentage]= React.useState({percentage_1:0, percentage_2:0})
   const {saving_balance_loading}= useContext(MyContext)
       const [Load,setLoad]= useState(true);
+      const {reload_savings_card}= useContext(MyContext) 
       const {card_bank_reload,setcard_bank_reload}= useContext(MyContext)
 
 
@@ -29,7 +30,7 @@ export default function Savings() {
     }
 
     getData()
-  }, [reload,saving_balance_loading,card_bank_reload]);
+  }, [reload,saving_balance_loading,card_bank_reload,reload_savings_card]);
   return (
     <div className="h-11/12 w-11/12  bg-logo-surrounding text-custom-white rounded-2xl ">
       <div className="w-full h-1/5   flex">

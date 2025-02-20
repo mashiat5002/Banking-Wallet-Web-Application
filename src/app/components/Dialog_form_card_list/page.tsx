@@ -85,7 +85,7 @@ export default function Dialog_form_card_list() {
                     </SelectTrigger>  
                     <SelectContent position="popper" >
                      
-                      {cardList.map((x:any,index)=><SelectItem   value={`${index}`}>{`${x.type} (${x.last4})`}</SelectItem>)}
+                      {cardList.map((x:any,index)=><SelectItem key={index}  value={`${index}`}>{`${x.type} (${x.last4})`}</SelectItem>)}
                     </SelectContent>
                   </Select>
                 </div>

@@ -17,9 +17,9 @@ import Dialog_form_forgot_pass from '../Dialog_form_forgot_pass/page'
 
   type propsType ={
     header:string,
-    action: () => void
+    setLoading: any
     description:string
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+    action:   ()=>void
     emailInput:string
     
   }
@@ -53,7 +53,7 @@ const Dialog_UI_login:React.FC<props>=({status})=> {
       </AlertDialogHeader>
       <AlertDialogFooter>
       {loading?<Dialog_form_forgot_pass emailInput={status?.emailInput}/>:null}      
-          <AlertDialogAction disabled={status?.description=="Processing Request..."}  onClick={() => {status?.setLoading(false),setloading(false)}}>Close</AlertDialogAction>
+          <AlertDialogAction disabled={status?.description=="Processing Request..."}  onClick={() => {status?.setLoading(false),status.action()}}>Close</AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

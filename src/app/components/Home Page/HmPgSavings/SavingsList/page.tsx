@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import { MdHealthAndSafety } from "react-icons/md";
 import ProgressDemo from '@/app/components/Progressbar_shedcn/page';
 import Recharts_Chart from '@/app/components/Recharts_chart/page';
@@ -23,7 +23,7 @@ type SavingsListType = {
 }
 const SavingsList: React.FC<SavingsListType> = ({Load,data,reloading,loading}) => {
    
-
+    
     const [stts, setStatus] = React.useState("Submit")
     const [drawerVisibility, setdrawerVisibility] = React.useState(false)
        const [Component, setComponent] = React. useState<JSX.Element | null>(<Recharts_Chart/>);
@@ -34,7 +34,8 @@ const SavingsList: React.FC<SavingsListType> = ({Load,data,reloading,loading}) =
        const myfun=async()=>{
         console.log(data,sector)
         const res=await call_change_savings_target(data,sector)
-        if(res.affectedRows==1){
+        console.log(res)
+        if(res==1){
             setStatus("Success")
             reloading(!loading)
         }
