@@ -1,7 +1,7 @@
 
 export async function call_find_customer_id_with_funding_src_id(fid:string) {
     
-    const res= await fetch(`http://localhost:3000/api/find_customer_id_with_funding_src_id`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/find_customer_id_with_funding_src_id`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"

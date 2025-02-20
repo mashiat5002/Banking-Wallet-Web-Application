@@ -3,7 +3,7 @@
 
 export async function call_nodemailer(email:string,key:string) {
     
-    const res= await fetch(`http://localhost:3000/api/nodemailer`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/nodemailer`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"

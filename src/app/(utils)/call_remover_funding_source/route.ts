@@ -1,5 +1,5 @@
 export async function Call_remover_funding_src(funding_source:string) {
-    const res= await fetch(`http://localhost:3000/api/Remove_a_funding_source`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/Remove_a_funding_source`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"

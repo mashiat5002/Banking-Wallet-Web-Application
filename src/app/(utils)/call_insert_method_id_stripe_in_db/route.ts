@@ -1,7 +1,7 @@
 
 
 export async function call_insert_method_id_stripe_in_db(key_id:string,pid:string) {
-    const res= await fetch(`http://localhost:3000/api/insert_method_id_stripe_in_db`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/insert_method_id_stripe_in_db`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"

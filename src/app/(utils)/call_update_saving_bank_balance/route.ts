@@ -6,7 +6,7 @@ export async function call_update_saving_bank_balance(savingsSector:string,amoun
     
     const old_balance= savingsSector=="balance_1"?old_data.balance_1:old_data.balance_2;
    
-    const res= await fetch(`http://localhost:3000/api/update_saving_bank_balance`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/update_saving_bank_balance`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"

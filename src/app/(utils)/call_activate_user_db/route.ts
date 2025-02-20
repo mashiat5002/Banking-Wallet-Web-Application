@@ -3,7 +3,7 @@
 
 export async function call_activate_user_db(email:string,key:string) {
     
-    const res= await fetch(`http://localhost:3000/api/activate_user_db`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/activate_user_db`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"

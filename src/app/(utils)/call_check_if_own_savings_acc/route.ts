@@ -1,7 +1,7 @@
 
 export async function call_check_if_own_savings_acc(id: string) {
    
-    const res= await fetch(`http://localhost:3000/api/check_if_own_savings_acc`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/check_if_own_savings_acc`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"

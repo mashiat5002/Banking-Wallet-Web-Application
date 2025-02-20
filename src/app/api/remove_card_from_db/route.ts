@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server"
-import { db } from "../db connection/route"
 import { get_stripe_user_id } from "@/app/(utils)/(get_logged_in_stripe_customer_id)/route"
 import { connectToDatabase } from "@/app/(utils)/connect_mongodb/route"
 import stripe_cards from "@/app/models/stripe_cards"

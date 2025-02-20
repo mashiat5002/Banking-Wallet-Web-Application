@@ -1,7 +1,7 @@
 
 export async function call_check_bank_acc_type(id: string) {
    
-    const res= await fetch(`http://localhost:3000/api/check_bank_acc_type`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/check_bank_acc_type`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"

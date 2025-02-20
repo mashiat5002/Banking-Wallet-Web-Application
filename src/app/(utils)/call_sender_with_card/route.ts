@@ -9,7 +9,7 @@ export async function call_Sender_card(amount:string,sender:string,receiver:stri
         console.log(res_bank)
         if(res_bank.status==201){
             // await call_Sender_card(amount,sender,receiver,selected)
-            const res= await fetch("http://localhost:3000/api/send_money_with_card",{
+            const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/send_money_with_card`,{
                 method:"POST",
                 body:JSON.stringify({
                     "amount":amount,

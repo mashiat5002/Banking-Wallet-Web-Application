@@ -2,7 +2,7 @@ import { Call_remover_funding_src } from "../call_remover_funding_source/route";
 import { call_Sender_card } from "../call_sender_with_card/route";
 
 export async function check_funding_source_origin(routing_no:string,acc_no:string,name:string,amount:string,payment_method:string,recipient_name:string) {
-    const res= await fetch(`http://localhost:3000/api/check_funding_source_origin`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/check_funding_source_origin`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json",

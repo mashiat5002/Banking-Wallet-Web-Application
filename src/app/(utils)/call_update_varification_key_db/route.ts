@@ -1,7 +1,7 @@
 
 
 export async function call_update_varification_key_db(email:string) {
-    const res= await fetch(`http://localhost:3000/api/update_varification_key_db`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/update_varification_key_db`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"

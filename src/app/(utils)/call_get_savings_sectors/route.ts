@@ -1,6 +1,6 @@
 
 export async function get_both_savings_sector() {
-    const res= await fetch(`http://localhost:3000/api/get_both_savings_sector`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/get_both_savings_sector`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"

@@ -1,6 +1,6 @@
 
 export async function call_create_saving_acc_in_db(id:string) {
-    const res= await fetch(`http://localhost:3000/api/create_saving_acc_in_db`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/create_saving_acc_in_db`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"

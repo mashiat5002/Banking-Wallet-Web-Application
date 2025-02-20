@@ -1,7 +1,7 @@
 
 
 export async function call_remove_card_from_db(key_id:string) {
-    const res= await fetch(`http://localhost:3000/api/remove_card_from_db`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/remove_card_from_db`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"

@@ -3,7 +3,7 @@
 
 export async function call_update_password(email:string ,pass:string,key:string) {
     
-    const res= await fetch(`http://localhost:3000/api/update_password`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/update_password`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"

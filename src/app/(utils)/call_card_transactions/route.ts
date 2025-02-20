@@ -1,6 +1,6 @@
 
     export async function call_card_transactions() {
-        const res= await fetch(`http://localhost:3000/api/card_transactions`,{
+        const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/card_transactions`,{
             method:"POST",
             headers:{
                 "Content-Type": "application/json"

@@ -1,7 +1,7 @@
 
 export async function call_find_balance_acc_id_with_customer_id(cid:string) {
     
-    const res= await fetch(`http://localhost:3000/api/find_balance_acc_id_with_customer_id`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/find_balance_acc_id_with_customer_id`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"

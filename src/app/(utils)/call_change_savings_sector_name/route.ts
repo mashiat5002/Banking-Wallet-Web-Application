@@ -3,7 +3,7 @@
 export async function call_change_savings_sector_name(department:string,updated_name:string) {
     
    
-    const res= await fetch(`http://localhost:3000/api/change_savings_sector_name`,{
+    const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/change_savings_sector_name`,{
         method:"POST",
         headers:{
             "Content-Type": "application/json"
