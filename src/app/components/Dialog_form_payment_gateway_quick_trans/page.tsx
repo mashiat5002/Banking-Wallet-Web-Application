@@ -18,7 +18,7 @@ type props={
   setIsopen:React.Dispatch<React.SetStateAction<boolean>>
   recipient:string
   from: string
-  amount:Number
+  amount:number
 
 }
 const  Dialog_form_payment_gateway_quick_trans:React.FC<props>=({recipient,from,amount,setIsopen,isOpen,system_id,system_type})=> {
@@ -41,7 +41,7 @@ const  Dialog_form_payment_gateway_quick_trans:React.FC<props>=({recipient,from,
      
      
       </DialogTrigger>
-      <DialogContent className="md:h-[700px] md:w-[1000px] h-[500px] w-[550px] flex items-center justify-center bg-transparent text-custom-white">
+      <DialogContent className=" h-[550px] w-5/6 overflow-scroll scrollbar-hide md:w-[850px] rounded-2xl flex items-center justify-center  text-black ">
           <Payment_Form recipient={recipient} from={from} amount={amount}  system_type={system_type} system_id={system_id}/>
       </DialogContent>
     </Dialog>

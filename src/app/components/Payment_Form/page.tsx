@@ -15,14 +15,13 @@ import { call_update_savings_time } from '@/app/(utils)/call_update_savings_time
 import { call_check_bank_acc_type } from '@/app/(utils)/call_check_bank_acc_type/route';
 import MyContext from '../MyContext/route';
 import Dialog_UI_confirm_payment from '../Dialog_UI_confirm_payment/page';
-import { send } from 'process';
 
 type props={
   system_id: string;
   system_type:string
   recipient:string
   from: string
-  amount:number
+  amount: number
 }
 
 const  Payment_Form:React.FC<props>=({recipient,from,amount,system_id,system_type})=> {
@@ -77,23 +76,17 @@ const  Payment_Form:React.FC<props>=({recipient,from,amount,system_id,system_typ
   
     const handleSubmit:any= ()=>{
 
-        // e.preventDefault()
         
         setStatus("Processing...")
-        // const formdata=  new FormData(e.currentTarget);
-        // const routingId = formdata.get("routing_id") as string;
         const routingId = routing_id?.value;
-        // const accountId = formdata.get("account_id") as string;
         const accountId = account_id?.value;
-        // const recipient_name = formdata.get("recipient") as string;
         const recipient_name = recipientName?.value;
-        // const recipient_name_type1 = formdata.get("recipient_type1") as string;
+     
         const recipient_name_type1 = recipient_type1?.value;
 
-        // const recipientID = formdata.get("receipent_id") as string;
-        // const recipientID = formdata.get("receipent_id") as string;
+     
         const recipientID = recipientInput?.value;
-        // const amount = formdata.get("amount") as string;
+       
         const amount = amountInput?.value;
         setreceiverID(recipientID)
         setsending_amount(amount)
@@ -230,13 +223,13 @@ const  Payment_Form:React.FC<props>=({recipient,from,amount,system_id,system_typ
     }
     
   return (
-    <form onSubmit={(e)=>{()=>{e.preventDefault()}}} ref={formRef} >
-      <div   className="h-screen w-screen  flex items-center justify-center">
-        <div  className="h-4/6 w-11/12 md:w-5/6 lg:w-3/6 flex  lg:min-w-625">
+    <form onSubmit={(e)=>{()=>{e.preventDefault()}}} ref={formRef} className='h-full  w-full  md:flex '>
+     
+       
 
 
           {/* left */}
-          <div className="h-full w-7/12    bg-slate-50  flex items-center justify-center ">
+          <div className=" h-1/2 md:h-full w-full md:w-7/12    bg-slate-50  flex items-center justify-center ">
             <div className="h-full w-4/6  ">
               <div className="h-4/12 w-full ">
                 <div className="h-4/6  ">
@@ -250,26 +243,19 @@ const  Payment_Form:React.FC<props>=({recipient,from,amount,system_id,system_typ
                   </div>
                 </div>
                 <div className="h-2/6 text-blue-700 flex items-center text-xs  md:text-sm">
-                  <h1 className="cursor-pointer">
-                    Download Invoice 
-                  </h1>
+                  
                   <IoDownloadOutline className="cursor-pointer ml-1" />
                 </div>
               </div>
 
               <Internal_External  recipient={recipient} from={from} amount={amount} selected={selected}/>
 
-              {/* <div className=" mt-5 w-full flex items-center ">
-                <input type="radio"></input> 
-                <h1 className="ml-3 text-xs md:text-sm  text-custom-blue3 font-semibold">
-                Confirm and Send
-                </h1>
-              </div> */}
+            
             </div>
           </div>
 
           {/* right */}
-          <div className="h-full w-5/12 bg-custom-grey2 flex items-center justify-center">
+          <div className="h-[550px] md:h-full w-full md:w-5/12   bg-custom-grey2 flex items-center justify-center">
             <RightSidePaymentForm setLoading={setLoading} setLoading_2={setLoading_2}  system_type={system_type} system_id={system_id}
               status_data={{ status: status,  } }  setSavingsSector={handleSector} 
               />
@@ -279,8 +265,8 @@ const  Payment_Form:React.FC<props>=({recipient,from,amount,system_id,system_typ
             
             {(loading && recipientInput.value!="" )  ? <Dialog_UI_confirm_payment status={{stat:status, setLoading:setLoading,loading:loading,header:"Confirm to transfer",description:`from: ${sender} to: ${recipientInput.value} amount: ${amountInput.value} `,action:()=>{console.log("submission"),handleSubmit()}}} /> : null}
             {(loading_2  )  ? <Dialog_UI_confirm_payment status={{stat:status,setLoading:setLoading_2,loading:loading_2,header:"Confirm to transfer",description:`from ${sender} amount: ${amountInput.value} to: ${routing_id?"Routing No:"+routing_id.value:""} ${account_id?"Account no: "+account_id.value:""} ${recipientInput?recipientInput.value:""}`,action:()=>{console.log("submission"),handleSubmit()}}} /> : null}
-        </div>
-      </div>
+       
+     
       
     </form>
     

@@ -52,8 +52,8 @@ export default function Bank_transaction_list_all() {
     <DialogTrigger asChild>
       <h1 className='text-white text-sm'>Bank Transactions</h1>
     </DialogTrigger>
-    <DialogContent className="md:h-[800px] md:w-[1000px] h-[700px] w-[550px] flex items-center justify-center">
-    <div className="h-full w-full flex items-center justify-center bg-black">
+    <DialogContent className="md:h-[600px] md:w-[700px] h-5/6 w-5/6 flex p-0 items-center justify-center bg-black rounded-2xl border-2 text-white">
+    <div className="h-full w-full flex items-center justify-center bg-black rounded-2xl ">
           <div className="  h-full w-full overflow-hidden bg-custom-light-green opacity-50 ">
             <SplineComponent />
           </div>

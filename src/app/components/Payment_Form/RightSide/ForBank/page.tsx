@@ -64,7 +64,7 @@ const ForBank: React.FC<PropsType>=({setLoading,system_id,system_type,status_dat
 
   return (
     <div className="h-full w-9/12 text-custom-blue3">
-      <div className="h-2/12 w-full flex flex-col-reverse  ">
+      <div className="h-16 w-full flex flex-col-reverse  ">
         <div className="flex">
           <h1 className="text-xs md:text-xl font-bold text-custom-blue2 text-nowrap">
             Bank Details{" "}
@@ -75,7 +75,7 @@ const ForBank: React.FC<PropsType>=({setLoading,system_id,system_type,status_dat
           </h1>
         </div>
       </div>
-      <div className="h-8/12 w-full ">
+      <div className="h-[350px] w-full ">
         <div className="h-3/12 w-full flex flex-col-reverse">
           <div className="h-1/2 w-full flex items-center border-b-2 border-b-custom-grey3 ">
             <h1 className="text-xs md:text-base text-custom-blue2">

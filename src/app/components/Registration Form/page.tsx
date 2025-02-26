@@ -191,38 +191,38 @@ const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
     }
     
     return (
-        <div>
-        <form onSubmit={HandleSubmit}>
+        <>
+        <form onSubmit={HandleSubmit} className='h-full md:h-650px w-full'>
   
-        <div   className='scale-[0.63] md:scale-100 h-full w-full  flex items-center justify-center '>
-            <div className='h-600px w-850px  flex items-center justify-center rounded-2xl  '>
-                <div className='h-full w-1/2 bg-slate-50 rounded-s-2xl flex items-center justify-center'>
-                    <div className='h-11/12 w-5/6  text-custom-green '>
-                        <div className='h-1/12 w-full '>
-                            <h1 className='text-xl text-custom-green font-semibold'>General Information</h1>
+        <div   className='  h-full w-full  flex items-center justify-center '>
+            <div className='overflow-scroll scrollbar-hide h-full w-full  md:w-850px  md:flex items-center justify-center rounded-2xl  '>
+                <div className=' h-1/2 md:h-full w-full md:w-1/2  rounded-s-2xl flex items-center justify-center'>
+                    <div className=' md:h-11/12 w-5/6  text-slate-50 '>
+                        <div className='h-12 w-full '>
+                            <h1 className='text-xl text-slate-50 font-semibold'>General Information</h1>
 
                         </div>
-                        <div className='h-1/12 w-full '>
-                            <input readOnly={isreadonly} onChange={(e)=>setemail_input(e.currentTarget.value)} required defaultValue={emailInput} name='email' className='h-full w-full border-b-2 outline-none pl-3' placeholder='Email'/>
+                        <div className='h-12 w-full '>
+                            <input readOnly={isreadonly} onChange={(e)=>setemail_input(e.currentTarget.value)} required defaultValue={emailInput} name='email' className='h-full w-full border-b-2 outline-none pl-3 bg-transparent' placeholder='Email'/>
 
                         </div>
-                        <div className='h-1/12 w-full flex justify-between'>
+                        <div className='h-12 w-full flex justify-between'>
                        
 
                            <Opt_input_field Otp={Otp} setOtp={setOtp} isreadonly={isreadonly}/>
                            <div className='h-full flex items-center justify-center ml-1'>
 
-                           <Button disabled={isdisabled} onClick={handleOTP} type='button' className=' bg-white =ring-1  text-black hover:bg-custom-green hover:text-custom-white' >{otp_btn_txt}</Button>
+                           <Button disabled={isdisabled} onClick={handleOTP} type='button' className=' bg-white =ring-1  text-black hover:bg-transparent hover:text-custom-white' >{otp_btn_txt}</Button>
                            </div>
                        
                         </div>
-                        <div className='h-1/12 w-full flex justify-between'>
-                            <div  className='h-full w-2/5'> <input required name='first_name' className='h-full w-full border-b-2 outline-none pl-3' placeholder='First Name'/></div>
-                            <div className='h-full w-2/5'> <input required name='last_name' className='h-full w-full border-b-2 outline-none pl-3' placeholder='Last Name'/></div>
+                        <div className='h-12 w-full flex justify-between'>
+                            <div  className='h-full w-2/5'> <input required name='first_name' className='h-full w-full border-b-2 outline-none pl-3 bg-transparent' placeholder='First Name'/></div>
+                            <div className='h-full w-2/5'> <input required name='last_name' className='h-full w-full border-b-2 outline-none pl-3 bg-transparent' placeholder='Last Name'/></div>
 
                         </div>
-                        <div className='h-1/12 w-full flex justify-between'>
-                            <div className='h-full w-3/5'> <input required name='dob'  className='h-full w-full border-b-2 outline-none pl-3 ' placeholder='Date of Birth YYYY-MM-DD' /></div>
+                        <div className='h-12 w-full flex justify-between'>
+                            <div className='h-full w-3/5'> <input required name='dob'  className='h-full w-full border-b-2 outline-none pl-3 bg-transparent' placeholder='Date of Birth YYYY-MM-DD' /></div>
                           
 
                         </div>
@@ -230,35 +230,35 @@ const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
                     </div>
 
                 </div>
-                <div className='h-full w-1/2 bg-custom-green rounded-e-2xl flex items-center justify-center text-slate-50'>
+                <div className='h-full w-full md:w-1/2  rounded-e-2xl flex items-center justify-center text-slate-50 '>
                     <div className='h-11/12 w-5/6 '>
-                        <div className='h-1/12 w-full '>
+                        <div className='h-12 w-full '>
                             <h1 className='text-xl text-slate-50 font-semibold'>Contact Details</h1>
 
                         </div>
 
-                        <div className='h-1/12 w-full '>
-                            <input required  name='address' className=' h-full w-full border-b-2 outline-none pl-3 bg-custom-green ' placeholder='Address'/>
+                        <div className='h-12 w-full '>
+                            <input required  name='address' className=' h-full w-full border-b-2 outline-none pl-3 bg-transparent ' placeholder='Address'/>
 
                         </div>
-                        <div className='h-1/12 w-full '>
-                            <input required name='city' className='h-full w-full border-b-2 outline-none pl-3 bg-custom-green' placeholder='City'/>
+                        <div className='h-12 w-full '>
+                            <input required name='city' className='h-full w-full border-b-2 outline-none pl-3 bg-transparent' placeholder='City'/>
 
                         </div>
-                        <div className='h-1/12 w-full '>
-                            <input required name='state' className='h-full w-full border-b-2 outline-none pl-3 bg-custom-green' placeholder='State'/>
+                        <div className='h-12 w-full '>
+                            <input required name='state' className='h-full w-full border-b-2 outline-none pl-3 bg-transparent' placeholder='State'/>
 
                         </div>
-                        <div className='h-1/12 w-full '>
-                            <input required  name='postal' className='h-full w-full border-b-2 outline-none pl-3 bg-custom-green' placeholder='Postal Code'/>
+                        <div className='h-12 w-full '>
+                            <input required  name='postal' className='h-full w-full border-b-2 outline-none pl-3 bg-transparent' placeholder='Postal Code'/>
 
                         </div>
-                        <div className='h-1/12 w-full '>
-                            <input required name='phone' type="tel" pattern="[0-9]*"  className=' h-full w-full border-b-2 outline-none pl-3 bg-custom-green' placeholder='Phone Number'/>
+                        <div className='h-12 w-full '>
+                            <input required name='phone' type="tel" pattern="[0-9]*"  className=' h-full w-full border-b-2 outline-none pl-3 bg-transparent' placeholder='Phone Number'/>
 
                         </div>
-                        <div className='h-1/12 w-full '>
-                            <input required onChange={handlePass}  name='password' type='password' className=' h-full w-full border-b-2 outline-none pl-3 bg-custom-green' placeholder='Password'/>
+                        <div className='h-12 w-full '>
+                            <input required onChange={handlePass}  name='password' type='password' className=' h-full w-full border-b-2 outline-none pl-3 bg-transparent' placeholder='Password'/>
 
                         </div>
                         <div className='h-3/12 w-full text-gray-500 '>
@@ -273,7 +273,7 @@ const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
                         <div className='h-3/12 w-full '>
                                 
                         
-                                <button onClick={()=>{setloading(true)}}  className='h-12 w-full bg-slate-50 flex rounded-3xl items-center justify-center cursor-pointer hover:text-slate-50 hover:bg-black text-custom-green-light'>
+                                <button onClick={()=>{setloading(true)}}  className='h-12 w-full bg-slate-50 flex rounded-3xl items-center justify-center cursor-pointer hover:text-slate-50 hover:bg-custom-green ring-white ring-1 text-slate-50-light'>
                                     <h1 className=' font-semibold '>Register</h1>
                                 </button>
 
@@ -295,7 +295,7 @@ const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
     </form>
     {loading?<Dialog_UI_login  status={{setLoading:()=>{},emailInput:"","header":"Processing Registration Request","description":error_msg,"action":()=>{setloading(false)}}}/>:null}
 
-    </div>
+    </>
   )
 }
 export default  Registration_form;

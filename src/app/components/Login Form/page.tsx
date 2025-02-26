@@ -53,7 +53,7 @@ export default function Login() {
 
   return (
     <form onSubmit={handleSubmission} >
-        <div onClick={(e)=>e.stopPropagation()} className='h-500px w-96 bg-custom-green space-y-3 rounded-2xl'>
+        <div onClick={(e)=>e.stopPropagation()} className='h-500px w-96 bg-custom-light-green to-black border border-gray-50 space-y-3 rounded-2xl'>
             <div className='h-1/5 w-full  flex items-center justify-center'>
                 <h1  className='text-3xl  opacity-100'>Login Here</h1>
             </div>
@@ -64,7 +64,7 @@ export default function Login() {
                     <h1>Enter Email</h1>
                     </div>
                     <div className='h-2/3 w-full '>
-                        <input onChange={(e)=>{setemailInput(e.currentTarget.value)}} required name='email' className='h-full w-full font-normal pl-3 text-black' type='email'   placeholder='Email'/>
+                        <input onChange={(e)=>{setemailInput(e.currentTarget.value)}} required name='email' className='h-full w-full border-zinc-50 border-2 bg-transparent font-normal pl-3 text-white' type='email'   placeholder='Email'/>
                     </div>
 
                 </div>
@@ -76,7 +76,7 @@ export default function Login() {
                     <h1>Enter Password</h1>
                     </div>
                     <div className='h-2/3 w-full '>
-                        <input required name='password' className='h-full w-full font-normal pl-3 text-black' type='password'  placeholder='Password'/>
+                        <input required name='password' className='h-full w-full bg-transparent border-zinc-50 border-2 font-normal pl-3 text-white' type='password'  placeholder='Password'/>
                     </div>
 
                 </div>

@@ -218,7 +218,7 @@ const Shed_cn_table_card_transactions:React.FC<props>=({loading,data})=> {
   return (
     <div className=" w-full ">
       
-      <div className="flex items-center py-4">
+      <div className="flex items-center mb-2">
         <Input
           placeholder="Filter receivers..."
           value={(table?.getColumn("receiver")?.getFilterValue() as string) ?? ""}

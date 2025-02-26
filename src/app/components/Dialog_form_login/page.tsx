@@ -16,7 +16,7 @@ export default function Dialog_form_login() {
     <DialogTrigger asChild>
       <h1 className='text-white text-sm cursor-pointer'>Login</h1>
     </DialogTrigger>
-    <DialogContent className="md:h-[600px] md:w-[500px] h-[600px] w-[500px] flex items-center justify-center bg-black text-slate-50 font-semibold">
+    <DialogContent className="p-0 h-fit w-fit flex items-center justify-center bg-transparent border-transparent text-slate-50 font-semibold">
     
     <Login/>
       

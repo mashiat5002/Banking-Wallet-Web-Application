@@ -20,7 +20,7 @@ const  Left_side_internal_user:React.FC<propsType>=({recipient,from,amount})=> {
   
   return (
     <div className=' h-5/12 w-full '>
-                    <div className='h-1/6 w-full text-xs md:text-base text-custom-blue3 flex items-center '>
+                    <div className='h-8 w-full text-xs md:text-base text-custom-blue3 flex items-center '>
                         <div className='h-full w-9/12 flex items-center '>
                             <h1 className=''>Reciepent Name:</h1>
                         </div>
@@ -28,7 +28,7 @@ const  Left_side_internal_user:React.FC<propsType>=({recipient,from,amount})=> {
                         <input required defaultValue={recipient} name='recipient_type1' className='w-11/12 ml-1 bg-slate-50'/>
                         </div>
                     </div>
-                    <div className='h-1/6 w-full text-xs md:text-base text-custom-blue3 flex items-center '>
+                    <div className='h-8 w-full text-xs md:text-base text-custom-blue3 flex items-center '>
                         <div className='h-full w-9/12 flex items-center '>
                             <h1 className=''>Reciepent Card ID:</h1>
                         </div>
@@ -36,7 +36,7 @@ const  Left_side_internal_user:React.FC<propsType>=({recipient,from,amount})=> {
                         <input required  defaultValue={from} name='receipent_id' className='w-11/12 ml-1 bg-slate-50 border-y-2'/>
                         </div>
                     </div>
-                    <div className='h-1/6 w-full text-xs md:text-base text-custom-blue3 flex items-center '>
+                    <div className='h-8 w-full text-xs md:text-base text-custom-blue3 flex items-center '>
                         <div className='h-full w-9/12 flex items-center '>
                             <h1 className=''>Amount:</h1>
                         </div>
@@ -45,7 +45,7 @@ const  Left_side_internal_user:React.FC<propsType>=({recipient,from,amount})=> {
                         <input  defaultValue={amount?.toString()} onChange={handleAmount} required name='amount' className='w-11/12 ml-1 bg-slate-50 border-b-2'/>
                         </div>
                     </div>
-                    <div className='h-1/6 w-full text-xs md:text-base text-custom-blue3 flex items-center  '>
+                    <div className='h-8 w-full text-xs md:text-base text-custom-blue3 flex items-center  '>
                         <div className='h-full w-9/12 flex items-center '>
                             <h1 className=''>Charge:</h1>
                         </div>
@@ -53,7 +53,7 @@ const  Left_side_internal_user:React.FC<propsType>=({recipient,from,amount})=> {
                         <h1>${(Number(total_amount)* 0.00).toPrecision(2)}</h1>
                         </div>
                     </div>
-                    <div className='h-2/6 w-full text-xs md:text-base text-custom-blue3 flex items-center  '>
+                    <div className='h-16 w-full text-xs md:text-base text-custom-blue3 flex items-center  '>
                         <div className='h-full w-9/12 flex items-center border-t-2 border-t-custom-grey3'>
                             <h1 className=''>Amount to pay:</h1>
                         </div>

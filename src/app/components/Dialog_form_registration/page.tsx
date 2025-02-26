@@ -1,5 +1,5 @@
 "use client"
-
+import { FaPiggyBank } from "react-icons/fa6";
 import React, { useState } from 'react'
 import {
   Dialog,
@@ -25,10 +25,14 @@ const  Dialog_form_registration:React.FC<props>=({emailInput,setemailInput,title
           <h1 className='text-white text-base font-semibold '>{title}</h1>
       </div>
     </DialogTrigger>
-    <DialogContent className=" md:h-[700px] md:w-[1000px] h-[380px] w-[540px] flex items-center justify-center md:bg-black text-slate-50 font-semibold rounded-2xl
+    <DialogContent className=" h-10/12 text-xs md:h-fit w-11/12 md:w-fit flex items-center justify-center bg-[url('/assets/images/landing-bg.jpg')] to-black text-slate-50 font-semibold rounded-2xl
     ">
-    
-    <Registration_form emailInput={emailInput} setemailInput={setemailInput}/>
+      <div  className="-z-10 absolute rounded-full bg-gradient-to-tl shadow-slate-950 from-[rgb(16,42,46)] to-black p-5 flex items-center justify-center">
+        
+        <FaPiggyBank style={{ fontSize: '300px', fill: 'transparent', stroke: 'black', strokeWidth: 6 }} />
+
+      </div>
+<Registration_form emailInput={emailInput} setemailInput={setemailInput}/>
       
     </DialogContent>
   </Dialog>

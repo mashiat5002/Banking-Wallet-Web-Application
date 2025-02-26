@@ -28,7 +28,7 @@ const  Dialog_form_payment_gateway:React.FC<props>=({system_id,system_type})=> {
         <Button variant="default">Confirm</Button>
      
       </DialogTrigger>
-      <DialogContent className="md:h-[700px] md:w-[1000px] h-[500px] w-[550px] flex items-center justify-center  bg-transparent text-custom-white">
+      <DialogContent className="h-[550px] w-5/6 p-0 overflow-scroll scrollbar-hide md:w-[850px] flex items-center justify-center  bg-transparent text-black rounded-2xl">
           <Payment_Form recipient="" from="" amount={0} system_type={system_type} system_id={system_id}/>
       </DialogContent>
     </Dialog>
