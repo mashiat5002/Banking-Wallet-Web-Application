@@ -166,7 +166,7 @@ const  Payment_Form:React.FC<props>=({recipient,from,amount,system_id,system_typ
 
         selected=="2"?summary_response= await check_funding_source_origin(routingId,accountId,recipient_name,amount,sender,recipient_name):
         summary_response=await call_Sender_card(amount,sender,recipientID,selected,recipient_name_type1)
-        console.log(summary_response)
+        console.log("summary_response",summary_response)
         if(summary_response=="succeeded" || summary_response=="201"){
           
           if(isSavings){
