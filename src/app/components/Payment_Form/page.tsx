@@ -181,7 +181,7 @@ const  Payment_Form:React.FC<props>=({recipient,from,amount,system_id,system_typ
 
         }
         else {
-          setStatus("Failed")
+          setStatus("Failed-")
           
           if(summary_response=="DuplicateResource"){
             setStatus("Invelid Recipient Type")
@@ -210,7 +210,7 @@ const  Payment_Form:React.FC<props>=({recipient,from,amount,system_id,system_typ
            
            }
            else{
-            setStatus("Failed")
+            setStatus("Failed--")
           
            }
         }

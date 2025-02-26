@@ -41,6 +41,7 @@ export async function call_Sender_card(amount:string,sender:string,receiver:stri
             })
         })
       
+        console.log(res)
         const data= await res.json()
         console.log(data)
         if(data.response.status=="succeeded")
