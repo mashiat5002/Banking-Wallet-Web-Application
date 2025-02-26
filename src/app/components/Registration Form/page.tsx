@@ -273,7 +273,7 @@ const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
                         <div className='h-3/12 w-full '>
                                 
                         
-                                <button onClick={()=>{setloading(true)}}  className='h-12 w-full bg-slate-50 flex rounded-3xl items-center justify-center cursor-pointer hover:text-slate-50 hover:bg-custom-green ring-white ring-1 text-slate-50-light'>
+                                <button onClick={()=>{setloading(true)}}  className='h-12 w-full bg-custom-green-light flex rounded-3xl items-center justify-center cursor-pointer hover:text-slate-50 hover:bg-custom-green ring-white ring-1 text-slate-50-light'>
                                     <h1 className=' font-semibold '>Register</h1>
                                 </button>
 
