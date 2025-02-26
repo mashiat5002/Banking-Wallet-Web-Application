@@ -67,6 +67,7 @@ const Stripe_: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
           method: "POST",
           body: JSON.stringify({"id":paymentMethod}),
         });
+        console.log(res) 
         const res_data=await res.json() 
         console.log(res_data)
         if (res.status == 200) {
@@ -98,7 +99,7 @@ const Stripe_: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
 
       }
 } catch(err){
-  console.log("error in handleSubmit")
+  console.log("error in handleSubmit",err)
 }
 
      
