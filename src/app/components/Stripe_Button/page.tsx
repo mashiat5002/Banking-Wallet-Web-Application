@@ -30,7 +30,7 @@ const Stripe_: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true)
+    try{setLoading(true)
     if (name != "" && number != "" && cvc != "" && expiry != "") {
       
       const inserted_res= await call_add_card_to_slide(number,name,expiry,cvc)
@@ -96,7 +96,9 @@ const Stripe_: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
      
 
       }
-
+} catch(err){
+  console.log("error in handleSubmit")
+}
 
      
   };
