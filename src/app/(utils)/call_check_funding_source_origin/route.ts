@@ -17,8 +17,9 @@ export async function check_funding_source_origin(routing_no:string,acc_no:strin
             "name": name})
         
     })
-    console.log("final_res",final_res)
+    console.log("res",res)
     const final_res= await res.json();
+    console.log("final_res",final_res)
     
     if(final_res.response=="DuplicateResource"){
         return "DuplicateResource"
