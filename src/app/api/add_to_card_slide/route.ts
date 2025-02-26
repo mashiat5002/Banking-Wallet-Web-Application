@@ -17,13 +17,13 @@ export async function POST(request: NextRequest) {
       Card_holder:body.name
 
     })
-    await card.save()
-    const res =
-    await db.query(`INSERT INTO stripe_cards (stripe_id, card_ids, expiry_date,Card_holder)
-VALUES ('${stripe_id}', '${body.number}', '${body.exp}', '${body.name}');
-`);
+    const res=await card.save()
+//     const res =
+//     await db.query(`INSERT INTO stripe_cards (stripe_id, card_ids, expiry_date,Card_holder)
+// VALUES ('${stripe_id}', '${body.number}', '${body.exp}', '${body.name}');
+// `);
 
-return NextResponse.json({"status":"inserted","res":res[0]});
+return NextResponse.json({"status":"inserted","res":res});
   }
   catch(err){
     if(err)

@@ -30,7 +30,8 @@ const Stripe_: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try{setLoading(true)
+    try{
+    setLoading(true)
     if (name != "" && number != "" && cvc != "" && expiry != "") {
       
       const inserted_res= await call_add_card_to_slide(number,name,expiry,cvc)
@@ -72,7 +73,7 @@ const Stripe_: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
          
           setStatus("Successfully connected card to stripe. (The card is added to card stack as your input for homepage stack)");
          
-          await call_insert_method_id_stripe_in_db(insertID,res_data.data.id)
+          // await call_insert_method_id_stripe_in_db(insertID,res_data.data.id)
         }
         else{
        
