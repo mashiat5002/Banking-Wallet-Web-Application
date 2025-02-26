@@ -33,4 +33,8 @@ export async function check_funding_source_origin(routing_no:string,acc_no:strin
        
         return final_res.response;
     }
+    else if(final_res.response=="Routing number is invalid."){
+       
+        return final_res.response;
+    }
 }
