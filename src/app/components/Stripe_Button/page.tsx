@@ -62,10 +62,10 @@ const Stripe_: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
             card: cardElement,
           });
 
-  
+          console.log("payment method id",paymentMethod)
         const res = await fetch("/api/connect_stripe_card", {
           method: "POST",
-          body: JSON.stringify(paymentMethod),
+          body: JSON.stringify({"id":paymentMethod}),
         });
         const res_data=await res.json() 
         console.log(res_data)
