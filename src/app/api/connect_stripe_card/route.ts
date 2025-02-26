@@ -2,7 +2,7 @@ import { get_stripe_user_id } from "@/app/(utils)/(get_logged_in_stripe_customer
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-    console.log("howw")
+  
     const body= await request.json();
     const params= new URLSearchParams();
     const stripe_acc= await get_stripe_user_id()
