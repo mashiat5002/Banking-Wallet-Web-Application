@@ -69,7 +69,7 @@ const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
       if(otp_btn_txt=="Send OTP"){
           setotp_btn_txt("OTP Sent")
           setTimeout(() => {setotp_btn_txt("Enter OTP")}, 2000);
- 
+        console.log("before sending")
         await call_update_varification_key_db(email_input)
       }
       else{
