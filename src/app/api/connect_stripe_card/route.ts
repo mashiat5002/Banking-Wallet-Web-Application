@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
     const stripe_acc= await get_stripe_user_id()
     console.log(stripe_acc)
     params.append("customer",`${stripe_acc}`);
-    console.log(body.id.id);
+    console.log(body.id);
     const response= await fetch(`${process.env.Base_Url_Stripe}/v1/payment_methods/${body.id}/attach`,{
         method:"POST",
         headers:{
