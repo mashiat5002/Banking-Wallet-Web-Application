@@ -62,7 +62,7 @@ const Stripe_: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
             card: cardElement,
           });
           if (cardError){
-            console.log(cardError)
+            console.log("card error",cardError)
           }
           console.log("payment method id",paymentMethod)
         const res = await fetch("/api/connect_stripe_card", {
