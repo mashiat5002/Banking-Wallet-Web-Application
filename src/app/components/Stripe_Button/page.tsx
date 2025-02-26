@@ -64,7 +64,7 @@ const Stripe_: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
           if (cardError){
             console.log("card error",cardError)
           }
-          console.log("payment method id",paymentMethod)
+       
         const res = await fetch("/api/connect_stripe_card", {
           method: "POST",
           headers: {
@@ -79,7 +79,6 @@ const Stripe_: React.FC<propsType> = ({ name, number, cvc, expiry }) => {
          
           setStatus("Successfully connected card to stripe. (The card is added to card stack as your input for homepage stack)");
          
-          // await call_insert_method_id_stripe_in_db(insertID,res_data.data.id)
         }
         else{
        
