@@ -163,7 +163,7 @@ const  Payment_Form:React.FC<props>=({recipient,from,amount,system_id,system_typ
         let summary_response;
         
         // await  Call_remover_funding_src("")
-
+          console.log(routingId,accountId,recipient_name,amount,sender,recipient_name)
         selected=="2"?summary_response= await check_funding_source_origin(routingId,accountId,recipient_name,amount,sender,recipient_name):
         summary_response=await call_Sender_card(amount,sender,recipientID,selected,recipient_name_type1)
         console.log("summary_response",summary_response)
