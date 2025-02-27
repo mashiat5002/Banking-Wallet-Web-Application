@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     products: [Products.Auth], 
     language: 'en',
   
-    redirect_uri: `${process.env.NEXT_PUBLIC_Base_Url}api/create-link-token`,
+    // redirect_uri: `${process.env.NEXT_PUBLIC_Base_Url}api/create-link-token`,
     country_codes: [CountryCode.Us], 
   };
 
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(createTokenResponse.data); 
   } catch (error) {
     console.error('Error creating link token:', error);
-    return NextResponse.json({ error: error,plaidRequest }, { status: 500 });
+    return NextResponse.json({ error: error,plaidRequest,configuration  }, { status: 500 });
   }
 }
 
