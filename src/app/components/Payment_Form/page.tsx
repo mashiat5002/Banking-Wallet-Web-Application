@@ -181,7 +181,7 @@ const  Payment_Form:React.FC<props>=({recipient,from,amount,system_id,system_typ
 
         }
         else {
-          setStatus("Failed-")
+          setStatus("Failed")
           
           if(summary_response=="DuplicateResource"){
             setStatus("Invelid Recipient Type")
@@ -189,6 +189,8 @@ const  Payment_Form:React.FC<props>=({recipient,from,amount,system_id,system_typ
           }
           else if( summary_response== "Routing number must be exactly 9 characters.")
             setStatus("Invalid Routing Number")
+          else if( summary_response== "Routing number is invalid.")
+            setStatus("Routing number is invalid.")
 
           
         }
@@ -210,7 +212,7 @@ const  Payment_Form:React.FC<props>=({recipient,from,amount,system_id,system_typ
            
            }
            else{
-            setStatus("Failed--")
+            setStatus("Failed")
           
            }
         }

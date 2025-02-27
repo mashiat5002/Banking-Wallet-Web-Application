@@ -11,7 +11,9 @@ export default function PlaidButton() {
       const resp = await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/create-link-token`, {
         method: "POST",
       });
+      console.log("resp",resp)
       const data = await resp.json();
+      console.log("data",data)
       setLinkToken(data.link_token); 
     };
     createLinkToken(); 
