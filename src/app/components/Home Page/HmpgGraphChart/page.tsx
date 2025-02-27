@@ -227,7 +227,7 @@ export default function Graph() {
       <div className="h-1/6 w-full flex items-center pl-8 text-sm text-custom-white">
 
 
-      <div className='h-full  flex items-center justify-center text-nowrap text-xs'>
+      <div className='h-full  flex items-center justify-center text-nowrap text-custom-size'>
           <h1>Bank Transaction Amount {dimension}:</h1>
         </div>
         <div className="h-full w-2/3  flex flex-row-reverse">

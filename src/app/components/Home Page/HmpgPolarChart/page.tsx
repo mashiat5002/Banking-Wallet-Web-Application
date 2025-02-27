@@ -208,7 +208,7 @@ export default function PolarChart() {
   return (
     <div className="h-full w-11/12   rounded-2xl bg-logo-surrounding">
       <div className="h-1/6 w-full flex justify-between items-center pl-5 text-sm text-custom-white ">
-        <div className='h-full  flex items-center justify-center text-nowrap text-xs'>
+        <div className='h-full  flex items-center justify-center text-nowrap text-custom-size'>
           <h1>Cards Transaction Amount {dimension}:</h1>
         </div>
       <div className='h-full   w-1/3  flex flex-row-reverse'>

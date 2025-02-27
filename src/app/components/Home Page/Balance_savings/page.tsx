@@ -47,7 +47,7 @@ const Balance_savings = ({card_type}:propsType) => {
     },[saving_balance_loading,card_bank_reload])
     
   return (
-  <div className='h-1/3 w-full md:h-full  md:w-full  pl-3 md:pl-0'>
+  <div className='h-1/3 w-full md:h-full  md:w-full  pl-3 md:pl-0 flex items-center justify-center'>
       <div className='w-11/12 h-5/6 bg-logo-surrounding text-custom-white rounded-2xl '>
         <div className='h-1/3 w-full  flex '>
             <div className='w-2/12 h-full  flex items-center justify-center'>

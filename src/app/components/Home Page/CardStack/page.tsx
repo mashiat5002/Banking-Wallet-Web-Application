@@ -67,7 +67,7 @@ export default function CardStack() {
         </div>
 
         <div className='h-full w-1/6  flex items-center justify-center'>
-        <BsThreeDotsVertical size={"25px"}/>
+        {/* <BsThreeDotsVertical size={"25px"}/> */}
                   <Drawer_Shedcn_remove_card  cardData={cardData}  drawerVisibility={drawerVisibility} setdrawerVisibility={setdrawerVisibility} btnVisibility={false}  setStatus={setStatus} stts={stts}  action={handleSubmission} heading='Remove Card'  description='This action will only remove from the homepage view' />
         </div>
       </div>

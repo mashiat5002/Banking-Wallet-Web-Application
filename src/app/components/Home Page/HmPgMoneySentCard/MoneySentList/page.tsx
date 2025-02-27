@@ -99,34 +99,34 @@ export default function MoneySentList() {
   return (
 
     <div className="h-4/6 w-full">
-      {(no_data_loading || loading)?<div className="h-full w-full bg-logo-surrounding flex text-xs lg:text-custom-size2 lg:font-semibold" ><Loading_shed_cn_card/></div>:
+      {(no_data_loading || loading)?<div className="h-full w-full bg-logo-surrounding flex  lg:text-custom-size2 lg:font-semibold" ><Loading_shed_cn_card/></div>:
       (transList.length==0)? <div className='w-full h-full bg-custom-grey-white'><No_data_skeleton/></div> :
       transList.map((transaction, index) => {
         
         return (
         <div
           key={index}
-          className="h-1/4 w-full bg-logo-surrounding flex text-xs lg:text-custom-size2 lg:font-semibold"
+          className="h-1/4 w-full bg-logo-surrounding flex  lg:text-custom-size2 lg:font-semibold"
         >
           <div className="h-full w-2/6 flex">
             <div className="h-full w-1/3  flex items-center justify-center">
             
-              <div className="h-4/6 w-4/6 bg-red-500 rounded-full">
+              <div className="h-4/6 aspect-square rounded-full">
               <Avatar className="w-full h-full"  {...genConfig(customerNames[index]?.replace(/".*?"/g, '') || "Loading...")} />
               </div>
             </div>
-            <div className="text-custom-white font-semibold flex items-center">
+            <div className="text-custom-white font-semibold flex items-center ml-1 md:ml-0">
               <p>{customerNames[index]?.replace(/".*?"/g, '') || "Loading..."}</p>
             </div>
           </div>
                 
           <div className="h-full w-2/6 flex">
             <div className="h-full w-1/3 flex items-center justify-center">
-            <div className="h-4/6 w-4/6 bg-red-500 rounded-full">
+            <div className="h-4/6 aspect-square  rounded-full">
               <Avatar className="w-full h-full"  {...genConfig(destNames[index]?.replace(/".*?"/g, '') || "Loading...")} />
               </div>
             </div>
-            <div className="text-white font-semibold flex items-center">
+            <div className="text-white font-semibold flex items-center ml-1 md:ml-0">
               <p>{destNames[index]?.replace(/".*?"/g, '') || "Loading..."}</p>
             </div>
           </div>

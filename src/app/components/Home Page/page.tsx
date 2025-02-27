@@ -66,7 +66,7 @@ export default  function Homepage() {
           <div className='h-custompx w-full md:h-full md:w-2/3 bg-black md:pt-3 md:pb-2'>
 
 
-              <div className='h-1/3 md:h-1/5 w-full text-xs  md:flex md:items-center  md:space-x-5 flex-col md:flex-row items-center justify-center '>
+              <div className='h-1/3 md:h-1/5 w-full text-xs  md:flex md:items-center  md:space-x-5 flex-col md:flex-row flex  items-center justify-center '>
                 <Balance_credit_card card_type={"card"} />
                 <Balance_savings card_type={"savings"}/>
                 <Bank_banance card_type={"bank"}/>
@@ -90,7 +90,7 @@ export default  function Homepage() {
                     <RecentTrans/>
 
                   </div>
-                  <div className='h-1/2 w-full md:h-full md:w-1/2  flex items-center justify-center '>
+                  <div className='h-1/2 w-full md:h-full md:w-1/2 text-custom-size  flex items-center justify-center '>
                     <MoneySentCard/>
 
                   </div>
