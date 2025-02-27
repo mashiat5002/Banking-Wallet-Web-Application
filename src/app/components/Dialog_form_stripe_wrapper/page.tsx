@@ -21,7 +21,7 @@ export default function Dialog_form_stripe_wrapper() {
   return (
     <Dialog >
       <DialogTrigger asChild>
-        <p className="text-sm font-light pl-1 cursor-pointer text-nowrap">
+        <p className=" font-light pl-1 cursor-pointer text-nowrap">
           Connect Cards
         </p>
       </DialogTrigger>

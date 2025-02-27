@@ -15,7 +15,7 @@ export default function Savings() {
   const {saving_balance_loading}= useContext(MyContext)
       const [Load,setLoad]= useState(true);
       const {reload_savings_card}= useContext(MyContext) 
-      const {card_bank_reload,setcard_bank_reload}= useContext(MyContext)
+      const {card_bank_reload}= useContext(MyContext)
 
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function Savings() {
   return (
     <div className="h-11/12 w-11/12  bg-logo-surrounding text-custom-white rounded-2xl ">
       <div className="w-full h-1/5   flex">
-            <div className="h-full w-5/6 flex items-center pl-5 md:text-custom-size lg:text-xs">
+            <div className="h-full w-5/6 flex items-center pl-5  md:text-custom-size lg:text-xs">
             <h1>Savings</h1>
             </div>
             <div className="h-full w-1/6 flex items-center justify-center ">

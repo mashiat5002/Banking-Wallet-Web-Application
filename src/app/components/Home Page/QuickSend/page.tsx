@@ -298,7 +298,7 @@ export default function QuickSend() {
     
     return (
     <div  className='h-full w-11/12 bg-logo-surrounding rounded-2xl'>
-        <div className='h-1/3 w-full  flex items-center pl-5 text-custom-white text-xl md:text-custom-size lg:text-xs'>
+        <div className='h-1/3 w-full  flex items-center pl-5 text-custom-white text-xs md:text-custom-size lg:text-xs'>
             <h1>Quick Transactions</h1>
         </div>
         <div className='h-2/3 w-full flex items-center justify-center md:space-x-1 lg:space-x-3 '>
@@ -307,16 +307,16 @@ export default function QuickSend() {
          {loading? <div className='w-full h-full'><Loading_shed_cn_card/></div>: (destNames.length==0)? <div className='w-full h-full bg-custom-grey-white'><No_data_skeleton/></div> : total_transaction.map((_, index:any) => {
            return (
          
-             <div key={index} className='w-1/6 h-full    text-custom-white '>
+             <div key={index} className='w-1/6 h-full  ml-3 text-center text-custom-white '>
              <div className='w-full h-full '>
-               <div className='h-3/6 w-full flex items-center justify-center cursor-pointer'>
-               <div className='h-full aspect-square ' onClick={()=>handleClick(index)}>
-                <Avatar  className="w-full h-full"  {...genConfig(index<destNames.length?destNames[index]:"Card Transfer")} />
-               </div>
+               <div className='h-2/6 md:h-3/6 w-full bg-red flex items-center justify-center cursor-pointer'>
+                  <div className='h-full aspect-square ' onClick={()=>handleClick(index)}>
+                    <Avatar  className="h-10 w-10 md:w-full md:h-full"  {...genConfig(index<destNames.length?destNames[index]:"Card Transfer")} />
+                  </div>
                </div>
          
          
-               <div  onClick={()=>handleClick(index)} className=' h-1/3 w-full cursor-pointer font-semibold flex items-center justify-center md:text-custom-size lg:text-xs'>
+               <div  onClick={()=>handleClick(index)} className=' h-1/3 w-full cursor-pointer font-semibold flex items-center justify-center text-xs md:text-custom-size lg:text-xs'>
                {index<destNames.length?<h1>{destNames[index]?.replace(/".*?"/g, '')}</h1>:<h1>{card_meta[index-(destNames.length)]?.recipient}</h1>}
                </div>
          

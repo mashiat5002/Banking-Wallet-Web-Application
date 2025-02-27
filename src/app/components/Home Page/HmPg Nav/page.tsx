@@ -6,7 +6,7 @@ import NavbarLogo from './Navbar_Homepg/Navbar'
 
 export default function HomePageNav() {
   return (
-    <div className='text-gray-200 bg-red h-full  w-screen md:flex '>
+    <div className='text-gray-200  h-full  w-screen md:flex text-xs'>
       <NavbarLogo />
       <Navbar_Elements />
       <NavSearchBar />

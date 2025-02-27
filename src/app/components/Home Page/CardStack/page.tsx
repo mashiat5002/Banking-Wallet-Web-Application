@@ -80,8 +80,8 @@ export default function CardStack() {
 
      {loading? <div className='h-4/5 w-full  flex items-center justify-center '><Loading_shed_cn_card/> </div>  :
      (cardAllData.length==0)? <div className='w-full h-2/3 bg-custom-grey-white'><No_data_skeleton/></div> :
-     <div className='h-4/5 w-full  flex items-center justify-center '>
-                   <StackedCarousel height={360}  autoplay={cardPlay}  scaleFactor={0.9} >
+     <div className='h-4/5 w-full  flex items-center justify-center scale-75 md:scale-100'>
+                   <StackedCarousel height={360}  autoplay={cardPlay}   >
 
 
                     {cardAllData.map((x,index)=><div key={index} className="cursor-pointer sample-card bg-color-1 mt-20 " >

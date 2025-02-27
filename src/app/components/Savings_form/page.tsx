@@ -120,7 +120,7 @@ export default function Savings_form() {
   return (
     <Dialog open={isOpen} onOpenChange={()=>{setIsOpen(!isOpen), setSource(""),setdestination(""),setSavingsSector("")}}>
       <DialogTrigger asChild>
-        <p className="text-sm font-light pl-1 cursor-pointer text-nowrap">
+        <p className=" font-light pl-1 cursor-pointer text-nowrap">
           Add Savings
         </p>
       </DialogTrigger>

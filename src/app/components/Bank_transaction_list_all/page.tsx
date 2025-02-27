@@ -50,7 +50,7 @@ export default function Bank_transaction_list_all() {
   return (
     <Dialog >
     <DialogTrigger asChild>
-      <h1 className='text-white text-sm'>Bank Transactions</h1>
+      <h1 className='text-white '>Bank Transactions</h1>
     </DialogTrigger>
     <DialogContent className="md:h-[600px] md:w-[700px] h-5/6 w-5/6 flex p-0 items-center justify-center bg-black rounded-2xl border-2 text-white">
     <div className="h-full w-full flex items-center justify-center bg-black rounded-2xl ">

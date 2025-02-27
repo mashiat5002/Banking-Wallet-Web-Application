@@ -21,11 +21,11 @@ export default function Navbar_Elements() {
             <Dialog_form_payment_options />
           </div>
 
-          <TiHomeOutline size={"20px"} />
+          <TiHomeOutline className='h-4 w-4 md:h-5 md:w-5' />
           <PlaidButton />
 
           <div className="h-full w-2/5  flex justify-center items-center ">
-            <LuWallet style={{ fontSize: "text-sm", fill: "Black" }} />
+            <LuWallet style={{ fill: "Black" }} className='mr-2 h-4 w-4 md:h-5 md:w-5'/>
             <Dialog_form_stripe_wrapper />
           </div>
         </div>
@@ -36,19 +36,19 @@ export default function Navbar_Elements() {
 
 
           <div className="h-full w-2/5  flex justify-center items-center cursor-pointer">
-          <FaMoneyBillTransfer size={"20px"} className='mr-2'/>
+          <FaMoneyBillTransfer  className='mr-2 h-4 w-4 md:h-5 md:w-5'/>
           <Card_transaction_list_all/>
           </div>
 
 
 
-          <FaFileInvoiceDollar size={"20px"} />
+          <FaFileInvoiceDollar className='mr-2 h-4 w-4 md:h-5 md:w-5' />
           <Savings_form />
 
 
 
           <div className="h-full w-2/5  flex justify-center items-center cursor-pointer">
-          <TbTransferIn size={"20px"} className='mr-2'/>
+          <TbTransferIn className='mr-2 h-4 w-4 md:h-5 md:w-5 ' />
           <Bank_transaction_list_all />
           </div>
         </div>

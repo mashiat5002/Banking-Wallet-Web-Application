@@ -50,7 +50,7 @@ export default  function Homepage() {
                   <QuickSend/>
               </div>
 
-              <div className='h-4/12 w-full flex items-center justify-center '>
+              <div className='h-4/12 w-full flex items-center justify-center text-xs'>
                 <Savings/>
 
               </div>
@@ -66,8 +66,8 @@ export default  function Homepage() {
           <div className='h-custompx w-full md:h-full md:w-2/3 bg-black md:pt-3 md:pb-2'>
 
 
-              <div className='h-1/3 md:h-1/5 w-full  md:flex md:items-center  md:space-x-5 flex-col md:flex-row items-center justify-center '>
-                <Balance_credit_card card_type={"card"}/>
+              <div className='h-1/3 md:h-1/5 w-full text-xs  md:flex md:items-center  md:space-x-5 flex-col md:flex-row items-center justify-center '>
+                <Balance_credit_card card_type={"card"} />
                 <Balance_savings card_type={"savings"}/>
                 <Bank_banance card_type={"bank"}/>
            

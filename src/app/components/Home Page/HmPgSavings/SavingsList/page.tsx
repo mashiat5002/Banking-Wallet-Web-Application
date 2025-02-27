@@ -73,7 +73,7 @@ const SavingsList: React.FC<SavingsListType> = ({Load,data,reloading,loading}) =
 
 
            <div className='h-1/2 w-full  '>
-                <div className='h-1/2 w-full flex text-sm'>
+                <div className='h-1/2 w-full flex '>
                         <div className='h-full w-5/6 flex items-center pl-3 md:text-custom-size lg:text-xs'>
                             <h1>Target $ {data?.target}</h1>
 

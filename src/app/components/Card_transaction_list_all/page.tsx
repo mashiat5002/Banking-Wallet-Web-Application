@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/dialog"
 import SplineComponent from '../Spline/page'
 import { call_card_transfer_all } from '@/app/(utils)/call_card_transfer_all/route'
-import { format_date } from '@/app/(utils)/format_date_function/route'
 import Shed_cn_table_card_transactions from '../Shed_cn_table_card_transactions/page'
 import { toLocalDate } from '@/app/(utils)/toLocalDate/route'
 import MyContext from '../MyContext/route'
@@ -25,7 +24,7 @@ export default function Card_transaction_list_all() {
 
    const [data, setInfo] = React.useState<Payment[]>([]); // Correct type initialization
    const [loading,setLoading]=React.useState(true)
-   const {card_bank_reload,setcard_bank_reload}= useContext(MyContext)
+   const {card_bank_reload}= useContext(MyContext)
 
     
     React.useEffect(()=>{
@@ -49,7 +48,7 @@ export default function Card_transaction_list_all() {
   return (
     <Dialog >
     <DialogTrigger asChild>
-      <h1 className='text-white text-sm'>Card Transactions</h1>
+      <h1 className='text-white '>Card Transactions</h1>
     </DialogTrigger>
     <DialogContent className="md:h-[600px] md:w-[700px] h-5/6 w-5/6 flex p-0 items-center justify-center bg-black rounded-2xl border-2 text-white">
     <div className="h-full w-full rounded-2xl flex items-center justify-center bg-black">

@@ -49,12 +49,12 @@ const Balance_credit_card = ({card_type}:propsType) => {
                 </div>
 
             </div>
-            <div className='w-8/12 h-full  flex items-center text-sm font-medium md:text-custom-size lg:text-xs'>
+            <div className='w-8/12 h-full  flex items-center  font-medium md:text-custom-size lg:text-xs'>
                 <h1 className='pl-3'>Card Balance</h1>
             </div>
-            <div className='w-2/12 h-full  flex items-center justify-center'>
+            {/* <div className='w-2/12 h-full  flex items-center justify-center'>
                 <BsThreeDotsVertical size={"30px"} fill='white'/>
-            </div>
+            </div> */}
 
         </div>
 
@@ -62,14 +62,14 @@ const Balance_credit_card = ({card_type}:propsType) => {
         {loading?<div className='h-2/3 w-full'><Loading_shed_cn_card/></div>:<div className='h-2/3 w-full'>
 
 <div className='h-1/2 w-full  flex items-center pl-7'>
-    <h1 className='font-extrabold text-2xl md:text-custom-size2 lg:text-2xl'>${((value*(-1)).toFixed(2))}</h1>
+    <h1 className='font-extrabold  md:text-custom-size2 lg:text-2xl'>${((value*(-1)).toFixed(2))}</h1>
 
 </div>
 
 
 <div className='h-1/2 w-full  flex'>
     <div className='w-4/6 h-full  flex items-center pl-5'>
-    <h1 className='font-medium text-sm text-custom-grey md:text-custom-size lg:text-xs'>Last Updated</h1>
+    <h1 className='font-medium  text-custom-grey md:text-custom-size lg:text-xs'>Last Updated</h1>
     </div>
     <div className='w-4/6 h-full flex items-center justify-center'>
         <div className='h-2/6 w-4/6 bg-custom-green-light text-custom-green-lighter rounded-xl flex items-center justify-center md:text-custom-size lg:text-xs'>

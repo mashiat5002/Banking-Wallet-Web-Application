@@ -58,9 +58,9 @@ const Bank_banance = ({card_type}:propsType) => {
             <div className='w-8/12 h-full  flex items-center text-sm font-medium md:text-custom-size lg:text-xs'>
                 <h1 className='pl-3'>Bank Balance</h1>
             </div>
-            <div className='w-2/12 h-full  flex items-center justify-center'>
+            {/* <div className='w-2/12 h-full  flex items-center justify-center'>
                 <BsThreeDotsVertical size={"30px"} fill='white'/>
-            </div>
+            </div> */}
 
         </div>
 

@@ -84,7 +84,7 @@ export default function Dialog_form_payment_options() {
     
       <Dialog open={isOpen} onOpenChange={()=>{setSelectedMethod(""),setisOpen(!isOpen)}}>
       <DialogTrigger asChild>
-        <div className=" font-light pl-1 cursor-pointer text-nowrap flex text-text-sm">
+        <div className=" font-light pl-1 cursor-pointer text-nowrap flex ">
           <MdOutlinePayments size={"20px"}/>
           <h1 className="ml-1">Payment</h1>
         </div>
