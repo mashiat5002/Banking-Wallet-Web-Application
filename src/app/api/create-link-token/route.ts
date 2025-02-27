@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     products: [Products.Auth], 
     language: 'en',
   
-    redirect_uri: `${process.env.NEXT_PUBLIC_Base_Url}/api/create-link-token`,
+    redirect_uri: `${process.env.NEXT_PUBLIC_Base_Url}api/create-link-token`,
     country_codes: [CountryCode.Us], 
   };
 
