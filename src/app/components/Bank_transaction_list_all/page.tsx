@@ -52,13 +52,13 @@ export default function Bank_transaction_list_all() {
     <DialogTrigger asChild>
       <h1 className='text-white '>Bank Transactions</h1>
     </DialogTrigger>
-    <DialogContent className="md:h-[600px] md:w-[700px] h-5/6 w-5/6 flex p-0 items-center justify-center bg-black rounded-2xl border-2 text-white">
+    <DialogContent className="md:h-[600px]  md:w-[700px] h-5/6 w-5/6 flex p-0 items-center justify-center bg-black rounded-2xl border-2 text-white">
     <div className="h-full w-full flex items-center justify-center bg-black rounded-2xl ">
           <div className="  h-full w-full overflow-hidden bg-custom-light-green opacity-50 ">
             <SplineComponent />
           </div>
-          <div className="h-full w-screen   absolute flex items-center justify-center ">
-            <div className="scale-75 md:scale-90  h-full w-2/6 min-w-[550px] text-white font-bold " style={{ textShadow: "2px 2px 4px black" }}>
+          <div className="h-full w-full absolute flex items-center justify-center ">
+            <div className="scale-75 md:scale-90  h-full w-full  text-white font-bold " style={{ textShadow: "2px 2px 4px black" }}>
             
             <Shed_cn_table_bank_transactions loading={loading} data={data}/>
     

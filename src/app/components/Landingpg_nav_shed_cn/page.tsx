@@ -56,7 +56,7 @@ export function Landingpg_nav_shed_cn() {
     <NavigationMenu className="text-sm font-semibold ">
       <NavigationMenuList>
         <NavigationMenuItem >
-          <NavigationMenuTrigger className="bg-transparent text-base">
+          <NavigationMenuTrigger className="bg-transparent text-xs md:text-base">
             Getting started
           </NavigationMenuTrigger>
           <NavigationMenuContent className="bg-black text-black">
@@ -96,7 +96,7 @@ export function Landingpg_nav_shed_cn() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent text-base">
+          <NavigationMenuTrigger className="bg-transparent text-xs md:text-base">
             Components
           </NavigationMenuTrigger>
           <NavigationMenuContent className=" bg-black ">
@@ -116,7 +116,7 @@ export function Landingpg_nav_shed_cn() {
         <NavigationMenuItem>
           {/* <Link href="/docs" legacyBehavior passHref> */}
             {/* <NavigationMenuLink className={navigationMenuTriggerStyle()} > */}
-            <NavigationMenuLink className="bg-transparent text-base cursor-pointer" >
+            <NavigationMenuLink className="bg-transparent text-xs md:text-base cursor-pointer" >
               Documentation
             </NavigationMenuLink>
           {/* </Link> */}

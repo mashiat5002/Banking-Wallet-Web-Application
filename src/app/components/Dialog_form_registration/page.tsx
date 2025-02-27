@@ -20,7 +20,7 @@ const  Dialog_form_registration:React.FC<props>=({emailInput,setemailInput,title
     
     <Dialog >
     <DialogTrigger asChild>
-      <div className='w-1/2 text-nowrap  cursor-pointer h-fit px-3 py-3 md:w-fit md:ml-10 bg-custom-green rounded-s md:rounded-s-2xl rounded-2xl'>
+      <div className='w-1/2 text-nowrap  cursor-pointer h-fit px-3 py-3 md:w-fit md:ml-10 bg-custom-green  rounded-s-2xl md:rounded-2xl'>
             
           <h1 className='text-white text-base font-semibold '>{title}</h1>
       </div>
