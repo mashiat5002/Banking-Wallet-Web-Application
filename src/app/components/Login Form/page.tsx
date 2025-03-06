@@ -6,6 +6,7 @@ import React from 'react'
 import { useState } from 'react';
 
 import Dialog_UI_login from '../Dialog_UI_login/page';
+import Dialog_form_forgot_pass from '../Dialog_form_forgot_pass/page';
 
 
 export default function Login() {
@@ -13,6 +14,7 @@ export default function Login() {
     const [LoginStat, setLoginStat]=useState("");
     const [emailInput, setemailInput]=useState("");
     const [loading, setloading]=useState(false);
+    const [forgot, setforgot]=useState(false);
 
     
     const handleSubmission=async (e:React.FormEvent<HTMLFormElement>)=>{
@@ -87,7 +89,7 @@ export default function Login() {
                 <div className='h-full w-4/5   flex items-center justify-center '>
                 <div className='h-4/5 w-full  '>
 
-                    <h1 className='text-sm font-normal ' ></h1>
+                <Dialog_form_forgot_pass emailInput={emailInput}/>
                     <button className='h-2/5 w-full bg-white text-black mt-5'>Login</button>
                 </div>
 
@@ -96,6 +98,7 @@ export default function Login() {
             </div>
 
         </div>
+       
       {loading?<Dialog_UI_login  status={{"emailInput":emailInput,"setLoading":setloading,"header":"Logging In","description":LoginStat,"action":()=>handleSubmission}}/>:null}
     </form>
   )

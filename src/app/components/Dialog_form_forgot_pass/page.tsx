@@ -98,7 +98,8 @@ const Dialog_form_forgot_pass:React.FC<props>=({emailInput})=> {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>forgot password</Button>
+        
+        <u className='text-custom-white cursor-pointer mt-2 text-xs'>Forgot Password</u>
       </DialogTrigger>
       <DialogContent className="md:h-[300px] md:w-[350px] h-[300px] w-[350px] flex items-center justify-center bg-custom-green text-white font-semibold">
         {toggle ? (
