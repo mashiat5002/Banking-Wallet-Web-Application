@@ -30,7 +30,8 @@ export  async function POST (request:NextRequest){
               return NextResponse.json({status:201,msg:"successfully sent email"})
         }catch(err){
             console.log(err)
-            return NextResponse.json({status:500,msg:"Failed to send email"})
+            throw new Error("nodemailer error")
+            // return NextResponse.json({status:500,msg:"Failed to send email"})
         }
     }
     else{
