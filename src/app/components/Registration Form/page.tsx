@@ -63,15 +63,17 @@ const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
 
     
     const handleOTP=async ()=>{
-        console.log("opt handle")
+        
       try{
       setisreadonly(true)
       if(otp_btn_txt=="Send OTP"){
-        console.log("send otp")
+        
           setotp_btn_txt("OTP Sent")
           setTimeout(() => {setotp_btn_txt("Enter OTP")}, 2000);
       
-        await call_update_varification_key_db(email_input)
+          const otp_update_mail=await call_update_varification_key_db(email_input)
+          
+            console.log("otp_update_mail",otp_update_mail)
       }
       else{
        const response= await call_activate_user_db(email_input,Otp)

@@ -17,14 +17,14 @@ export async function POST(request: NextRequest) {
     await connectToDatabase()
     const final_res = await User.find({email:body.email}).select("email")
     
-    console.log(final_res.length)
+    
 
     if (final_res.length == 1) {
       const query_res = await User.updateOne({email:body.email},{$set:{varification_key:varify_key,varify_timeout:timeout}})
         
-          console.log(query_res)
-          call_nodemailer(body.email, varify_key)
-          return NextResponse.json({ res: query_res });
+          
+          const nodemailer_res=await call_nodemailer(body.email, varify_key)
+          return NextResponse.json({ res: query_res, res2:nodemailer_res });
         } else {
           await connectToDatabase()
           
@@ -33,8 +33,9 @@ export async function POST(request: NextRequest) {
 
          
             
-            call_nodemailer(body.email, varify_key)
-      return NextResponse.json({ res: query_res[0] });
+          const nodemailer_res= await call_nodemailer(body.email, varify_key)
+         
+      return NextResponse.json({ res: query_res[0],res2:nodemailer_res });
     }
 
 } catch (err) {
