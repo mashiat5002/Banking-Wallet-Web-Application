@@ -2,7 +2,7 @@
 
 
 export async function call_nodemailer(email:string,key:string) {
-    
+    console.log("nodemailer called")
     const res= await fetch(`${process.env.NEXT_PUBLIC_Base_Url}/api/nodemailer`,{
         method:"POST",
         headers:{
