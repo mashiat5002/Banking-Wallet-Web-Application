@@ -11,17 +11,17 @@ export  async function POST (request:NextRequest){
                 port: 587, 
                 secure: false, 
                 auth: {
-                  user: "lalamia464@gmail.com", 
-                  pass: "zxsf odjz vvcy ktih",   
+                  user: `${process.env.NEXT_EMAIL}`, 
+                  pass: `${process.env.NEXT_EMAIL_PASSWORD}`,   
                 },
             })
 
 
             const mailOptions = {
-                from: '"Mashiat Islam" <lalamia464@gmail.com>', 
+                from: `"Banking Wallet" <${process.env.NEXT_EMAIL}>`, 
                 to:`${body.email}`, 
-                subject:"Demo Email", 
-                text:"Demo text", 
+                subject:"Banking Wallet Varification Key", 
+                text:"Enter The Varification Key to activate your account", 
                 html:`<p>${body.key}</p>`, 
               };
 
