@@ -63,10 +63,11 @@ const Registration_form:React.FC<props>=({setemailInput,emailInput})=> {
 
     
     const handleOTP=async ()=>{
-
+        console.log("opt handle")
       try{
       setisreadonly(true)
       if(otp_btn_txt=="Send OTP"){
+        console.log("send otp")
           setotp_btn_txt("OTP Sent")
           setTimeout(() => {setotp_btn_txt("Enter OTP")}, 2000);
       
